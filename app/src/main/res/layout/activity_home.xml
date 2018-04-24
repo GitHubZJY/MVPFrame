@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjyang.mvpframe.ui.view.CustomToolBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:right_tv_text=""
+    app:right_tv_visible="true"
+    app:left_btn_visible="true"
+    app:title_text="@string/app_name"
+    app:title_visible="true"
+    app:shader_visible="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/bottom_tab"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            layout="@layout/layout_bottom_tab" />
+
+        <View
+            android:id="@+id/bottom_tab_split"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@id/bottom_tab"
+            android:background="#bbffffff"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_tab_split">
+
+        </android.support.v4.view.ViewPager>
+
+
+    </RelativeLayout>
+
+
+</com.zjyang.mvpframe.ui.view.CustomToolBar>
