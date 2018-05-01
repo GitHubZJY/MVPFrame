@@ -12,11 +12,14 @@ public interface DiscoverTasksContract {
 
     interface Presenter {
         void toggleProvince(int index);
+        void refreshList();
     }
 
 
     interface Model {
         void getVideoDataByProvinceId(int provinceId);
+        void setCurSelectTabIndex(int index);
+        int getCurSelectTabIndex();
     }
 
 }

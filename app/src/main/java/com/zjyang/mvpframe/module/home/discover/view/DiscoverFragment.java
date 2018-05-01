@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.andview.refreshview.XRefreshView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
@@ -19,6 +20,8 @@ import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.view.VideoListAdapter;
+import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
+import com.zjyang.mvpframe.utils.HandlerUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,6 +45,8 @@ public class DiscoverFragment extends Fragment implements DiscoverTasksContract.
 
     @BindView(R.id.video_recycle_view)
     public RecyclerView mVideoListView;
+    @BindView(R.id.refresh_view)
+    public XRefreshView mRefreshView;
     @BindView(R.id.top_tab_1)
     public TextView mTopTab1;
     @BindView(R.id.top_tab_2)
@@ -116,6 +121,41 @@ public class DiscoverFragment extends Fragment implements DiscoverTasksContract.
                 }
             }
         });
+
+        //默认只有下拉刷新，需要上拉加载的添加下面第二行代码
+        mRefreshView.setPullRefreshEnable(true);//设置允许下拉刷新
+        mRefreshView.setPullLoadEnable(false);//设置允许上拉加载
+        //刷新动画，需要自定义CustomGifHeader，不需要修改动画的会默认头布局
+        RefreshViewHeader header = new RefreshViewHeader(getContext());
+        mRefreshView.setCustomHeaderView(header);
+        mRefreshView.setMoveForHorizontal(true);
+
+        mRefreshView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.refreshList();
+            }
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+
+            }
+
+            @Override
+            public void onRelease(float direction) {
+
+            }
+
+            @Override
+            public void onHeaderMove(double headerMovePercent, int offsetY) {
+
+            }
+        });
     }
 
 
@@ -186,6 +226,7 @@ public class DiscoverFragment extends Fragment implements DiscoverTasksContract.
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRequstVideoListSuccessEvent(RequestVideoListEvent event){
+        mRefreshView.stopRefresh();//刷新停止
         if(event.ismIsSuccess()){
             mVideoList.clear();
             mVideoList.addAll(event.getVideoInfoList());

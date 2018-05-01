@@ -10,17 +10,25 @@ import com.zjyang.mvpframe.module.home.discover.model.DiscoverModel;
 public class DiscoverPresenter implements DiscoverTasksContract.Presenter{
 
 
-    private DiscoverTasksContract.View mLoginView;
-    private DiscoverTasksContract.Model mLoginModel;
+    private DiscoverTasksContract.View mDiscoverView;
+    private DiscoverTasksContract.Model mDiscoverModel;
 
     public DiscoverPresenter(DiscoverTasksContract.View mLoginView) {
-        this.mLoginView = mLoginView;
-        mLoginModel = new DiscoverModel();
+        this.mDiscoverView = mLoginView;
+        mDiscoverModel = new DiscoverModel();
     }
 
     @Override
     public void toggleProvince(int index){
-        mLoginView.toggleTopTab(index);
-        mLoginModel.getVideoDataByProvinceId(index);
+        mDiscoverView.toggleTopTab(index);
+        mDiscoverModel.getVideoDataByProvinceId(index);
+        mDiscoverModel.setCurSelectTabIndex(index);
+    }
+
+    @Override
+    public void refreshList(){
+        int curIndex = mDiscoverModel.getCurSelectTabIndex();
+        mDiscoverModel.getVideoDataByProvinceId(curIndex);
+        mDiscoverModel.setCurSelectTabIndex(curIndex);
     }
 }

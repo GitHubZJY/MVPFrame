@@ -22,6 +22,17 @@ public class DiscoverModel implements DiscoverTasksContract.Model{
 
     private static final String TAG = "DiscoverModel";
 
+    private int mCurSelectTabIndex;
+
+    @Override
+    public int getCurSelectTabIndex() {
+        return mCurSelectTabIndex;
+    }
+
+    @Override
+    public void setCurSelectTabIndex(int mCurSelectTabIndex) {
+        this.mCurSelectTabIndex = mCurSelectTabIndex;
+    }
 
     @Override
     public void getVideoDataByProvinceId(int provinceId) {
