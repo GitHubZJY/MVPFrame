@@ -35,9 +35,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".module.idcard.view.IdCardSrcActivity">
-
-        </activity>
 
         <activity android:name=".module.home.view.HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"

@@ -27,7 +27,6 @@ import com.zjyang.mvpframe.MainActivity;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.home.view.HomeActivity;
-import com.zjyang.mvpframe.module.idcard.view.IdCardSrcActivity;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.presenter.LoginPresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
