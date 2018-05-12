@@ -1,5 +1,6 @@
 package com.zjyang.mvpframe.module.home.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import com.example.zjy.player.ui.YPlayerView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
+import com.zjyang.mvpframe.module.camera.view.CameraActivity;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.view.DiscoverFragment;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -62,6 +65,13 @@ public class HomeActivity extends BaseActivity{
         mPagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), mFragmentList);
 
         mViewPager.setAdapter(mPagerAdapter);
+    }
+
+
+    @OnClick(R.id.bottom_camera_iv)
+    void clickToCamera(){
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
     }
 
     @Override
