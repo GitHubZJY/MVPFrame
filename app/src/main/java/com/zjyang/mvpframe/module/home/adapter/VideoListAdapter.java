@@ -1,4 +1,4 @@
-package com.zjyang.mvpframe.module.home.view;
+package com.zjyang.mvpframe.module.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.zjy.player.controller.ItemVideoController;
 import com.example.zjy.player.ui.VideoFrame;
-import com.example.zjy.player.utils.PlayerUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.fullscreen.view.FullScreenWatchActivity;

@@ -1,8 +1,6 @@
 package com.zjyang.mvpframe.module.home.discover.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,13 +13,13 @@ import com.andview.refreshview.XRefreshView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
+import com.zjyang.mvpframe.module.base.BaseFragment;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.module.home.view.VideoListAdapter;
+import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
 import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
-import com.zjyang.mvpframe.utils.HandlerUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -39,7 +37,7 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/4/9.
  */
 
-public class DiscoverFragment extends Fragment implements DiscoverTasksContract.View{
+public class DiscoverFragment extends BaseFragment implements DiscoverTasksContract.View{
 
     private Unbinder unbinder;
 
@@ -69,7 +67,9 @@ public class DiscoverFragment extends Fragment implements DiscoverTasksContract.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discover, null);
         unbinder = ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
         mPresenter = new DiscoverPresenter(this);
         initView();
         return view;

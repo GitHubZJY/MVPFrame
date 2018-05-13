@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 
+import com.zjyang.mvpframe.module.base.BaseFragment;
+
 import java.util.List;
 
 /**
@@ -14,10 +16,10 @@ import java.util.List;
 
 public class HomePagerAdapter extends FragmentPagerAdapter{
 
-    private List<Fragment> mViewList;
+    private List<BaseFragment> mViewList;
 
 
-    public HomePagerAdapter(FragmentManager fm, List<Fragment> mViewList) {
+    public HomePagerAdapter(FragmentManager fm, List<BaseFragment> mViewList) {
         super(fm);
         this.mViewList = mViewList;
     }
@@ -30,5 +32,11 @@ public class HomePagerAdapter extends FragmentPagerAdapter{
     @Override
     public int getCount() {
         return mViewList.size();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        // 最简单解决 notifyDataSetChanged() 页面不刷新问题的方法
+        return POSITION_NONE;
     }
 }

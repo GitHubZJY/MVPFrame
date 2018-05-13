@@ -16,12 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <com.zjyang.mvpframe.module.home.view.HomeBottomBar
             android:id="@+id/bottom_tab"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            layout="@layout/layout_bottom_tab" />
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true">
+
+        </com.zjyang.mvpframe.module.home.view.HomeBottomBar>
 
         <View
             android:id="@+id/bottom_tab_split"
@@ -38,6 +39,30 @@
             android:layout_above="@id/bottom_tab_split">
 
         </android.support.v4.view.ViewPager>
+
+        <RelativeLayout
+            android:id="@+id/bottom_camera_llyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/bottom_camera_bg"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#ffffff"
+                android:layout_centerInParent="true" />
+            <ImageView
+                android:id="@+id/bottom_camera_iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#ffd600"
+                android:layout_centerInParent="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_camera"/>
+        </RelativeLayout>
 
 
     </RelativeLayout>
