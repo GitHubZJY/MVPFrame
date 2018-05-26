@@ -228,6 +228,31 @@ public class VideoFrame extends RelativeLayout {
         }
     }
 
+    public void setOnCompletionListener(final OnCompleteListener completeListener){
+        switch (VideoSetting.getVideoType()){
+            case VideoSetting.ANDROID_VIDEO_VIEW:
+                mAndroidVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        if(completeListener != null){
+                            completeListener.onCompletion(null, mediaPlayer);
+                        }
+                    }
+                });
+                break;
+            case VideoSetting.IJK_VIDEO_VIEW:
+                mIjkVideoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(IMediaPlayer mediaPlayer) {
+                        if(completeListener != null){
+                            completeListener.onCompletion(mediaPlayer, null);
+                        }
+                    }
+                });
+                break;
+        }
+    }
+
 
     public interface OnPreparedListener{
         void onPrepared(IMediaPlayer iMediaPlayer, MediaPlayer mediaPlayer);
@@ -235,5 +260,9 @@ public class VideoFrame extends RelativeLayout {
 
     public interface OnErrorListener{
         void onError(IMediaPlayer imp, MediaPlayer mp, int what, int extra);
+    }
+
+    public interface OnCompleteListener{
+        void onCompletion(IMediaPlayer imp, MediaPlayer mp);
     }
 }

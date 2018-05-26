@@ -21,6 +21,7 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.camera.model.CameraModel;
 import com.zjyang.mvpframe.module.camera.model.CameraSetting;
+import com.zjyang.mvpframe.module.share.view.ShareActivity;
 import com.zjyang.mvpframe.utils.DateUtils;
 import com.zjyang.mvpframe.utils.HandlerUtils;
 
@@ -189,6 +190,7 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
             }
         }
         mStartedFlg = false;
+        ShareActivity.go(this, path);
     }
 
     @Override
@@ -216,7 +218,7 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
 
         camera.startPreview();
         if (camera != null) {
-            camera.setDisplayOrientation(90);
+            camera.setDisplayOrientation(CameraSetting.VIDEO_ORIENTATION);
             camera.unlock();
             mRecorder.setCamera(camera);
         }

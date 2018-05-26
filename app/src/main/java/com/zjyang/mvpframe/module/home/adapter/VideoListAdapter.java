@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -81,9 +82,16 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.MyVi
             }
         });
         videoInfo.setStatus(STOP_STATUS);
-        FrescoUtils.showImgByUrl(videoInfo.getVideoThumbUrl(), holder.mPreviewIv);
-        FrescoUtils.showImgByUrl(videoInfo.getUserPicUrl(), holder.mUserPicIv);
-        holder.mUserNameTv.setText(videoInfo.getUserName());
+        String videoThumbUrl = videoInfo.getVideoThumbUrl();
+        if(!TextUtils.isEmpty(videoThumbUrl)){
+            FrescoUtils.showImgByUrl(videoThumbUrl, holder.mPreviewIv);
+        }
+        String userPicUrl = videoInfo.getUserPicUrl();
+        if(!TextUtils.isEmpty(userPicUrl)){
+            FrescoUtils.showImgByUrl(userPicUrl, holder.mUserPicIv);
+        }
+        String userName = videoInfo.getUserName();
+        holder.mUserNameTv.setText(TextUtils.isEmpty(userName) ? "" : userName);
         holder.mCenterPlayIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

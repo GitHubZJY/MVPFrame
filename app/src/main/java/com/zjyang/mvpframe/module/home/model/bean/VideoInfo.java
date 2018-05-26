@@ -2,11 +2,13 @@ package com.zjyang.mvpframe.module.home.model.bean;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by 74215 on 2018/4/1.
  */
 
-public class VideoInfo {
+public class VideoInfo extends BmobObject{
 
     private String videoUrl;
     private String videoThumbUrl;
