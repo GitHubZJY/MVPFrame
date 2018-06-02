@@ -1,6 +1,8 @@
 package com.zjyang.mvpframe.module.login.model;
 
+import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
+import com.zjyang.mvpframe.module.login.LoginErrorCode;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 
@@ -19,7 +21,7 @@ public class LoginModel implements LoginTasksContract.Model{
 
 
     @Override
-    public void login(String account, String password, final ILoginCallBack callBack) {
+    public void login(String account, final String password, final ILoginCallBack callBack) {
 
         BmobQuery<User> bmobQuery = new BmobQuery<User>();
         bmobQuery.addWhereEqualTo("account", account);
@@ -27,10 +29,16 @@ public class LoginModel implements LoginTasksContract.Model{
             @Override
             public void done(List<User> list, BmobException e) {
                 if(e == null && list.size() > 0){
-                    callBack.loginSuccess();
+                    User user = list.get(0);
+                    if(user.getPassword().equals(password)){
+                        UserDataManager.getInstance().setCurUser(user);
+                        callBack.loginSuccess();
+                    }else{
+                        callBack.loginFail(LoginErrorCode.PASSWORD_ERROR);
+                    }
                 }else{
                     e.printStackTrace();
-                    callBack.loginFail(0);
+                    callBack.loginFail(LoginErrorCode.ACCOUNT_NOT_EXIST);
                 }
             }
         });

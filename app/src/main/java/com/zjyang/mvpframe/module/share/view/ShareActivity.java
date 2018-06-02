@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.zjy.player.ui.VideoFrame;
 import com.example.zjy.player.utils.VideoUtils;
@@ -18,6 +19,7 @@ import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.presenter.SharePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,6 +106,16 @@ public class ShareActivity extends BaseActivity implements ShareTaskContracts.Vi
         if(mPresenter != null){
             mPresenter.shareVideo(mVideoPath);
         }
+    }
+
+    @Override
+    public void showUpLoadSuccess() {
+        ToastUtils.showToast(this, getResources().getString(R.string.share_success));
+    }
+
+    @Override
+    public void showUpLoadFail() {
+        ToastUtils.showToast(this, getResources().getString(R.string.share_fail));
     }
 
     @Override

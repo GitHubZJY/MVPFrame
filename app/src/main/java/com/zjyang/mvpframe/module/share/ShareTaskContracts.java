@@ -7,7 +7,8 @@ package com.zjyang.mvpframe.module.share;
 public interface ShareTaskContracts {
 
     interface View {
-
+        void showUpLoadSuccess();
+        void showUpLoadFail();
     }
 
     interface Model {
@@ -15,6 +16,7 @@ public interface ShareTaskContracts {
     }
 
     interface Presenter {
+        void destroy();
         void shareVideo(String videoPath);
     }
 }

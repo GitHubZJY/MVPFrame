@@ -13,6 +13,7 @@ public interface LoginTasksContract {
         void showPasswordNotNullTip();
         void jumpToHomeActivity();
         void showLoginAnim();
+        void showAccountNotExist();
         void resetInput();
     }
 

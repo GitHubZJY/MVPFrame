@@ -31,6 +31,7 @@ import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.presenter.LoginPresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.view.JellyInterpolator;
+import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,6 +92,11 @@ public class LoginActivity extends BaseActivity implements LoginTasksContract.Vi
     @Override
     public void showPwErrorToast() {
         Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showAccountNotExist() {
+        ToastUtils.showToast(this, "该账号不存在");
     }
 
     @Override

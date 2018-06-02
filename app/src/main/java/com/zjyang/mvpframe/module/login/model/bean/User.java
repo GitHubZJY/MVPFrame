@@ -9,6 +9,8 @@ public class User {
     private String id;
     private String account;
     private String password;
+    private String userPic;
+    private String userName;
 
     public User() {
     }
@@ -37,5 +39,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserPic() {
+        return userPic;
+    }
+
+    public void setUserPic(String userPic) {
+        this.userPic = userPic;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

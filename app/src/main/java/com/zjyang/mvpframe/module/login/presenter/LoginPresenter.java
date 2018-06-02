@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.module.login.presenter;
 import android.text.TextUtils;
 
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
+import com.zjyang.mvpframe.module.login.LoginErrorCode;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.model.LoginModel;
 import com.zjyang.mvpframe.utils.HandlerUtils;
@@ -45,12 +46,17 @@ public class LoginPresenter implements LoginTasksContract.Presenter{
             }
 
             @Override
-            public void loginFail(int errorStatus) {
+            public void loginFail(final int errorStatus) {
                 HandlerUtils.postDelay(new Runnable() {
                     @Override
                     public void run() {
-                        mLoginView.showPwErrorToast();
-                        mLoginView.resetInput();
+                        if(errorStatus == LoginErrorCode.PASSWORD_ERROR){
+                            mLoginView.showPwErrorToast();
+                            mLoginView.resetInput();
+                        }else if(errorStatus == LoginErrorCode.ACCOUNT_NOT_EXIST){
+                            mLoginView.showAccountNotExist();
+                            mLoginView.resetInput();
+                        }
                     }
                 }, 1000);
             }
