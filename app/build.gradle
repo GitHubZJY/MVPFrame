@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
@@ -12,6 +13,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            multiDexEnabled true
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -34,6 +42,12 @@ configurations.all {
     }
 }
 
+greendao {
+    schemaVersion 1
+    daoPackage 'com.zjyang.mvpframe.db.base'
+    targetGenDir 'src/main/java'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -54,6 +68,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
 
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
 
     testCompile ('org.powermock:powermock-api-mockito:1.6.2') {
         exclude module: 'hamcrest-core'

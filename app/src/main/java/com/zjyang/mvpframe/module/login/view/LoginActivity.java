@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity implements LoginTasksContract.Vi
     }
 
     public void initView(){
-
+        mPresenter.checkUserCache();
     }
 
     @Override

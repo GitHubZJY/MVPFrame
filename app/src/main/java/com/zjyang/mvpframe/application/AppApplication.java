@@ -4,7 +4,12 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.zjyang.mvpframe.db.DBConfig;
+import com.zjyang.mvpframe.db.base.DaoMaster;
+import com.zjyang.mvpframe.db.base.DaoSession;
 import com.zjyang.mvpframe.utils.Constants;
+
+import org.greenrobot.greendao.database.Database;
 
 import cn.bmob.v3.Bmob;
 
@@ -15,6 +20,7 @@ import cn.bmob.v3.Bmob;
 public class AppApplication extends Application{
 
     private static Context mContext;
+    private static DaoSession mDaoSession;
 
 
     @Override
@@ -23,6 +29,7 @@ public class AppApplication extends Application{
         mContext = this;
         initBombSDK();
         initFresco();
+        initDB();
     }
 
     public void initBombSDK(){
@@ -37,5 +44,16 @@ public class AppApplication extends Application{
 
     public static Context getContext(){
         return mContext;
+    }
+
+    public void initDB(){
+        DaoMaster.DevOpenHelper openHelper = new DaoMaster.DevOpenHelper(this, DBConfig.DATA_BASE_NAME);
+        Database database = openHelper.getWritableDb();
+        DaoMaster daoMaster = new DaoMaster(database);
+        mDaoSession = daoMaster.newSession();
+    }
+
+    public static DaoSession getDaoSession(){
+        return mDaoSession;
     }
 }

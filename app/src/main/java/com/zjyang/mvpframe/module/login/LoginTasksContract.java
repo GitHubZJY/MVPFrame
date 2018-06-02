@@ -19,6 +19,7 @@ public interface LoginTasksContract {
 
     interface Presenter {
         void checkLogin(String account, String password);
+        void checkUserCache();
     }
 
     interface Model {

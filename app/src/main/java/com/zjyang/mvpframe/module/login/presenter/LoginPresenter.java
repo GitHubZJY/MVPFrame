@@ -2,6 +2,7 @@ package com.zjyang.mvpframe.module.login.presenter;
 
 import android.text.TextUtils;
 
+import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
 import com.zjyang.mvpframe.module.login.LoginErrorCode;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
@@ -61,5 +62,12 @@ public class LoginPresenter implements LoginTasksContract.Presenter{
                 }, 1000);
             }
         });
+    }
+
+    @Override
+    public void checkUserCache() {
+        if(UserDataManager.getInstance().getCurUser() != null && mLoginView != null){
+            mLoginView.jumpToHomeActivity();
+        }
     }
 }

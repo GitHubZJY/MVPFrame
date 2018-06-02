@@ -1,5 +1,6 @@
 package com.zjyang.mvpframe.module.base;
 
+import com.zjyang.mvpframe.db.dao.UserDBHelper;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 
 /**
@@ -25,10 +26,14 @@ public class UserDataManager {
     }
 
     public User getCurUser() {
+        if(mCurUser == null){
+            mCurUser = UserDBHelper.getInstance().queryUser();
+        }
         return mCurUser;
     }
 
     public void setCurUser(User mCurUser) {
+        UserDBHelper.getInstance().insertUser(mCurUser);
         this.mCurUser = mCurUser;
     }
 }
