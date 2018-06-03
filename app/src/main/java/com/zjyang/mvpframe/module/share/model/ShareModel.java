@@ -1,10 +1,15 @@
 package com.zjyang.mvpframe.module.share.model;
 
+import android.graphics.Bitmap;
+import android.text.TextUtils;
+
+import com.example.zjy.player.utils.VideoUtils;
 import com.zjyang.mvpframe.event.ShareResultEvent;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
+import com.zjyang.mvpframe.utils.FileUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,7 +31,34 @@ public class ShareModel implements ShareTaskContracts.Model{
 
 
     @Override
-    public void uploadVideoFile(String videoPath) {
+    public void uploadVideoFile(final String videoPath) {
+        Bitmap thumbBm = VideoUtils.getThumbFromVideo(videoPath);
+        final BmobFile thumb;
+        final String thumbPath = FileUtils.saveBitmapToFile(thumbBm, FileUtils.getFileNameByPath(videoPath));
+        if(!TextUtils.isEmpty(thumbPath)){
+            LogUtil.d(TAG, "本地截图路径: " + thumbPath);
+            thumb = new BmobFile(new File(thumbPath));
+            thumb.uploadblock(new UploadFileListener() {
+                @Override
+                public void done(BmobException e) {
+                    String thumbUrl = "";
+                    if (e == null){
+                        LogUtil.d(TAG, "上传截图成功!");
+                        thumbUrl = thumb.getFileUrl();
+                        FileUtils.deleteFile(thumbPath);
+                        LogUtil.d(TAG, "删除本地截图缓存!");
+                    }
+                    LogUtil.d(TAG, "开始上传视频!");
+                    uploadVideo(videoPath, thumbUrl);
+                }
+            });
+        }
+
+
+
+    }
+
+    private void uploadVideo(String videoPath, final String thumbUrl){
         final BmobFile video = new BmobFile(new File(videoPath));
         final User user = UserDataManager.getInstance().getCurUser();
         if(user == null){
@@ -43,6 +75,7 @@ public class ShareModel implements ShareTaskContracts.Model{
                     videoInfo.setProvinceId(1);
                     videoInfo.setUserPicUrl(user.getUserPic());
                     videoInfo.setUserName(user.getUserName());
+                    videoInfo.setVideoThumbUrl(thumbUrl);
                     videoInfo.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {

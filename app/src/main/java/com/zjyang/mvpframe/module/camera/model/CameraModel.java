@@ -10,5 +10,7 @@ public class CameraModel {
 
     //拍摄的视频的存储目录
     public static final String LOCAL_RECORD_VIDEO_PATH = StorageUtils.getSDPath() + "//tripvideo";
+    //本地视频截图缓存目录
+    public static final String LOCAL_VIDEO_THUMB_CACHE_PATH = StorageUtils.getSDPath() + "//tripvideo";
 
 }

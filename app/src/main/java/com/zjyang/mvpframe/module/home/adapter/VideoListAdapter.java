@@ -170,6 +170,27 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.MyVi
         });
         holder.mController.setNarrowEnable(true);
 
+        holder.mVideoFrame.setOnCompletionListener(new VideoFrame.OnCompleteListener() {
+            @Override
+            public void onCompletion(IMediaPlayer imp, MediaPlayer mp) {
+                holder.mPreviewIv.setVisibility(View.VISIBLE);
+                holder.mCenterPlayIv.setVisibility(View.VISIBLE);
+                holder.mController.setPlayBtnStatus(false);
+                holder.mVideoFrame.setVideoUrl(videoInfo.getVideoUrl());
+                holder.mVideoFrame.setTag(position);
+                holder.mVideoFrame.stopPlayback();
+                holder.mController.resetController();
+                holder.mController.setVisibility(View.GONE);
+                holder.mLoadingView.setVisibility(View.GONE);
+                holder.mUserPicIv.setVisibility(View.VISIBLE);
+                holder.mUserNameTv.setVisibility(View.VISIBLE);
+                holder.mDurationTv.setVisibility(View.VISIBLE);
+                holder.mWatchLlyt.setVisibility(View.VISIBLE);
+                VideoFramesModel.getInstance().setCurPlayItemIndex(-1);
+                videoInfo.setStatus(STOP_STATUS);
+            }
+        });
+
         holder.mVideoFrame.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
