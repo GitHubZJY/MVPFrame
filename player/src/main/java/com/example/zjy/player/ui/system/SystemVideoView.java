@@ -95,7 +95,7 @@ public class SystemVideoView extends FrameLayout
      **/
     public static final int TYPE_NATIVE = 222;
 
-    private int mPlayerType = TYPE_IJK;
+    private int mPlayerType = TYPE_NATIVE;
     private int mCurrentState = STATE_IDLE;
     private int mCurrentMode = MODE_NORMAL;
 

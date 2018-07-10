@@ -21,6 +21,8 @@ import java.util.zip.ZipFile;
 
 public class PlugInSoHelper implements Runnable {
 
+    public static final String TAG = "PlugInSoHelper";
+
     private Context sContext;
 
     private static String sNativeLibraryPath;
@@ -30,8 +32,7 @@ public class PlugInSoHelper implements Runnable {
     private static final String[] SO_ARRAYS = {
             "libijkffmpeg.so",
             "libijkplayer.so",
-            "libijksdl.so",
-            "libscan.so"
+            "libijksdl.so"
     };
 
     private static boolean sIsRunning;
@@ -81,7 +82,7 @@ public class PlugInSoHelper implements Runnable {
 //                }
 //            }
 //            if (!isFind) {
-                Log.d("LogUtils", "copySo 开始 " + soName);
+                Log.d(TAG, "copySo 开始 " + soName);
                 copySo(soName, applicationInfo.sourceDir, lastTime == curTime);
 //            }
         }
@@ -89,14 +90,17 @@ public class PlugInSoHelper implements Runnable {
             sSp.edit().putLong(LAST_COPY_SO_VC, curTime).apply();
         }
         sIsRunning = false;
+        PlugInSoHelper.loadLibrary("ijkffmpeg");
+        PlugInSoHelper.loadLibrary("ijksdl");
+        PlugInSoHelper.loadLibrary("ijkplayer");
     }
 
     private void copySo(String soName, String apkPath, boolean notNewTime) {
         try {
             File srcFile = new File(sNativeLibraryPath, soName);
-            Log.d("LogUtils", "for so !!!!" + notNewTime + "  " + soName + "  " + srcFile.getAbsolutePath());
+            Log.d(TAG, "for so !!!!" + notNewTime + "  " + soName + "  " + srcFile.getAbsolutePath());
             if (srcFile.exists() && notNewTime) {
-                Log.d("LogUtils", "for so 已经存在!!!!");
+                Log.d(TAG, "for so 已经存在!!!!");
                 return;
             }
 
@@ -104,8 +108,8 @@ public class PlugInSoHelper implements Runnable {
             ZipFile zipFile = new ZipFile(apkPath);
             ZipEntry zipEntry = zipFile.getEntry(BASE_SO_PATH + soName);
             if (zipEntry == null /*|| zipEntry.getName() == null*/) {
-                Log.d("LogUtils", "copySo zipEntry为空!!!! soName=" + soName + "  apkPath=" + apkPath);
-                Log.d("LogUtils", "copySo zipEntry为空!!!! dstFile=" + dstFile);
+                Log.d(TAG, "copySo zipEntry为空!!!! soName=" + soName + "  apkPath=" + apkPath);
+                Log.d(TAG, "copySo zipEntry为空!!!! dstFile=" + dstFile);
                 return;
             }
 
@@ -131,7 +135,7 @@ public class PlugInSoHelper implements Runnable {
             File file = new File(sNativeLibraryPath, "lib" + libname + ".so");
             if (file.exists()) {
                 System.load(file.getPath());
-                Log.d("LogUtils", "load " + file.getPath());
+                Log.d(TAG, "load " + file.getPath());
                 return;
             }
         }

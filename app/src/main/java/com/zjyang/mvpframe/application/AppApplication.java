@@ -12,6 +12,7 @@ import com.zjyang.mvpframe.utils.Constants;
 import org.greenrobot.greendao.database.Database;
 
 import cn.bmob.v3.Bmob;
+import tv.danmaku.ijk.media.player.PlugInSoHelper;
 
 /**
  * Created by zhengjiayang on 2018/3/1.
@@ -30,6 +31,8 @@ public class AppApplication extends Application{
         initBombSDK();
         initFresco();
         initDB();
+        //复制加载ijk so库
+        new PlugInSoHelper(this).run();
     }
 
     public void initBombSDK(){

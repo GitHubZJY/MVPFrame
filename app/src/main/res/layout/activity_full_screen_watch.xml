@@ -4,11 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.zjy.player.ui.YPlayerView
+    <com.example.zjy.player.ui.VideoFrame
         android:id="@+id/player_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.example.zjy.player.ui.YPlayerView>
+    </com.example.zjy.player.ui.VideoFrame>
+
+    <TableLayout
+        android:id="@+id/hud_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+    </TableLayout>
+
+
 
 </LinearLayout>

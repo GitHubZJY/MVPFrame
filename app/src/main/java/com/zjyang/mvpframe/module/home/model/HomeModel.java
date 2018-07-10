@@ -4,6 +4,7 @@ import com.zjyang.mvpframe.event.GetHomeTabInfoEvent;
 import com.zjyang.mvpframe.module.base.BaseFragment;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.discover.view.DiscoverFragment;
+import com.zjyang.mvpframe.module.home.discover.view.GridDiscoverFragment;
 import com.zjyang.mvpframe.module.home.focus.FocusFragment;
 import com.zjyang.mvpframe.module.home.me.MeFragment;
 import com.zjyang.mvpframe.module.home.message.MessageFragment;
@@ -29,7 +30,7 @@ public class HomeModel implements HomeTasksContract.Model{
 
     private static final String TAG = "HomeModel";
     private List<BaseFragment> fragments = new ArrayList<>();
-    DiscoverFragment mDiscoverFragment;
+    GridDiscoverFragment mDiscoverFragment;
     FocusFragment mFocusFragment;
     MessageFragment mMessageFragment;
     MeFragment mMeFragment;
@@ -59,7 +60,7 @@ public class HomeModel implements HomeTasksContract.Model{
 
     public void initFragments(){
         if(mDiscoverFragment == null){
-            mDiscoverFragment = new DiscoverFragment();
+            mDiscoverFragment = new GridDiscoverFragment();
             fragments.add(mDiscoverFragment);
         }
         if(mFocusFragment == null){

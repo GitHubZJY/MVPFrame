@@ -170,7 +170,7 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
      * Default library loader
      * Load them by yourself, if your libraries are not installed at default place.
      */
-    private static final IjkLibLoader sLocalLibLoader = new IjkLibLoader() {
+    public static final IjkLibLoader sLocalLibLoader = new IjkLibLoader() {
         @Override
         public void loadLibrary(String libName) throws UnsatisfiedLinkError, SecurityException {
             PlugInSoHelper.loadLibrary(libName);
@@ -185,8 +185,8 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
                     libLoader = sLocalLibLoader;
 
                 libLoader.loadLibrary("ijkffmpeg");
-                libLoader.loadLibrary("ijksdl");
                 libLoader.loadLibrary("ijkplayer");
+                libLoader.loadLibrary("ijksdl");
                 mIsLibLoaded = true;
             }
         }

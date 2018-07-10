@@ -6,7 +6,7 @@ package com.example.zjy.player.setting;
 
 public class VideoSetting {
 
-    private static final int VIDEO_VIEW_TYPE = 1;
+    private static final int VIDEO_VIEW_TYPE = 2;
 
     public static final int ANDROID_VIDEO_VIEW = 1;
 

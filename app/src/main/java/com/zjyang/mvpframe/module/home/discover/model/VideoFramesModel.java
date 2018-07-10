@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.module.home.discover.model;
 import android.widget.RelativeLayout;
 
 import com.example.zjy.player.ui.VideoFrame;
+import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 
 /**
  * Created by 74215 on 2018/4/15.
@@ -17,6 +18,8 @@ public class VideoFramesModel {
     private RelativeLayout mCurPlayWindow;
     //保存当前正在播放的Item下标
     private int mCurPlayItemIndex = -1;
+
+    private VideoInfo mCurPlayVideoInfo;
 
     private static VideoFramesModel mInstance;
 
@@ -49,5 +52,13 @@ public class VideoFramesModel {
 
     public void setCurPlayWindow(RelativeLayout mCurPlayWindow) {
         this.mCurPlayWindow = mCurPlayWindow;
+    }
+
+    public VideoInfo getCurPlayVideo() {
+        return mCurPlayVideoInfo;
+    }
+
+    public void setCurPlayVideo(VideoInfo curPlayVideoInfo) {
+        this.mCurPlayVideoInfo = curPlayVideoInfo;
     }
 }

@@ -1,8 +1,10 @@
 package com.zjyang.mvpframe.module.fullscreen.view;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
+import android.widget.TableLayout;
 
 import com.example.zjy.player.ui.PlayerListener;
 import com.example.zjy.player.ui.VideoFrame;
@@ -11,26 +13,32 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
+import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.utils.HandlerUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
  * Created by 74215 on 2018/4/15.
  */
 
-public class FullScreenWatchActivity extends BaseActivity implements PlayerListener{
+public class FullScreenWatchActivity extends BaseActivity {
 
+    private static final String TAG = "FullScreenWatchActivity";
     private Unbinder unbinder;
 
     @BindView(R.id.player_view)
-    YPlayerView mPlayView;
+    VideoFrame mPlayView;
+    @BindView(R.id.hud_view)
+    TableLayout mHudView;
 
-    private VideoFrame mVideoFrame;
+    private VideoInfo mVideoInfo;
 
 
     @Override
@@ -39,16 +47,13 @@ public class FullScreenWatchActivity extends BaseActivity implements PlayerListe
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);// 允许使用transitions
         setContentView(R.layout.activity_full_screen_watch);
         unbinder = ButterKnife.bind(this);
-        mVideoFrame = VideoFramesModel.getInstance().getCurPlayView();
-        mPlayView.setControllerStatus(mVideoFrame.isPlaying());
-        mPlayView.attachActivity(this);
-        mPlayView.addVideoFrame(mVideoFrame);
-        mPlayView.setPlayerListener(this);
-    }
+        mVideoInfo = VideoFramesModel.getInstance().getCurPlayVideo();
+        mPlayView.setHudView(mHudView);
+        mPlayView.setVideoUrl(mVideoInfo.getVideoUrl());
+        LogUtil.d(TAG, "URL: " + mVideoInfo.getVideoUrl());
 
-    @Override
-    public void clickNarrow() {
-        exitFullScreen();
+        mPlayView.start();
+
     }
 
     @Override
@@ -62,8 +67,8 @@ public class FullScreenWatchActivity extends BaseActivity implements PlayerListe
     }
 
     public void exitFullScreen(){
-        mPlayView.removeVideoFrame(mVideoFrame);
-        EventBus.getDefault().post(new FullScreenExitEvent());
+        mPlayView.stopPlayback();
+        //EventBus.getDefault().post(new FullScreenExitEvent());
         try{
             Thread.sleep(20);
         }catch (Exception e){

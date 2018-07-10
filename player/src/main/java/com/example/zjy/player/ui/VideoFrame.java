@@ -10,6 +10,7 @@ import android.widget.TableLayout;
 
 import com.example.zjy.player.setting.VideoSetting;
 import com.example.zjy.player.ui.system.SystemVideoView;
+import com.example.zjy.player.utils.LogUtil;
 
 import tv.danmaku.ijk.media.example.widget.media.IjkVideoView;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -20,6 +21,8 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  */
 
 public class VideoFrame extends RelativeLayout {
+
+    public static final String TAG = "VideoFrame";
 
     private SystemVideoView mAndroidVideoView;
     private IjkVideoView mIjkVideoView;
@@ -50,11 +53,13 @@ public class VideoFrame extends RelativeLayout {
 
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->初始化播放器");
                 mIjkVideoView.setVisibility(GONE);
                 mAndroidVideoView.setVisibility(VISIBLE);
                 addView(mAndroidVideoView);
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->初始化播放器");
                 mIjkVideoView.setVisibility(VISIBLE);
                 mAndroidVideoView.setVisibility(GONE);
                 addView(mIjkVideoView);
@@ -66,9 +71,11 @@ public class VideoFrame extends RelativeLayout {
     public void setVideoUrl(String videoUrl){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->setVideoUrl");
                 mAndroidVideoView.setVideoURI(Uri.parse(videoUrl));
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->setVideoUrl");
                 mIjkVideoView.setVideoURI(Uri.parse(videoUrl));
                 break;
         }
@@ -78,9 +85,11 @@ public class VideoFrame extends RelativeLayout {
     public void start(){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->start");
                 mAndroidVideoView.start();
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->start");
                 mIjkVideoView.start();
                 break;
         }
@@ -90,8 +99,10 @@ public class VideoFrame extends RelativeLayout {
     public void setHudView(TableLayout hudView){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->setHudView");
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->setHudView");
                 mIjkVideoView.setHudView(hudView);
                 break;
         }
@@ -122,9 +133,11 @@ public class VideoFrame extends RelativeLayout {
     public void pause(){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->pause");
                 mAndroidVideoView.pause();
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->pause");
                 mIjkVideoView.pause();
                 break;
         }
@@ -166,9 +179,11 @@ public class VideoFrame extends RelativeLayout {
     public void stopPlayback(){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->stopPlayback");
                 mAndroidVideoView.release();
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->stopPlayback");
                 mIjkVideoView.pause();
                 mIjkVideoView.stopBackgroundPlay();
                 mIjkVideoView.stopPlayback();
@@ -179,6 +194,7 @@ public class VideoFrame extends RelativeLayout {
     public void setOnPrePareListener(final OnPreparedListener prePareListener){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->setOnPrePareListener");
                 mAndroidVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
@@ -189,6 +205,7 @@ public class VideoFrame extends RelativeLayout {
                 });
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->setOnPreparedListener");
                 mIjkVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(IMediaPlayer mp) {
@@ -204,10 +221,12 @@ public class VideoFrame extends RelativeLayout {
     public void setOnErrorListener(final OnErrorListener errorListener){
         switch (VideoSetting.getVideoType()){
             case VideoSetting.ANDROID_VIDEO_VIEW:
+                LogUtil.d(TAG, "System--->setOnErrorListener");
                 mAndroidVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                     @Override
                     public boolean onError(MediaPlayer mediaPlayer, int what, int extra) {
                         if(errorListener != null){
+                            LogUtil.d(TAG, "System--->onError: " + what + ", " + extra);
                             errorListener.onError(null, mediaPlayer, what, extra);
                         }
                         return true;
@@ -215,10 +234,12 @@ public class VideoFrame extends RelativeLayout {
                 });
                 break;
             case VideoSetting.IJK_VIDEO_VIEW:
+                LogUtil.d(TAG, "IjK--->setOnErrorListener");
                 mIjkVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
                     @Override
                     public boolean onError(IMediaPlayer mediaPlayer, int what, int extra) {
                         if(errorListener != null){
+                            LogUtil.d(TAG, "IjK--->onError: " + what + ", " + extra);
                             errorListener.onError(mediaPlayer, null, what, extra);
                         }
                         return true;
@@ -235,6 +256,7 @@ public class VideoFrame extends RelativeLayout {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         if(completeListener != null){
+                            LogUtil.d(TAG, "System--->onCompletion");
                             completeListener.onCompletion(null, mediaPlayer);
                         }
                     }
@@ -245,6 +267,7 @@ public class VideoFrame extends RelativeLayout {
                     @Override
                     public void onCompletion(IMediaPlayer mediaPlayer) {
                         if(completeListener != null){
+                            LogUtil.d(TAG, "IjK--->onCompletion");
                             completeListener.onCompletion(mediaPlayer, null);
                         }
                     }
