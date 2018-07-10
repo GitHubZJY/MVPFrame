@@ -1,8 +1,11 @@
 package com.zjyang.mvpframe.module.home.view;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +29,8 @@ import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.presenter.HomePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.mvpframe.utils.PermissionUtils;
+import com.zjyang.mvpframe.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,14 +96,51 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
 
     @OnClick(R.id.bottom_camera_iv)
     void clickToCamera(){
-        Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+        //6.0以上若未有相机权限，需先申请
+        boolean hasGranted = PermissionUtils.newInstance().grantPermission(this, Manifest.permission.CAMERA);
+        if(!hasGranted){
+            //假如还未有权限，则先不跳转录制界面
+            return;
+        }
+        jumpToCameraPage();
     }
 
     @Override
     public void clickTab(int index) {
         mViewPager.setCurrentItem(index - 1);
     }
+
+    /*************************Android6.0以上申请相机权限的回调**************************/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PermissionUtils.MY_PERMISSION_REQUEST_CODE) {
+            boolean isAllGranted = true;
+
+            // 判断是否所有的权限都已经授予了
+            for (int grant : grantResults) {
+                if (grant != PackageManager.PERMISSION_GRANTED) {
+                    isAllGranted = false;
+                    break;
+                }
+            }
+
+            if (isAllGranted) {
+                // 如果所有的权限都授予了, 则跳转录制界面
+                jumpToCameraPage();
+            } else {
+                // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
+                ToastUtils.showToast(this, "暂无权限");
+            }
+        }
+    }
+
+    public void jumpToCameraPage(){
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onBackPressed() {
