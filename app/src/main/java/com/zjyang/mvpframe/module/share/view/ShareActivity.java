@@ -64,8 +64,6 @@ public class ShareActivity extends BaseActivity implements ShareTaskContracts.Vi
         setContentView(R.layout.activity_share);
         unbinder = ButterKnife.bind(this);
 
-        mShareBtn.setBackground(ShapeUtils.getRoundRectDrawable(20, getResources().getColor(R.color.yellow)));
-
 
         initVideoView();
 

@@ -6,7 +6,7 @@
     <string name="message_tab_name">消息</string>
     <string name="me_tab_name">我</string>
 
-    <string name="share_title">发布</string>
+    <string name="share_title">分享</string>
 
     <string name="share_success">分享成功</string>
     <string name="share_fail">分享失败</string>
