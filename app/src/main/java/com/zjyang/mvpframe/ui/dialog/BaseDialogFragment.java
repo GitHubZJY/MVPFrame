@@ -27,6 +27,10 @@ public class BaseDialogFragment extends DialogFragment {
     private DialogCallBack mDialogCallBack;
     private OnDialogCancelListener mCancelListener;
 
+    public static BaseDialogFragment create(boolean cancelable){
+        return create(null, cancelable, null);
+    }
+
     public static BaseDialogFragment create(DialogCallBack call, boolean cancelable, OnDialogCancelListener cancelListener){
         BaseDialogFragment instance = new BaseDialogFragment();
         instance.setCancelable(cancelable);

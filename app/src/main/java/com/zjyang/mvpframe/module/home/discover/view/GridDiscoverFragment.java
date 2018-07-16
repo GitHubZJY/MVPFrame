@@ -1,6 +1,7 @@
 package com.zjyang.mvpframe.module.home.discover.view;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
+import com.zjyang.mvpframe.utils.DrawUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -57,6 +59,8 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
     public TextView mTopTab4;
     @BindView(R.id.top_tab_5)
     public TextView mTopTab5;
+    @BindView(R.id.top_tab)
+    public View mTopBar;
 
 
     private GridVideoListAdapter mVideoAdapter;
@@ -79,6 +83,8 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
 
     public void initView(){
+
+        ViewCompat.setElevation(mTopBar, DrawUtils.dp2px(6));
 
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mVideoListView.setLayoutManager(mLayoutManager);

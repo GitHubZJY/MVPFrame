@@ -7,10 +7,10 @@
 
 
     <LinearLayout
+        android:id="@+id/dialog_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:layout_marginTop="30dp">
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="46dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="16dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@color/primary_text_color"
@@ -51,8 +51,8 @@
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:background="@color/text_color_gray"/>
             <TextView
                 android:id="@+id/agree_tv"
@@ -82,14 +82,9 @@
             android:layout_height="60dp"
             android:layout_centerInParent="true"
             android:src="@drawable/circle_start"/>
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerInParent="true"
             android:background="@drawable/circle_start"
             android:src="@drawable/ic_camera"/>
