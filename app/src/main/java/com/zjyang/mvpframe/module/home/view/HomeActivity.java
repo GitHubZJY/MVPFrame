@@ -28,6 +28,7 @@ import com.zjyang.mvpframe.module.home.model.HomeModel;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.presenter.HomePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.ui.dialog.DialogHelper;
 import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.PermissionUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
@@ -97,9 +98,10 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
     @OnClick(R.id.bottom_camera_iv)
     void clickToCamera(){
         //6.0以上若未有相机权限，需先申请
-        boolean hasGranted = PermissionUtils.newInstance().grantPermission(this, Manifest.permission.CAMERA);
+        boolean hasGranted = PermissionUtils.newInstance().grantPermission(Manifest.permission.CAMERA);
         if(!hasGranted){
             //假如还未有权限，则先不跳转录制界面
+            DialogHelper.showPermissionDialog(getFragmentManager(), "相机权限", "开启录制需要先授予相机权限");
             return;
         }
         jumpToCameraPage();
