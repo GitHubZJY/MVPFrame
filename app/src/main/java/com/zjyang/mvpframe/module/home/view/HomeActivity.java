@@ -101,7 +101,7 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
         boolean hasGranted = PermissionUtils.newInstance().grantPermission(Manifest.permission.CAMERA);
         if(!hasGranted){
             //假如还未有权限，则先不跳转录制界面
-            DialogHelper.showPermissionDialog(getFragmentManager(), "相机权限", "开启录制需要先授予相机权限");
+            DialogHelper.showPermissionDialog(getFragmentManager(),  "开启录制需要先授予相机权限");
             return;
         }
         jumpToCameraPage();

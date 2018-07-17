@@ -2,6 +2,7 @@ package com.zjyang.mvpframe.ui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,39 +26,16 @@ import com.zjyang.mvpframe.utils.PermissionUtils;
 
 public class DialogHelper {
 
+    private static final String PERMISSION_DIALOG = "permission_dialog";
 
-    public static void showPermissionDialog(FragmentManager manager, final String title, final String msg){
-        final BaseDialogFragment dialogFragment = BaseDialogFragment.create(true);
+
+    public static void showPermissionDialog(FragmentManager manager, final String msg){
+        final BaseDialogFragment dialogFragment = BaseDialogFragment.create(true, 0.7);
         dialogFragment.setDialogCallBack( new BaseDialogFragment.DialogCallBack() {
             @Override
             public Dialog getDialog(Context context) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.Base_AlertDialog);
-                View view = LayoutInflater.from(context).inflate(R.layout.dialog_permission, null);
-                TextView msgTv = view.findViewById(R.id.dialog_detail);
-                TextView cancelTv = view.findViewById(R.id.cancel_tv);
-                TextView agreeTv = view.findViewById(R.id.agree_tv);
-                LinearLayout mBgView = view.findViewById(R.id.dialog_bg);
-                msgTv.setText(msg);
-                mBgView.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(4), Color.parseColor("#ffffff")));
-                builder.setView(view);
-                cancelTv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(dialogFragment != null){
-                            dialogFragment.dismiss();
-                        }
-                    }
-                });
-
-                agreeTv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(dialogFragment != null){
-                            dialogFragment.dismiss();
-                        }
-                        PermissionUtils.newInstance().jumpPermissionPage();
-                    }
-                });
+                builder.setView(getPermissionDialogView(context, msg, dialogFragment));
                 return builder.create();
             }
         });
@@ -67,7 +45,36 @@ public class DialogHelper {
 
             }
         });
-        dialogFragment.show(manager, "s");
+        dialogFragment.show(manager, PERMISSION_DIALOG);
+    }
+
+    private static View getPermissionDialogView(Context context, String msg, final DialogFragment dialogFragment){
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_permission, null);
+        TextView msgTv = view.findViewById(R.id.dialog_detail);
+        TextView cancelTv = view.findViewById(R.id.cancel_tv);
+        TextView agreeTv = view.findViewById(R.id.agree_tv);
+        LinearLayout mBgView = view.findViewById(R.id.dialog_bg);
+        msgTv.setText(msg);
+        mBgView.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(4), Color.parseColor("#ffffff")));
+        cancelTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dialogFragment != null){
+                    dialogFragment.dismiss();
+                }
+            }
+        });
+
+        agreeTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dialogFragment != null){
+                    dialogFragment.dismiss();
+                }
+                PermissionUtils.newInstance().jumpPermissionPage();
+            }
+        });
+        return view;
     }
 
 }
