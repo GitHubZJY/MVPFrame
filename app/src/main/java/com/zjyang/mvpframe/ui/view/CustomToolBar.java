@@ -81,7 +81,7 @@ public class CustomToolBar extends LinearLayout {
         /**-------------背景颜色------------*/
         backgroundResId = typedArray.getResourceId(R.styleable.CustomToolBar_barBackground, -1);
         /**-------------是否显示阴影------------*/
-        isShaderVisible = typedArray.getBoolean(R.styleable.CustomToolBar_shader_visible, true);
+        isShaderVisible = typedArray.getBoolean(R.styleable.CustomToolBar_shader_visible, false);
 
         typedArray.recycle();
 

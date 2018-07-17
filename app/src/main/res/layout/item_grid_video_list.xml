@@ -5,10 +5,7 @@
     android:id="@+id/item_root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="1dp"
-    android:paddingRight="1dp"
-    android:paddingTop="1dp"
-    android:paddingBottom="1dp">
+    >
 
     <RelativeLayout
         android:id="@+id/video_container"

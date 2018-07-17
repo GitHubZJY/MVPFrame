@@ -3,10 +3,14 @@ package com.zjyang.mvpframe.utils;
 import android.net.Uri;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.postprocessors.IterativeBoxBlurPostProcessor;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.zjyang.mvpframe.application.AppApplication;
 
 /**
@@ -27,5 +31,30 @@ public class FrescoUtils {
 //                .build();
 //        simpleDraweeView.setController(placeHolderDraweeController);
 //        simpleDraweeView.setHierarchy(hierarchy);
+    }
+
+
+    /**
+     * 以高斯模糊显示。
+     *
+     * @param draweeView View。
+     * @param url        url.
+     * @param iterations 迭代次数，越大越魔化。
+     * @param blurRadius 模糊图半径，必须大于0，越大越模糊。
+     */
+    public static void showUrlBlur(SimpleDraweeView simpleDraweeView, String url, int blurRadius) {
+        try {
+            Uri uri = Uri.parse(url);
+            ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                    .setPostprocessor(new IterativeBoxBlurPostProcessor(6, blurRadius))
+                    .build();
+            AbstractDraweeController controller = Fresco.newDraweeControllerBuilder()
+                    .setOldController(simpleDraweeView.getController())
+                    .setImageRequest(request)
+                    .build();
+            simpleDraweeView.setController(controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

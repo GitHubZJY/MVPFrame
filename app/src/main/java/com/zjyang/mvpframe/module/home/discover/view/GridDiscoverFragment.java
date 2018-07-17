@@ -23,6 +23,7 @@ import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
+import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 import com.zjyang.mvpframe.utils.DrawUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -84,7 +85,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
     public void initView(){
 
-        ViewCompat.setElevation(mTopBar, DrawUtils.dp2px(6));
+        ViewCompat.setElevation(mTopBar, DrawUtils.dp2px(4));
 
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mVideoListView.setLayoutManager(mLayoutManager);
@@ -92,6 +93,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
         mVideoAdapter = new GridVideoListAdapter(getContext(), mVideoList);
         mVideoListView.setAdapter(mVideoAdapter);
         mVideoListView.setItemAnimator(new DefaultItemAnimator());
+        mVideoListView.addItemDecoration(new SpaceItemDecoration(3));
 
         mVideoListView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

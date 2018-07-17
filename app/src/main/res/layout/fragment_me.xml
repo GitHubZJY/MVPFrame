@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/AppFragment_CollapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/big_user_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/small_user_pic"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="32dp"
+                    fresco:roundAsCircle="true"
+                    fresco:roundingBorderWidth="2dp"
+                    fresco:roundingBorderColor="#ffffff"
+                    />
+                <TextView
+                    android:id="@+id/user_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/small_user_pic"
+                    android:layout_alignTop="@id/small_user_pic"
+                    android:layout_marginLeft="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:text="随手起个名"/>
+                <TextView
+                    android:id="@+id/describe_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/small_user_pic"
+                    android:layout_below="@id/user_name_tv"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="16dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/small_user_pic"
+                    android:layout_below="@id/describe_tv"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="16dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:text="旅拍达人"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                app:layout_collapseMode="pin">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <View
+                        android:id="@+id/padding_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        />
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/toolbar_user_pic"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="centerCrop"
+                        android:layout_below="@id/padding_view"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        fresco:roundAsCircle="true"
+                        />
+                    <TextView
+                        android:id="@+id/user_name_toolbar_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:layout_below="@id/padding_view"
+                        android:layout_toRightOf="@id/toolbar_user_pic"
+                        android:layout_marginLeft="8dp"
+                        android:text="Me"
+                        android:textColor="@color/primary_text_color"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_setting"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_below="@id/padding_view"
+                        android:layout_marginRight="16dp" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                app:cardElevation="7dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/circle_start"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_text_color"
+                            android:textSize="14sp"
+                            android:text="旅拍"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="@color/text_color_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/circle_start"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_text_color"
+                            android:textSize="14sp"
+                            android:text="关注"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="@color/text_color_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/circle_start"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primary_text_color"
+                            android:textSize="14sp"
+                            android:text="粉丝"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </ScrollView>
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
