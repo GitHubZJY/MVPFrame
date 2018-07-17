@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -14,6 +15,7 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseFragment;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.login.model.bean.User;
+import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.ColorUtils;
 import com.zjyang.mvpframe.utils.FrescoUtils;
 import com.zjyang.mvpframe.utils.ScreenUtils;
@@ -22,6 +24,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -49,6 +52,16 @@ public class MeFragment extends BaseFragment implements AppBarLayout.OnOffsetCha
     SimpleDraweeView mToolBarUserPicIv;
     @BindView(R.id.user_name_tv)
     TextView mUserNameTv;
+    @BindView(R.id.videos_tab)
+    LinearLayout mVideosTab;
+    @BindView(R.id.focus_tab)
+    LinearLayout mFocusTab;
+    @BindView(R.id.fans_tab)
+    LinearLayout mFansTab;
+    @BindView(R.id.user_level_name)
+    TextView mUserLevelNameTv;
+    @BindView(R.id.describe_tv)
+    TextView mDescribeTv;
 
     @Nullable
     @Override
@@ -69,13 +82,33 @@ public class MeFragment extends BaseFragment implements AppBarLayout.OnOffsetCha
         if(curUser != null){
             String userPicUrl = curUser.getUserPic();
             String userName = curUser.getUserName();
+            String userLevelStr = curUser.getLevelName();
+            String userDiscribe = curUser.getDescribe();
             FrescoUtils.showUrlBlur(mBigUserPicIv, userPicUrl, 3);
             FrescoUtils.showImgByUrl(userPicUrl, mSmallUserPicIv);
             FrescoUtils.showImgByUrl(userPicUrl, mToolBarUserPicIv);
             mUserNameTitleTv.setText(userName);
             mUserNameTv.setText(userName);
+            mDescribeTv.setText(userDiscribe);
+            mUserLevelNameTv.setText(userLevelStr);
+            mUserLevelNameTv.setBackground(ShapeUtils.getRoundRectDrawable(30, getResources().getColor(R.color.yellow)));
         }
         mAppBarLayout.addOnOffsetChangedListener(this);
+
+    }
+
+    @OnClick(R.id.videos_tab)
+    void clickVideosTab(){
+
+    }
+
+    @OnClick(R.id.focus_tab)
+    void clickFocusTab(){
+
+    }
+
+    @OnClick(R.id.fans_tab)
+    void clickFansTab(){
 
     }
 

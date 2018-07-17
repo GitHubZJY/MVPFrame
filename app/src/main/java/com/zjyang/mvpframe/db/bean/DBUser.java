@@ -17,6 +17,27 @@ public class DBUser {
     private String password;
     private String userPic;
     private String userName;
+    private String describe;
+    private String sex;
+    private String levelName;
+    private int level;
+    @Generated(hash = 767299400)
+    public DBUser(String id, String account, String password, String userPic,
+            String userName, String describe, String sex, String levelName,
+            int level) {
+        this.id = id;
+        this.account = account;
+        this.password = password;
+        this.userPic = userPic;
+        this.userName = userName;
+        this.describe = describe;
+        this.sex = sex;
+        this.levelName = levelName;
+        this.level = level;
+    }
+    @Generated(hash = 138933025)
+    public DBUser() {
+    }
     public String getUserName() {
         return this.userName;
     }
@@ -47,17 +68,37 @@ public class DBUser {
     public void setId(String id) {
         this.id = id;
     }
-    @Generated(hash = 900494697)
-    public DBUser(String id, String account, String password, String userPic,
-            String userName) {
-        this.id = id;
-        this.account = account;
-        this.password = password;
-        this.userPic = userPic;
-        this.userName = userName;
+
+    public String getDescribe() {
+        return describe;
     }
-    @Generated(hash = 138933025)
-    public DBUser() {
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
 
@@ -71,6 +112,10 @@ public class DBUser {
         user.setPassword(dbUser.getPassword());
         user.setUserName(dbUser.getUserName());
         user.setUserPic(dbUser.getUserPic());
+        user.setDescribe(dbUser.getDescribe());
+        user.setSex(dbUser.getSex());
+        user.setLevelName(dbUser.getLevelName());
+        user.setLevel(dbUser.getLevel());
         return user;
     }
 

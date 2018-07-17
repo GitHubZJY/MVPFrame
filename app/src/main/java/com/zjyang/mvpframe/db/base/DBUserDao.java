@@ -29,6 +29,10 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
         public final static Property Password = new Property(2, String.class, "password", false, "PASSWORD");
         public final static Property UserPic = new Property(3, String.class, "userPic", false, "USER_PIC");
         public final static Property UserName = new Property(4, String.class, "userName", false, "USER_NAME");
+        public final static Property Describe = new Property(5, String.class, "describe", false, "DESCRIBE");
+        public final static Property Sex = new Property(6, String.class, "sex", false, "SEX");
+        public final static Property LevelName = new Property(7, String.class, "levelName", false, "LEVEL_NAME");
+        public final static Property Level = new Property(8, int.class, "level", false, "LEVEL");
     };
 
 
@@ -48,7 +52,11 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
                 "\"ACCOUNT\" TEXT," + // 1: account
                 "\"PASSWORD\" TEXT," + // 2: password
                 "\"USER_PIC\" TEXT," + // 3: userPic
-                "\"USER_NAME\" TEXT);"); // 4: userName
+                "\"USER_NAME\" TEXT," + // 4: userName
+                "\"DESCRIBE\" TEXT," + // 5: describe
+                "\"SEX\" TEXT," + // 6: sex
+                "\"LEVEL_NAME\" TEXT," + // 7: levelName
+                "\"LEVEL\" INTEGER NOT NULL );"); // 8: level
     }
 
     /** Drops the underlying database table. */
@@ -85,6 +93,22 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
         if (userName != null) {
             stmt.bindString(5, userName);
         }
+ 
+        String describe = entity.getDescribe();
+        if (describe != null) {
+            stmt.bindString(6, describe);
+        }
+ 
+        String sex = entity.getSex();
+        if (sex != null) {
+            stmt.bindString(7, sex);
+        }
+ 
+        String levelName = entity.getLevelName();
+        if (levelName != null) {
+            stmt.bindString(8, levelName);
+        }
+        stmt.bindLong(9, entity.getLevel());
     }
 
     @Override
@@ -115,6 +139,22 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
         if (userName != null) {
             stmt.bindString(5, userName);
         }
+ 
+        String describe = entity.getDescribe();
+        if (describe != null) {
+            stmt.bindString(6, describe);
+        }
+ 
+        String sex = entity.getSex();
+        if (sex != null) {
+            stmt.bindString(7, sex);
+        }
+ 
+        String levelName = entity.getLevelName();
+        if (levelName != null) {
+            stmt.bindString(8, levelName);
+        }
+        stmt.bindLong(9, entity.getLevel());
     }
 
     @Override
@@ -129,7 +169,11 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // account
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // password
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // userPic
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // userName
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // userName
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // describe
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // sex
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // levelName
+            cursor.getInt(offset + 8) // level
         );
         return entity;
     }
@@ -141,6 +185,10 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
         entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUserPic(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setUserName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setDescribe(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setSex(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setLevelName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setLevel(cursor.getInt(offset + 8));
      }
     
     @Override

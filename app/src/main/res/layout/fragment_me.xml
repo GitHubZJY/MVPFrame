@@ -4,7 +4,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/white">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -48,6 +48,7 @@
                     android:layout_toRightOf="@id/small_user_pic"
                     android:layout_alignTop="@id/small_user_pic"
                     android:layout_marginLeft="16dp"
+                    android:drawableLeft="@drawable/ic_boy"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
@@ -58,27 +59,40 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/small_user_pic"
                     android:layout_below="@id/user_name_tv"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="16dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp"
+                    android:text="生活不只有眼前的苟且，还有诗和远方~"/>
+
+                <TextView
+                    android:id="@+id/user_level_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/small_user_pic"
+                    android:layout_alignBottom="@id/small_user_pic"
+                    android:layout_below="@id/describe_tv"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="16dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textStyle="italic"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"/>
+                    android:textSize="12sp"
+                    android:text="旅拍达人"/>
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/small_user_pic"
-                    android:layout_below="@id/describe_tv"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="16dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:text="旅拍达人"/>
+                    android:src="@drawable/ic_setting_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="32dp"/>
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
@@ -121,9 +135,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_setting"
+                        android:src="@drawable/ic_setting_black"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
+                        android:layout_alignBottom="@id/user_name_toolbar_tv"
                         android:layout_below="@id/padding_view"
                         android:layout_marginRight="16dp" />
                 </RelativeLayout>
@@ -140,77 +154,88 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="horizontal"
-                android:background="@color/white"
+                android:background="@color/colorPrimary"
                 app:cardElevation="7dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <LinearLayout
+                        android:id="@+id/videos_tab"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/circle_start"/>
+                            android:src="@drawable/ic_videos"
+                            android:scaleType="fitXY"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:textColor="@color/primary_text_color"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:text="旅拍"/>
                     </LinearLayout>
 
                     <View
                         android:layout_width="0.5dp"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
                         android:background="@color/text_color_gray"/>
 
                     <LinearLayout
+                        android:id="@+id/focus_tab"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center">
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/circle_start"/>
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_focus"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
                             android:textColor="@color/primary_text_color"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:text="关注"/>
                     </LinearLayout>
 
                     <View
                         android:layout_width="0.5dp"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
                         android:background="@color/text_color_gray"/>
 
                     <LinearLayout
+                        android:id="@+id/fans_tab"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_weight="1"
                         android:orientation="vertical"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center">
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/circle_start"/>
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_fans"
+                            android:scaleType="fitXY"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/primary_text_color"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:text="粉丝"/>
                     </LinearLayout>
                 </LinearLayout>
