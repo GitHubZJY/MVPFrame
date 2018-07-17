@@ -83,14 +83,15 @@ public class MeFragment extends BaseFragment implements AppBarLayout.OnOffsetCha
             String userPicUrl = curUser.getUserPic();
             String userName = curUser.getUserName();
             String userLevelStr = curUser.getLevelName();
-            String userDiscribe = curUser.getDescribe();
+            String userDescribe = curUser.getDescribe();
+            int userLevel = curUser.getLevel();
             FrescoUtils.showUrlBlur(mBigUserPicIv, userPicUrl, 3);
             FrescoUtils.showImgByUrl(userPicUrl, mSmallUserPicIv);
             FrescoUtils.showImgByUrl(userPicUrl, mToolBarUserPicIv);
             mUserNameTitleTv.setText(userName);
             mUserNameTv.setText(userName);
-            mDescribeTv.setText(userDiscribe);
-            mUserLevelNameTv.setText(userLevelStr);
+            mDescribeTv.setText(userDescribe);
+            mUserLevelNameTv.setText("Lv"+userLevel +" "+ userLevelStr);
             mUserLevelNameTv.setBackground(ShapeUtils.getRoundRectDrawable(30, getResources().getColor(R.color.yellow)));
         }
         mAppBarLayout.addOnOffsetChangedListener(this);
