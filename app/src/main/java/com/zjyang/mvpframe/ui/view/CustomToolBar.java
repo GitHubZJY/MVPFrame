@@ -16,7 +16,7 @@ import com.zjyang.mvpframe.utils.ScreenUtils;
  * Created by IT_ZJYANG on 2016/9/9.
  * 标题栏
  */
-public class CustomToolBar extends LinearLayout {
+public class CustomToolBar extends LinearLayout implements View.OnClickListener{
 
     private Boolean isLeftBtnVisible;
     private int leftResId;
@@ -96,6 +96,11 @@ public class CustomToolBar extends LinearLayout {
         View paddingView = (View)barLayoutView.findViewById(R.id.padding_view);
         View shaderView = (View)barLayoutView.findViewById(R.id.shader);
 
+        leftBtn.setOnClickListener(this);
+        leftTv.setOnClickListener(this);
+        rightBtn.setOnClickListener(this);
+        rightTv.setOnClickListener(this);
+
         paddingView.getLayoutParams().height = ScreenUtils.getStatusBarHeight();
 
         if(isLeftBtnVisible){
@@ -134,5 +139,37 @@ public class CustomToolBar extends LinearLayout {
         }
         //将设置完成之后的View添加到此LinearLayout中
         addView(barLayoutView, 0);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(mClickListener == null){
+            return;
+        }
+        switch (view.getId()){
+            case R.id.toolbar_left_btn:
+                mClickListener.clickLeftBtn();
+                break;
+            case R.id.toolbar_left_tv:
+                mClickListener.clickLeftBtn();
+                break;
+            case R.id.toolbar_right_btn:
+                mClickListener.clickRightBtn();
+                break;
+            case R.id.toolbar_right_tv:
+                mClickListener.clickRightBtn();
+                break;
+        }
+    }
+
+    OnClickListener mClickListener;
+
+    public void setClickListener(OnClickListener mClickListener) {
+        this.mClickListener = mClickListener;
+    }
+
+    public interface OnClickListener {
+        void clickRightBtn();
+        void clickLeftBtn();
     }
 }

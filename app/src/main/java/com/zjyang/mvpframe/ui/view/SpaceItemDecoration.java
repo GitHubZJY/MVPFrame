@@ -11,9 +11,11 @@ import android.view.View;
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private int space;
+    private int columnNum;
 
-    public SpaceItemDecoration(int space) {
+    public SpaceItemDecoration(int space, int columnNum) {
         this.space = space;
+        this.columnNum = columnNum;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
         if(index == 0 || index == 1){
             //outRect.top = space;
         }
-        if (index % 2 != 0) {
+        if (index % columnNum != 0) {
             //outRect.left = 0;
             outRect.left = 0;
         }

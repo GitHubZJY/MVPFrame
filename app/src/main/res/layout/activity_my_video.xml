@@ -5,10 +5,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/tool_bar"
     app:right_tv_text=""
+    app:right_btn_visible="true"
+    app:right_btn_src="@drawable/ic_setting_black"
     app:right_tv_visible="true"
     app:left_btn_visible="true"
-    app:title_text="@string/app_name"
+    app:title_text="@string/my_video"
     app:title_visible="true"
     app:shader_visible="true">
 

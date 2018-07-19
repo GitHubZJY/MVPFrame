@@ -92,7 +92,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
         mVideoAdapter = new GridVideoListAdapter(getContext(), mVideoList);
         mRefreshRecyclerView.setAdapter(mVideoAdapter);
         mRefreshRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3));
+        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3, 2));
 
         mRefreshRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

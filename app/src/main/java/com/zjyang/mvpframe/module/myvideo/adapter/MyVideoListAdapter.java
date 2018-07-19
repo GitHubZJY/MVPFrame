@@ -45,7 +45,7 @@ public class MyVideoListAdapter extends RecyclerView.Adapter<MyVideoListAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_video_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_video_list, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(v);
         return viewHolder;
     }

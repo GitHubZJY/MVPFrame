@@ -17,6 +17,7 @@ import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.myvideo.MyVideoTasksContract;
 import com.zjyang.mvpframe.module.myvideo.adapter.MyVideoListAdapter;
 import com.zjyang.mvpframe.module.myvideo.presenter.MyVideoPresenter;
+import com.zjyang.mvpframe.ui.view.CustomToolBar;
 import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 
@@ -35,11 +36,13 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/7/18.
  */
 
-public class MyVideoActivity extends BaseActivity implements MyVideoTasksContract.View{
+public class MyVideoActivity extends BaseActivity implements MyVideoTasksContract.View, CustomToolBar.OnClickListener{
 
     public static final String TAG = "MyVideoActivity";
     private Unbinder unbinder;
 
+    @BindView(R.id.tool_bar)
+    CustomToolBar mToolBar;
     @BindView(R.id.refresh_view)
     public RefreshLoadRecyclerView mRefreshRecyclerView;
 
@@ -71,13 +74,13 @@ public class MyVideoActivity extends BaseActivity implements MyVideoTasksContrac
     }
 
     private void initView(){
-        mLayoutManager = new GridLayoutManager(this, 2);
+        mLayoutManager = new GridLayoutManager(this, 3);
         mRefreshRecyclerView.setLayoutManager(mLayoutManager);
         mVideoList = new ArrayList<>();
         mVideoAdapter = new MyVideoListAdapter(this, mVideoList);
         mRefreshRecyclerView.setAdapter(mVideoAdapter);
         mRefreshRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3));
+        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3, 3));
 
         //优先检查当前是否有缓存数据
         mPresenter.checkCacheDataAndNotify();
@@ -113,6 +116,18 @@ public class MyVideoActivity extends BaseActivity implements MyVideoTasksContrac
 
             }
         });
+
+        mToolBar.setClickListener(this);
+    }
+
+    @Override
+    public void clickLeftBtn() {
+
+    }
+
+    @Override
+    public void clickRightBtn() {
+
     }
 
     @Override
