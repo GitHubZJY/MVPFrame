@@ -23,4 +23,12 @@
         <attr name="shader_visible" format="boolean"/>
 
     </declare-styleable>
+
+    <declare-styleable name="BaseSettingItem">
+        <attr name="top_line_visible" format="boolean"/>
+        <attr name="bottom_line_visible" format="boolean" />
+        <attr name="left_icon_src" format="reference" />
+        <attr name="content_text" format="reference|string" />
+        <attr name="bottom_line_margin" format="dimension" />
+    </declare-styleable>
 </resources>
