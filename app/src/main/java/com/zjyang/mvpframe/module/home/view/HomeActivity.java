@@ -23,7 +23,6 @@ import com.zjyang.mvpframe.module.camera.view.CameraActivity;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
-import com.zjyang.mvpframe.module.home.discover.view.DiscoverFragment;
 import com.zjyang.mvpframe.module.home.model.HomeModel;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.presenter.HomePresenter;

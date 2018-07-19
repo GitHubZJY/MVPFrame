@@ -13,6 +13,7 @@ public class VideoInfo extends BmobObject{
     private String videoUrl;
     private String videoThumbUrl;
     private int status;
+    private String userId;
     private String userPicUrl;
     private String userName;
     private int provinceId;
@@ -22,6 +23,14 @@ public class VideoInfo extends BmobObject{
     private int likeNum;
 
     public VideoInfo() {
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getProvinceId() {

@@ -73,6 +73,7 @@ public class ShareModel implements ShareTaskContracts.Model{
                     VideoInfo videoInfo = new VideoInfo();
                     videoInfo.setVideoUrl(videoStringUrl);
                     videoInfo.setProvinceId(1);
+                    videoInfo.setUserId(user.getObjectId());
                     videoInfo.setUserPicUrl(user.getUserPic());
                     videoInfo.setUserName(user.getUserName());
                     videoInfo.setVideoThumbUrl(thumbUrl);

@@ -22,6 +22,7 @@ import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
+import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
 import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 import com.zjyang.mvpframe.utils.DrawUtils;
@@ -46,10 +47,8 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
     private Unbinder unbinder;
 
-    @BindView(R.id.video_recycle_view)
-    public RecyclerView mVideoListView;
     @BindView(R.id.refresh_view)
-    public XRefreshView mRefreshView;
+    public RefreshLoadRecyclerView mRefreshRecyclerView;
     @BindView(R.id.top_tab_1)
     public TextView mTopTab1;
     @BindView(R.id.top_tab_2)
@@ -88,14 +87,14 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
         ViewCompat.setElevation(mTopBar, DrawUtils.dp2px(4));
 
         mLayoutManager = new GridLayoutManager(getContext(), 2);
-        mVideoListView.setLayoutManager(mLayoutManager);
+        mRefreshRecyclerView.setLayoutManager(mLayoutManager);
         mVideoList = new ArrayList<>();
         mVideoAdapter = new GridVideoListAdapter(getContext(), mVideoList);
-        mVideoListView.setAdapter(mVideoAdapter);
-        mVideoListView.setItemAnimator(new DefaultItemAnimator());
-        mVideoListView.addItemDecoration(new SpaceItemDecoration(3));
+        mRefreshRecyclerView.setAdapter(mVideoAdapter);
+        mRefreshRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3));
 
-        mVideoListView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRefreshRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -114,15 +113,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
             }
         });
 
-        //默认只有下拉刷新，需要上拉加载的添加下面第二行代码
-        mRefreshView.setPullRefreshEnable(true);//设置允许下拉刷新
-        mRefreshView.setPullLoadEnable(false);//设置允许上拉加载
-        //刷新动画，需要自定义CustomGifHeader，不需要修改动画的会默认头布局
-        RefreshViewHeader header = new RefreshViewHeader(getContext());
-        mRefreshView.setCustomHeaderView(header);
-        mRefreshView.setMoveForHorizontal(true);
-
-        mRefreshView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+        mRefreshRecyclerView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
             @Override
             public void onRefresh() {
                 mPresenter.refreshList();
@@ -234,7 +225,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRequstVideoListSuccessEvent(RequestVideoListEvent event){
-        mRefreshView.stopRefresh();//刷新停止
+        mRefreshRecyclerView.stopRefresh();//刷新停止
         if(event.ismIsSuccess()){
             mVideoList.clear();
             mVideoList.addAll(event.getVideoInfoList());

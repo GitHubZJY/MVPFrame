@@ -8,6 +8,7 @@ import com.zjyang.mvpframe.db.bean.DBUser;
 
 public class User {
 
+    private String objectId;
     private String id;
     private String account;
     private String password;
@@ -21,7 +22,13 @@ public class User {
     public User() {
     }
 
+    public String getObjectId() {
+        return objectId;
+    }
 
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public String getId() {
         return id;
@@ -100,7 +107,7 @@ public class User {
             return null;
         }
         DBUser dbUser = new DBUser();
-        dbUser.setId(user.getId());
+        dbUser.setObjectId(user.getObjectId());
         dbUser.setAccount(user.getAccount());
         dbUser.setPassword(user.getPassword());
         dbUser.setUserName(user.getUserName());

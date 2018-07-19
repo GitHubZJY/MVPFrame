@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.zjyang.mvpframe.db.DBConfig;
 import com.zjyang.mvpframe.db.base.DaoMaster;
 import com.zjyang.mvpframe.db.base.DaoSession;
@@ -22,7 +24,7 @@ public class AppApplication extends Application{
 
     private static Context mContext;
     private static DaoSession mDaoSession;
-
+    private static Gson sGson;
 
     @Override
     public void onCreate() {
@@ -33,6 +35,20 @@ public class AppApplication extends Application{
         initDB();
         //复制加载ijk so库
         new PlugInSoHelper(this).run();
+    }
+
+    public static Gson getGson() {
+        if (sGson == null) {
+            synchronized (new Object()) {
+                if (sGson == null) {
+                    sGson = new GsonBuilder().setPrettyPrinting()
+                            .disableHtmlEscaping()
+                            .serializeSpecialFloatingPointValues()
+                            .create();
+                }
+            }
+        }
+        return sGson;
     }
 
     public void initBombSDK(){

@@ -24,15 +24,16 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, String.class, "id", false, "ID");
-        public final static Property Account = new Property(1, String.class, "account", false, "ACCOUNT");
-        public final static Property Password = new Property(2, String.class, "password", false, "PASSWORD");
-        public final static Property UserPic = new Property(3, String.class, "userPic", false, "USER_PIC");
-        public final static Property UserName = new Property(4, String.class, "userName", false, "USER_NAME");
-        public final static Property Describe = new Property(5, String.class, "describe", false, "DESCRIBE");
-        public final static Property Sex = new Property(6, String.class, "sex", false, "SEX");
-        public final static Property LevelName = new Property(7, String.class, "levelName", false, "LEVEL_NAME");
-        public final static Property Level = new Property(8, int.class, "level", false, "LEVEL");
+        public final static Property ObjectId = new Property(0, String.class, "objectId", false, "OBJECT_ID");
+        public final static Property Id = new Property(1, String.class, "id", false, "ID");
+        public final static Property Account = new Property(2, String.class, "account", false, "ACCOUNT");
+        public final static Property Password = new Property(3, String.class, "password", false, "PASSWORD");
+        public final static Property UserPic = new Property(4, String.class, "userPic", false, "USER_PIC");
+        public final static Property UserName = new Property(5, String.class, "userName", false, "USER_NAME");
+        public final static Property Describe = new Property(6, String.class, "describe", false, "DESCRIBE");
+        public final static Property Sex = new Property(7, String.class, "sex", false, "SEX");
+        public final static Property LevelName = new Property(8, String.class, "levelName", false, "LEVEL_NAME");
+        public final static Property Level = new Property(9, int.class, "level", false, "LEVEL");
     };
 
 
@@ -48,15 +49,16 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DBUSER\" (" + //
-                "\"ID\" TEXT," + // 0: id
-                "\"ACCOUNT\" TEXT," + // 1: account
-                "\"PASSWORD\" TEXT," + // 2: password
-                "\"USER_PIC\" TEXT," + // 3: userPic
-                "\"USER_NAME\" TEXT," + // 4: userName
-                "\"DESCRIBE\" TEXT," + // 5: describe
-                "\"SEX\" TEXT," + // 6: sex
-                "\"LEVEL_NAME\" TEXT," + // 7: levelName
-                "\"LEVEL\" INTEGER NOT NULL );"); // 8: level
+                "\"OBJECT_ID\" TEXT," + // 0: objectId
+                "\"ID\" TEXT," + // 1: id
+                "\"ACCOUNT\" TEXT," + // 2: account
+                "\"PASSWORD\" TEXT," + // 3: password
+                "\"USER_PIC\" TEXT," + // 4: userPic
+                "\"USER_NAME\" TEXT," + // 5: userName
+                "\"DESCRIBE\" TEXT," + // 6: describe
+                "\"SEX\" TEXT," + // 7: sex
+                "\"LEVEL_NAME\" TEXT," + // 8: levelName
+                "\"LEVEL\" INTEGER NOT NULL );"); // 9: level
     }
 
     /** Drops the underlying database table. */
@@ -69,92 +71,102 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
     protected final void bindValues(DatabaseStatement stmt, DBUser entity) {
         stmt.clearBindings();
  
+        String objectId = entity.getObjectId();
+        if (objectId != null) {
+            stmt.bindString(1, objectId);
+        }
+ 
         String id = entity.getId();
         if (id != null) {
-            stmt.bindString(1, id);
+            stmt.bindString(2, id);
         }
  
         String account = entity.getAccount();
         if (account != null) {
-            stmt.bindString(2, account);
+            stmt.bindString(3, account);
         }
  
         String password = entity.getPassword();
         if (password != null) {
-            stmt.bindString(3, password);
+            stmt.bindString(4, password);
         }
  
         String userPic = entity.getUserPic();
         if (userPic != null) {
-            stmt.bindString(4, userPic);
+            stmt.bindString(5, userPic);
         }
  
         String userName = entity.getUserName();
         if (userName != null) {
-            stmt.bindString(5, userName);
+            stmt.bindString(6, userName);
         }
  
         String describe = entity.getDescribe();
         if (describe != null) {
-            stmt.bindString(6, describe);
+            stmt.bindString(7, describe);
         }
  
         String sex = entity.getSex();
         if (sex != null) {
-            stmt.bindString(7, sex);
+            stmt.bindString(8, sex);
         }
  
         String levelName = entity.getLevelName();
         if (levelName != null) {
-            stmt.bindString(8, levelName);
+            stmt.bindString(9, levelName);
         }
-        stmt.bindLong(9, entity.getLevel());
+        stmt.bindLong(10, entity.getLevel());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, DBUser entity) {
         stmt.clearBindings();
  
+        String objectId = entity.getObjectId();
+        if (objectId != null) {
+            stmt.bindString(1, objectId);
+        }
+ 
         String id = entity.getId();
         if (id != null) {
-            stmt.bindString(1, id);
+            stmt.bindString(2, id);
         }
  
         String account = entity.getAccount();
         if (account != null) {
-            stmt.bindString(2, account);
+            stmt.bindString(3, account);
         }
  
         String password = entity.getPassword();
         if (password != null) {
-            stmt.bindString(3, password);
+            stmt.bindString(4, password);
         }
  
         String userPic = entity.getUserPic();
         if (userPic != null) {
-            stmt.bindString(4, userPic);
+            stmt.bindString(5, userPic);
         }
  
         String userName = entity.getUserName();
         if (userName != null) {
-            stmt.bindString(5, userName);
+            stmt.bindString(6, userName);
         }
  
         String describe = entity.getDescribe();
         if (describe != null) {
-            stmt.bindString(6, describe);
+            stmt.bindString(7, describe);
         }
  
         String sex = entity.getSex();
         if (sex != null) {
-            stmt.bindString(7, sex);
+            stmt.bindString(8, sex);
         }
  
         String levelName = entity.getLevelName();
         if (levelName != null) {
-            stmt.bindString(8, levelName);
+            stmt.bindString(9, levelName);
         }
-        stmt.bindLong(9, entity.getLevel());
+        stmt.bindLong(10, entity.getLevel());
     }
 
     @Override
@@ -165,30 +177,32 @@ public class DBUserDao extends AbstractDao<DBUser, Void> {
     @Override
     public DBUser readEntity(Cursor cursor, int offset) {
         DBUser entity = new DBUser( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // account
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // password
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // userPic
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // userName
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // describe
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // sex
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // levelName
-            cursor.getInt(offset + 8) // level
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // objectId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // id
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // account
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // password
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // userPic
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // userName
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // describe
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // sex
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // levelName
+            cursor.getInt(offset + 9) // level
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, DBUser entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setAccount(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setUserPic(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setUserName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setDescribe(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setSex(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setLevelName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setLevel(cursor.getInt(offset + 8));
+        entity.setObjectId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setAccount(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPassword(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setUserPic(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setUserName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDescribe(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setSex(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setLevelName(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setLevel(cursor.getInt(offset + 9));
      }
     
     @Override

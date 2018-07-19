@@ -34,17 +34,12 @@
             android:layout_alignParentTop="true"/>
     </RelativeLayout>
 
-    <com.andview.refreshview.XRefreshView
+
+
+    <com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/video_recycle_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-    </com.andview.refreshview.XRefreshView>
+        android:layout_height="match_parent">
+    </com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView>
 
 </com.zjyang.mvpframe.ui.view.CustomToolBar>

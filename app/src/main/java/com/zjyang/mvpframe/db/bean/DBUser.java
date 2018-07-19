@@ -12,6 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class DBUser {
 
+    private String objectId;
     private String id;
     private String account;
     private String password;
@@ -21,10 +22,12 @@ public class DBUser {
     private String sex;
     private String levelName;
     private int level;
-    @Generated(hash = 767299400)
-    public DBUser(String id, String account, String password, String userPic,
-            String userName, String describe, String sex, String levelName,
-            int level) {
+
+    @Generated(hash = 455852979)
+    public DBUser(String objectId, String id, String account, String password,
+            String userPic, String userName, String describe, String sex,
+            String levelName, int level) {
+        this.objectId = objectId;
         this.id = id;
         this.account = account;
         this.password = password;
@@ -38,6 +41,9 @@ public class DBUser {
     @Generated(hash = 138933025)
     public DBUser() {
     }
+
+
+    
     public String getUserName() {
         return this.userName;
     }
@@ -101,13 +107,20 @@ public class DBUser {
         this.level = level;
     }
 
+    public String getObjectId() {
+        return this.objectId;
+    }
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
+
 
     public User switchUser(DBUser dbUser){
         if(dbUser == null){
             return null;
         }
         User user = new User();
-        user.setId(dbUser.getId());
+        user.setObjectId(dbUser.getObjectId());
         user.setAccount(dbUser.getAccount());
         user.setPassword(dbUser.getPassword());
         user.setUserName(dbUser.getUserName());

@@ -12,4 +12,18 @@
     app:title_visible="true"
     app:shader_visible="true">
 
+    <com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView>
+
+    <ViewStub
+        android:id="@+id/empty_tip_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_empty_data"
+        />
+
 </com.zjyang.mvpframe.ui.view.CustomToolBar>

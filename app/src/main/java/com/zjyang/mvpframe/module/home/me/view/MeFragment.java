@@ -3,7 +3,6 @@ package com.zjyang.mvpframe.module.home.me.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,17 +13,14 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseFragment;
-import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.home.me.MeTasksContract;
 import com.zjyang.mvpframe.module.home.me.presenter.MePresenter;
 import com.zjyang.mvpframe.module.login.model.bean.User;
-import com.zjyang.mvpframe.module.myvideo.MyVideoActivity;
+import com.zjyang.mvpframe.module.myvideo.view.MyVideoActivity;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.ColorUtils;
 import com.zjyang.mvpframe.utils.FrescoUtils;
 import com.zjyang.mvpframe.utils.ScreenUtils;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
