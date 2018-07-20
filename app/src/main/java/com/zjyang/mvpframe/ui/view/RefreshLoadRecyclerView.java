@@ -1,22 +1,29 @@
 package com.zjyang.mvpframe.ui.view;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
 import com.andview.refreshview.XRefreshView;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 /**
  * Created by zhengjiayang on 2018/7/19.
  */
 
-public class RefreshLoadRecyclerView extends XRefreshView{
+public class RefreshLoadRecyclerView extends XRefreshView implements XRefreshView.XRefreshViewListener{
+
+    public static final String TAG = "RefreshLoadRecyclerView";
 
     private RecyclerView mRecyclerView;
 
     private boolean mIsRefreshEnable;
     private boolean mIsLoadMoreEnable;
+    //刷新结束时停留时长
+    private static final int MIX_REFRESH_TIME = 1000;
 
     public RefreshLoadRecyclerView(Context context) {
         this(context, null);
@@ -40,6 +47,54 @@ public class RefreshLoadRecyclerView extends XRefreshView{
         //默认只有下拉刷新，需要上拉加载的添加下面第二行代码
         setPullRefreshEnable(mIsRefreshEnable);//设置允许下拉刷新
         setPullLoadEnable(mIsLoadMoreEnable);//设置允许上拉加载
+
+        setXRefreshViewListener(this);
+        setPinnedTime(MIX_REFRESH_TIME);
+    }
+
+    @Override
+    public void startRefresh() {
+        super.startRefresh();
+    }
+
+    @Override
+    public void stopRefresh() {
+        LogUtil.d(TAG, "stopRefresh--->");
+        super.stopRefresh();
+    }
+
+    @Override
+    public void onLoadMore(boolean isSilence) {
+        LogUtil.d(TAG, "onLoadMore--->");
+        if(null != mListener){
+            mListener.onLoadMore(isSilence);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        LogUtil.d(TAG, "onRefresh--->");
+        if(null != mListener){
+            mListener.onRefresh();
+        }
+    }
+
+    @Override
+    public void onRefresh(boolean isPullDown) {
+
+    }
+
+    @Override
+    public void onRelease(float direction) {
+        LogUtil.d(TAG, "onRelease--->");
+        if(null != mListener){
+            mListener.onRelease(direction);
+        }
+    }
+
+    @Override
+    public void onHeaderMove(double headerMovePercent, int offsetY) {
+
     }
 
     public void setIsRefreshEnable(boolean isRefreshEnable) {
@@ -78,5 +133,17 @@ public class RefreshLoadRecyclerView extends XRefreshView{
         if(mRecyclerView != null){
             mRecyclerView.setOnScrollListener(listener);
         }
+    }
+
+    RefreshLoadListener mListener;
+
+    public void setOnRefreshLoadListener(RefreshLoadListener mListener) {
+        this.mListener = mListener;
+    }
+
+    public interface RefreshLoadListener {
+        void onRefresh();
+        void onLoadMore(boolean isSilence);
+        void onRelease(float direction);
     }
 }

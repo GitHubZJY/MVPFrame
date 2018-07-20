@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.andview.refreshview.XRefreshView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
@@ -20,7 +19,6 @@ import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
 import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
-import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -104,15 +102,10 @@ public class DiscoverFragment extends BaseFragment implements DiscoverTasksContr
             }
         });
 
-        mRefreshRecyclerView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+        mRefreshRecyclerView.setOnRefreshLoadListener(new RefreshLoadRecyclerView.RefreshLoadListener() {
             @Override
             public void onRefresh() {
                 mPresenter.refreshList();
-            }
-
-            @Override
-            public void onRefresh(boolean isPullDown) {
-
             }
 
             @Override
@@ -122,11 +115,6 @@ public class DiscoverFragment extends BaseFragment implements DiscoverTasksContr
 
             @Override
             public void onRelease(float direction) {
-
-            }
-
-            @Override
-            public void onHeaderMove(double headerMovePercent, int offsetY) {
 
             }
         });

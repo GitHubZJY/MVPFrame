@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.andview.refreshview.XRefreshView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
@@ -23,7 +21,6 @@ import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
-import com.zjyang.mvpframe.ui.view.RefreshViewHeader;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 import com.zjyang.mvpframe.utils.DrawUtils;
 
@@ -113,15 +110,10 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
             }
         });
 
-        mRefreshRecyclerView.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+        mRefreshRecyclerView.setOnRefreshLoadListener(new RefreshLoadRecyclerView.RefreshLoadListener() {
             @Override
             public void onRefresh() {
                 mPresenter.refreshList();
-            }
-
-            @Override
-            public void onRefresh(boolean isPullDown) {
-
             }
 
             @Override
@@ -131,11 +123,6 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
             @Override
             public void onRelease(float direction) {
-
-            }
-
-            @Override
-            public void onHeaderMove(double headerMovePercent, int offsetY) {
 
             }
         });
