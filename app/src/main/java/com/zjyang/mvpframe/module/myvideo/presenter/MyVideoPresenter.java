@@ -31,6 +31,9 @@ public class MyVideoPresenter implements MyVideoTasksContract.Presenter{
         User curUser = UserDataManager.getInstance().getCurUser();
         String userId = curUser.getObjectId();
         List<VideoInfo> cacheList = mModel.getSpVideoData();
+        if(null == cacheList){
+            return null;
+        }
         for(VideoInfo videoInfo : cacheList){
             if(videoInfo.getUserId().equals(userId)){
                 isCacheMatchUser = true;

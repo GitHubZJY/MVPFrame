@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.zjyang.mvpframe.MainActivity;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
+import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.view.HomeActivity;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.presenter.LoginPresenter;
@@ -42,7 +43,7 @@ import butterknife.Unbinder;
  * Created by zhengjiayang on 2018/3/1.
  */
 
-public class LoginActivity extends BaseActivity implements LoginTasksContract.View{
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginTasksContract.View{
 
     private Unbinder unbinder;
 
@@ -62,8 +63,6 @@ public class LoginActivity extends BaseActivity implements LoginTasksContract.Vi
     public LinearLayout mPwLlyt;
 
 
-    private LoginTasksContract.Presenter mPresenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +70,16 @@ public class LoginActivity extends BaseActivity implements LoginTasksContract.Vi
         setContentView(R.layout.activity_login);
 
         unbinder = ButterKnife.bind(this);
-        mPresenter = new LoginPresenter(this);
         initView();
     }
 
     public void initView(){
         mPresenter.checkUserCache();
+    }
+
+    @Override
+    public LoginPresenter createPresenter() {
+        return new LoginPresenter();
     }
 
     @Override

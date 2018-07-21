@@ -31,9 +31,9 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  * Created by 74215 on 2018/5/13.
  */
 
-public class ShareActivity extends BaseActivity implements ShareTaskContracts.View, VideoFrame.OnCompleteListener{
+public class ShareActivity extends BaseActivity<SharePresenter> implements ShareTaskContracts.View, VideoFrame.OnCompleteListener{
 
-    private static final String TAG = "HomeActivity";
+    private static final String TAG = "ShareActivity";
     private Unbinder unbinder;
 
     @BindView(R.id.share_video_view)
@@ -47,7 +47,6 @@ public class ShareActivity extends BaseActivity implements ShareTaskContracts.Vi
 
     public static final String VIDEO_PATH = "VIDEO_PATH";
     private String mVideoPath;
-    private ShareTaskContracts.Presenter mPresenter;
 
     public static void go(Context context, String videoPath){
         Intent intent = new Intent(context, ShareActivity.class);
@@ -55,6 +54,11 @@ public class ShareActivity extends BaseActivity implements ShareTaskContracts.Vi
         bundle.putString(VIDEO_PATH, videoPath);
         intent.putExtras(bundle);
         context.startActivity(intent);
+    }
+
+    @Override
+    public SharePresenter createPresenter() {
+        return new SharePresenter();
     }
 
     @Override
@@ -66,8 +70,6 @@ public class ShareActivity extends BaseActivity implements ShareTaskContracts.Vi
 
 
         initVideoView();
-
-        mPresenter = new SharePresenter(this);
     }
 
     public void initVideoView(){

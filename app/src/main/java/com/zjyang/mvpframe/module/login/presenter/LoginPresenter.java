@@ -2,6 +2,7 @@ package com.zjyang.mvpframe.module.login.presenter;
 
 import android.text.TextUtils;
 
+import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
 import com.zjyang.mvpframe.module.login.LoginErrorCode;
@@ -13,34 +14,32 @@ import com.zjyang.mvpframe.utils.HandlerUtils;
  * Created by zhengjiayang on 2018/3/1.
  */
 
-public class LoginPresenter implements LoginTasksContract.Presenter{
+public class LoginPresenter extends BasePresenter<LoginTasksContract.View, LoginModel> implements LoginTasksContract.Presenter{
 
-    private LoginTasksContract.View mLoginView;
-    private LoginTasksContract.Model mLoginModel;
 
-    public LoginPresenter(LoginTasksContract.View loginView) {
-        mLoginView = loginView;
-        mLoginModel = new LoginModel();
+    @Override
+    public LoginModel createModel() {
+        return new LoginModel();
     }
 
     @Override
     public void checkLogin(String account, String password) {
         if(TextUtils.isEmpty(account)){
-            mLoginView.showAccountNotNullTip();
+            mView.showAccountNotNullTip();
             return;
         }
         if(TextUtils.isEmpty(password)){
-            mLoginView.showPasswordNotNullTip();
+            mView.showPasswordNotNullTip();
             return;
         }
-        mLoginView.showLoginAnim();
-        mLoginModel.login(account, password, new ILoginCallBack() {
+        mView.showLoginAnim();
+        mModel.login(account, password, new ILoginCallBack() {
             @Override
             public void loginSuccess() {
                 HandlerUtils.postDelay(new Runnable() {
                     @Override
                     public void run() {
-                        mLoginView.jumpToHomeActivity();
+                        mView.jumpToHomeActivity();
                     }
                 }, 1000);
 
@@ -52,11 +51,11 @@ public class LoginPresenter implements LoginTasksContract.Presenter{
                     @Override
                     public void run() {
                         if(errorStatus == LoginErrorCode.PASSWORD_ERROR){
-                            mLoginView.showPwErrorToast();
-                            mLoginView.resetInput();
+                            mView.showPwErrorToast();
+                            mView.resetInput();
                         }else if(errorStatus == LoginErrorCode.ACCOUNT_NOT_EXIST){
-                            mLoginView.showAccountNotExist();
-                            mLoginView.resetInput();
+                            mView.showAccountNotExist();
+                            mView.resetInput();
                         }
                     }
                 }, 1000);
@@ -66,8 +65,8 @@ public class LoginPresenter implements LoginTasksContract.Presenter{
 
     @Override
     public void checkUserCache() {
-        if(UserDataManager.getInstance().getCurUser() != null && mLoginView != null){
-            mLoginView.jumpToHomeActivity();
+        if(UserDataManager.getInstance().getCurUser() != null && mView != null){
+            mView.jumpToHomeActivity();
         }
     }
 }

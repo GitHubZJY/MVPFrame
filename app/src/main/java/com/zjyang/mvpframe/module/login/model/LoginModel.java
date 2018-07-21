@@ -1,5 +1,6 @@
 package com.zjyang.mvpframe.module.login.model;
 
+import com.zjyang.mvpframe.module.base.BaseModel;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
 import com.zjyang.mvpframe.module.login.LoginErrorCode;
@@ -17,7 +18,7 @@ import cn.bmob.v3.listener.QueryListener;
  * Created by zhengjiayang on 2018/3/1.
  */
 
-public class LoginModel implements LoginTasksContract.Model{
+public class LoginModel extends BaseModel implements LoginTasksContract.Model{
 
 
     @Override

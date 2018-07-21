@@ -1,5 +1,9 @@
 package com.zjyang.mvpframe.module.camera.model;
 
+import android.hardware.Camera;
+
+import java.util.List;
+
 /**
  * Created by 74215 on 2018/5/10.
  * 当前相机的各项参数配置
@@ -19,4 +23,34 @@ public class CameraSetting {
     public static int VIDEO_MAX_DURATION = 30*1000;
     //设置摄像头的方向（180=横屏 90=竖屏）
     public static int VIDEO_ORIENTATION = 90;
+
+    public static Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
+        final double ASPECT_TOLERANCE = 0.1;
+        double targetRatio = (double) w / h;
+        if (sizes == null) {
+            return null;
+        }
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+        int targetHeight = h;
+        for (Camera.Size size : sizes) {
+            double ratio = (double) size.width / size.height;
+            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
+                continue;
+            if (Math.abs(size.height - targetHeight) < minDiff) {
+                optimalSize = size;
+                minDiff = Math.abs(size.height - targetHeight);
+            }
+        }
+        if (optimalSize == null) {
+            minDiff = Double.MAX_VALUE;
+            for (Camera.Size size : sizes) {
+                if (Math.abs(size.height - targetHeight) < minDiff) {
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - targetHeight);
+                }
+            }
+        }
+        return optimalSize;
+    }
 }

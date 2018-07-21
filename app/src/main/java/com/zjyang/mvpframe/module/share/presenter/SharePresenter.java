@@ -1,6 +1,7 @@
 package com.zjyang.mvpframe.module.share.presenter;
 
 import com.zjyang.mvpframe.event.ShareResultEvent;
+import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.model.ShareModel;
 
@@ -12,35 +13,36 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by 74215 on 2018/5/26.
  */
 
-public class SharePresenter implements ShareTaskContracts.Presenter{
+public class SharePresenter extends BasePresenter<ShareTaskContracts.View, ShareModel> implements ShareTaskContracts.Presenter{
 
-    private ShareTaskContracts.View mShareView;
-    private ShareTaskContracts.Model mShareModel;
 
-    public SharePresenter(ShareTaskContracts.View mShareView) {
-        this.mShareView = mShareView;
-        mShareModel = new ShareModel();
+    public SharePresenter() {
         if(!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
     }
 
     @Override
+    public ShareModel createModel() {
+        return new ShareModel();
+    }
+
+    @Override
     public void shareVideo(String videoPath) {
-        if(mShareModel != null){
-            mShareModel.uploadVideoFile(videoPath);
+        if(mModel != null){
+            mModel.uploadVideoFile(videoPath);
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ShareResultEvent event){
-        if(mShareView == null){
+        if(mView == null){
             return;
         }
         if(event.isSuccess()){
-            mShareView.showUpLoadSuccess();
+            mView.showUpLoadSuccess();
         }else{
-            mShareView.showUpLoadFail();
+            mView.showUpLoadFail();
         }
     }
 

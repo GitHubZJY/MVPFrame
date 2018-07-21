@@ -44,7 +44,7 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/3/13.
  */
 
-public class HomeActivity extends BaseActivity implements HomeTasksContract.View, HomeBottomBar.TabClickListener{
+public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTasksContract.View, HomeBottomBar.TabClickListener{
 
     private static final String TAG = "HomeActivity";
     private Unbinder unbinder;
@@ -64,8 +64,6 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
 
     private List<BaseFragment> mFragmentList;
 
-    private HomePresenter mHomePresenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +71,11 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);// 允许使用transitions
         setContentView(R.layout.activity_home);
         unbinder = ButterKnife.bind(this);
-        mHomePresenter = new HomePresenter(this);
         mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffd600")));
         mCameraBg.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffffff")));
 
 
-        mFragmentList = mHomePresenter.getChildPages();
+        mFragmentList = mPresenter.getChildPages();
         mPagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
 
@@ -86,10 +83,15 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
     }
 
     @Override
+    public HomePresenter createPresenter() {
+        return new HomePresenter();
+    }
+
+    @Override
     public void resetFragments(){
         LogUtil.d(TAG, "resetFragments");
         mFragmentList.clear();
-        mFragmentList.addAll(mHomePresenter.getChildPages());
+        mFragmentList.addAll(mPresenter.getChildPages());
         mPagerAdapter.notifyDataSetChanged();
     }
 
@@ -157,8 +159,8 @@ public class HomeActivity extends BaseActivity implements HomeTasksContract.View
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
-        if(mHomePresenter != null){
-            mHomePresenter.destroy();
+        if(mPresenter != null){
+            mPresenter.destroy();
         }
     }
 }

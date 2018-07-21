@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
+import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.camera.model.CameraModel;
 import com.zjyang.mvpframe.module.camera.model.CameraSetting;
 import com.zjyang.mvpframe.module.share.view.ShareActivity;
@@ -27,6 +28,7 @@ import com.zjyang.mvpframe.utils.HandlerUtils;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +70,10 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
         }
     };
 
+    @Override
+    public BasePresenter createPresenter() {
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,6 +234,11 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
         // 将holder，这个holder为开始在onCreate里面取得的holder，将它赋给mSurfaceHolder
         mSurfaceHolder = surfaceHolder;
+//        List<Camera.Size> sizeList = camera.getParameters().getSupportedVideoSizes();
+//        Camera.Size mPreviewSize = CameraSetting.getOptimalPreviewSize(sizeList, i1, i2);
+//        Camera.Parameters mParams = camera.getParameters();
+//        mParams.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+//        camera.setParameters(mParams);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.zjyang.mvpframe.module.home.model;
 
 import com.zjyang.mvpframe.event.GetHomeTabInfoEvent;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.base.BaseModel;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.discover.view.GridDiscoverFragment;
 import com.zjyang.mvpframe.module.home.focus.FocusFragment;
@@ -25,7 +26,7 @@ import cn.bmob.v3.listener.FindListener;
  * Created by 74215 on 2018/4/1.
  */
 
-public class HomeModel implements HomeTasksContract.Model{
+public class HomeModel extends BaseModel implements HomeTasksContract.Model{
 
     private static final String TAG = "HomeModel";
     private List<BaseFragment> fragments = new ArrayList<>();

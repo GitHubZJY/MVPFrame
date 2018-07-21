@@ -13,6 +13,7 @@ import com.andview.refreshview.XRefreshView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.RequestMyVideoListEvent;
 import com.zjyang.mvpframe.module.base.BaseActivity;
+import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.myvideo.MyVideoTasksContract;
 import com.zjyang.mvpframe.module.myvideo.adapter.MyVideoListAdapter;
@@ -57,6 +58,11 @@ public class MyVideoActivity extends BaseActivity implements MyVideoTasksContrac
     public static void go(Context context){
         Intent intent = new Intent(context, MyVideoActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public BasePresenter createPresenter() {
+        return null;
     }
 
     @Override

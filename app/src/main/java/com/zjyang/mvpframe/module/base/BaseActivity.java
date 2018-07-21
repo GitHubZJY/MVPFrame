@@ -16,7 +16,9 @@ import com.zjyang.mvpframe.utils.LogUtil;
  * Created by zhengjiayang on 2018/3/1.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
+
+    public P mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,14 @@ public class BaseActivity extends AppCompatActivity {
         //判断当前设备版本号是否为4.4以上，如果是，则通过调用setTranslucentStatus让状态栏变透明  
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
             setTranslucentStatus(true);
+        }
+
+        if(mPresenter == null){
+            mPresenter = createPresenter();
+        }
+
+        if(mPresenter != null){
+            mPresenter.attachV(this);
         }
 
     }
@@ -42,6 +52,8 @@ public class BaseActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
+    public abstract P createPresenter();
 
 
     @Override

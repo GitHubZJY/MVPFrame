@@ -12,6 +12,7 @@ import com.example.zjy.player.ui.YPlayerView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.module.base.BaseActivity;
+import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.utils.HandlerUtils;
@@ -40,6 +41,10 @@ public class FullScreenWatchActivity extends BaseActivity {
 
     private VideoInfo mVideoInfo;
 
+    @Override
+    public BasePresenter createPresenter() {
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
