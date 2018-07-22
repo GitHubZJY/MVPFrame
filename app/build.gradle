@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
@@ -116,5 +117,9 @@ dependencies {
 
 
     compile project(':player')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
