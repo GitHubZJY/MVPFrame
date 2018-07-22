@@ -9,11 +9,16 @@ import com.google.gson.GsonBuilder;
 import com.zjyang.mvpframe.db.DBConfig;
 import com.zjyang.mvpframe.db.base.DaoMaster;
 import com.zjyang.mvpframe.db.base.DaoSession;
+import com.zjyang.mvpframe.net.RequestApi;
 import com.zjyang.mvpframe.utils.Constants;
 
 import org.greenrobot.greendao.database.Database;
 
 import cn.bmob.v3.Bmob;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import tv.danmaku.ijk.media.player.PlugInSoHelper;
 
 /**
@@ -25,6 +30,7 @@ public class AppApplication extends Application{
     private static Context mContext;
     private static DaoSession mDaoSession;
     private static Gson sGson;
+    private static RequestApi sRequestApi;
 
     @Override
     public void onCreate() {
@@ -49,6 +55,22 @@ public class AppApplication extends Application{
             }
         }
         return sGson;
+    }
+
+    public static RequestApi getRequestApi(){
+        if (sRequestApi == null) {
+            synchronized (new Object()) {
+                if (sRequestApi == null) {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .baseUrl(RequestApi.BASE_URL).build();
+                    sRequestApi = retrofit.create(RequestApi.class);
+                }
+            }
+        }
+
+        return sRequestApi;
     }
 
     public void initBombSDK(){

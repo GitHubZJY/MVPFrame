@@ -251,6 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:background="?attr/selectableItemBackground"
+                    app:left_icon_src="@drawable/ic_foot"
                     app:bottom_line_margin="56dp"
                     app:content_text="我的足迹">
 
@@ -260,6 +261,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
+                    app:left_icon_src="@drawable/ic_support"
                     app:content_text="赞过的视频"
                     app:top_line_visible="false">
 

@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/setting_left_icon_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/ic_videos"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"

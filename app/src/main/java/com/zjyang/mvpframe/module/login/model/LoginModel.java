@@ -1,18 +1,22 @@
 package com.zjyang.mvpframe.module.login.model;
 
+import com.zjyang.mvpframe.application.AppApplication;
 import com.zjyang.mvpframe.module.base.BaseModel;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
 import com.zjyang.mvpframe.module.login.LoginErrorCode;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.model.bean.User;
+import com.zjyang.mvpframe.net.ResponseBean;
 
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.QueryListener;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by zhengjiayang on 2018/3/1.
@@ -43,6 +47,33 @@ public class LoginModel extends BaseModel implements LoginTasksContract.Model{
                 }
             }
         });
+
+
+//        AppApplication.getRequestApi().getUserInfo().
+//                subscribeOn(Schedulers.io()).
+//                observeOn(AndroidSchedulers.mainThread()).
+//                subscribe(new Observer<ResponseBean<User>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable throwable) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(ResponseBean<User> responseBean) {
+//                User user = responseBean.getData();
+//                if(user != null){
+//                    UserDataManager.getInstance().setCurUser(user);
+//                    callBack.loginSuccess();
+//                }else{
+//                    callBack.loginFail(LoginErrorCode.PASSWORD_ERROR);
+//                }
+//            }
+//        });
     }
 
 

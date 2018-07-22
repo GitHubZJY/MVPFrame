@@ -32,6 +32,11 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
 }
 
 configurations.all {
@@ -75,6 +80,25 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:3.0.0'
 
     compile 'com.android.support:design:26.2.0'
+
+    compile ('com.squareup.retrofit2:retrofit:2.1.0'){
+        exclude group : 'com.google.code.gson'
+        exclude group : 'com.squareup.okhttp3'
+    }
+    compile ('com.squareup.retrofit2:converter-scalars:2.1.0'){
+        exclude group : 'com.google.code.gson'
+        exclude group : 'com.squareup.okhttp3'
+    }
+    compile ('com.squareup.retrofit2:converter-gson:2.1.0'){
+        exclude group : 'com.google.code.gson'
+        exclude group : 'com.squareup.okhttp3'
+    }
+
+    compile ('com.squareup.retrofit2:adapter-rxjava:2.1.0'){
+        exclude group : 'com.google.code.gson'
+        exclude group : 'com.squareup.okhttp3'
+        exclude group : 'io.reactivex'
+    }
 
 
     testCompile ('org.powermock:powermock-api-mockito:1.6.2') {
