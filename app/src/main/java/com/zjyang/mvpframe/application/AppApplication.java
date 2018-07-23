@@ -11,6 +11,8 @@ import com.zjyang.mvpframe.db.base.DaoMaster;
 import com.zjyang.mvpframe.db.base.DaoSession;
 import com.zjyang.mvpframe.net.RequestApi;
 import com.zjyang.mvpframe.utils.Constants;
+import com.zjyang.mvpframe.utils.HandlerUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -27,6 +29,8 @@ import tv.danmaku.ijk.media.player.PlugInSoHelper;
 
 public class AppApplication extends Application{
 
+    public static final String TAG = "AppApplication";
+
     private static Context mContext;
     private static DaoSession mDaoSession;
     private static Gson sGson;
@@ -35,12 +39,20 @@ public class AppApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        long startAppTime = System.currentTimeMillis();
         mContext = this;
-        initBombSDK();
-        initFresco();
+        HandlerUtils.postThread(new Runnable() {
+            @Override
+            public void run() {
+                //放到子线程里提高启动速度
+                initBombSDK();
+                initFresco();
+            }
+        });
         initDB();
         //复制加载ijk so库
         new PlugInSoHelper(this).run();
+        LogUtil.e(TAG, "Application start time--->" + (System.currentTimeMillis() - startAppTime));
     }
 
     public static Gson getGson() {

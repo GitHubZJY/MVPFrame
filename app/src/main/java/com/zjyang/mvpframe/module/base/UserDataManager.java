@@ -32,7 +32,7 @@ public class UserDataManager {
         return mCurUser;
     }
 
-    public void setCurUser(User mCurUser) {
+    public synchronized void setCurUser(User mCurUser) {
         UserDBHelper.getInstance().insertUser(mCurUser);
         this.mCurUser = mCurUser;
     }

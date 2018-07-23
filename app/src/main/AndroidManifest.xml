@@ -29,17 +29,18 @@
         android:supportsRtl="true"
         android:name=".application.AppApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
-
-        <activity android:name=".module.login.view.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".module.login.view.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         </activity>
 
 
