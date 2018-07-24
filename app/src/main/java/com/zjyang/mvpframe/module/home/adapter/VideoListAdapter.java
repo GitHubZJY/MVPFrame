@@ -163,8 +163,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.MyVi
 
             @Override
             public void clickNarrow() {
-                Intent intent = new Intent(mContext, FullScreenWatchActivity.class);
-                mContext.startActivity(intent);
+                FullScreenWatchActivity.go(mContext, videoInfo);
                 //overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
             }
         });
