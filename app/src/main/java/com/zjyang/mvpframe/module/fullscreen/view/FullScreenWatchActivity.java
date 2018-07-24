@@ -53,15 +53,15 @@ public class FullScreenWatchActivity extends BaseActivity {
     }
 
     public static void go(Context context, View previewIv, VideoInfo videoInfo){
-//        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,
-//                new Pair<View, String>(previewIv, JUMP_ANIM_VIEW));
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context,
+                new Pair<View, String>(previewIv, JUMP_ANIM_VIEW));
         Intent intent = new Intent(context, FullScreenWatchActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(VIDEO_INFO, videoInfo);
         intent.putExtras(bundle);
-        context.startActivity(intent);
+        //context.startActivity(intent);
         // ActivityCompat是android支持库中用来适应不同android版本的
-        //ActivityCompat.startActivity(context, intent, activityOptions.toBundle());
+        ActivityCompat.startActivity(context, intent, activityOptions.toBundle());
     }
 
     @Override
@@ -79,7 +79,7 @@ public class FullScreenWatchActivity extends BaseActivity {
         LogUtil.d(TAG, "URL: " + mVideoInfo.getVideoUrl());
 
         mPlayView.start();
-        //FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
+        FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
     }
 
     @Override
