@@ -75,7 +75,7 @@ public class MyVideoListAdapter extends RecyclerView.Adapter<MyVideoListAdapter.
             public void onClick(View view) {
                 videoInfo.setStatus(LOADING_STATUS);
                 VideoFramesModel.getInstance().setCurPlayVideo(videoInfo);
-                FullScreenWatchActivity.go(mContext, videoInfo);
+                FullScreenWatchActivity.go(mContext, holder.mPreviewIv, videoInfo);
             }
         });
     }

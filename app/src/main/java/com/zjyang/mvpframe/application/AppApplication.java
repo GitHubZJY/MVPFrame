@@ -44,8 +44,9 @@ public class AppApplication extends Application{
         long startAppTime = System.currentTimeMillis();
         mContext = this;
         if(isMainProcess()){
-            initInMainProcess();
+
         }
+        initInMainProcess();
         //复制加载ijk so库
         new PlugInSoHelper(this).run();
         LogUtil.e(TAG, "Application start time--->" + (System.currentTimeMillis() - startAppTime));
@@ -58,9 +59,9 @@ public class AppApplication extends Application{
             public void run() {
                 //放到子线程里提高启动速度
                 initBombSDK();
-                initFresco();
             }
         });
+        initFresco();
         initDB();
     }
 
