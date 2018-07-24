@@ -1,5 +1,9 @@
 package com.zjyang.mvpframe.module.home.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
@@ -8,7 +12,7 @@ import cn.bmob.v3.BmobObject;
  * Created by 74215 on 2018/4/1.
  */
 
-public class VideoInfo extends BmobObject{
+public class VideoInfo extends BmobObject implements Parcelable {
 
     private String videoUrl;
     private String videoThumbUrl;
@@ -117,4 +121,52 @@ public class VideoInfo extends BmobObject{
     public void setStatus(int status) {
         this.status = status;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.videoUrl);
+        dest.writeString(this.videoThumbUrl);
+        dest.writeInt(this.status);
+        dest.writeString(this.userId);
+        dest.writeString(this.userPicUrl);
+        dest.writeString(this.userName);
+        dest.writeInt(this.provinceId);
+        dest.writeString(this.watchNum);
+        dest.writeString(this.duration);
+        dest.writeList(this.commentList);
+        dest.writeInt(this.likeNum);
+    }
+
+    protected VideoInfo(Parcel in) {
+        this.videoUrl = in.readString();
+        this.videoThumbUrl = in.readString();
+        this.status = in.readInt();
+        this.userId = in.readString();
+        this.userPicUrl = in.readString();
+        this.userName = in.readString();
+        this.provinceId = in.readInt();
+        this.watchNum = in.readString();
+        this.duration = in.readString();
+        this.commentList = new ArrayList<Comment>();
+        in.readList(this.commentList, Comment.class.getClassLoader());
+        this.likeNum = in.readInt();
+    }
+
+    public static final Parcelable.Creator<VideoInfo> CREATOR = new Parcelable.Creator<VideoInfo>() {
+        @Override
+        public VideoInfo createFromParcel(Parcel source) {
+            return new VideoInfo(source);
+        }
+
+        @Override
+        public VideoInfo[] newArray(int size) {
+            return new VideoInfo[size];
+        }
+    };
 }

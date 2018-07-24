@@ -1,5 +1,7 @@
 package com.zjyang.mvpframe.module.fullscreen.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -32,6 +34,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 public class FullScreenWatchActivity extends BaseActivity {
 
     private static final String TAG = "FullScreenWatchActivity";
+    private static final String VIDEO_INFO = "VIDEO_INFO";
     private Unbinder unbinder;
 
     @BindView(R.id.player_view)
@@ -46,13 +49,24 @@ public class FullScreenWatchActivity extends BaseActivity {
         return null;
     }
 
+    public static void go(Context context, VideoInfo videoInfo){
+        Intent intent = new Intent(context, FullScreenWatchActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(VIDEO_INFO, videoInfo);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);// 允许使用transitions
         setContentView(R.layout.activity_full_screen_watch);
         unbinder = ButterKnife.bind(this);
-        mVideoInfo = VideoFramesModel.getInstance().getCurPlayVideo();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        mVideoInfo = bundle.getParcelable(VIDEO_INFO);
+        //mVideoInfo = VideoFramesModel.getInstance().getCurPlayVideo();
         mPlayView.setHudView(mHudView);
         mPlayView.setVideoUrl(mVideoInfo.getVideoUrl());
         LogUtil.d(TAG, "URL: " + mVideoInfo.getVideoUrl());

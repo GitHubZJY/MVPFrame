@@ -1,7 +1,9 @@
 package com.zjyang.mvpframe.application;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
@@ -41,6 +43,16 @@ public class AppApplication extends Application{
         super.onCreate();
         long startAppTime = System.currentTimeMillis();
         mContext = this;
+        if(isMainProcess()){
+            initInMainProcess();
+        }
+        //复制加载ijk so库
+        new PlugInSoHelper(this).run();
+        LogUtil.e(TAG, "Application start time--->" + (System.currentTimeMillis() - startAppTime));
+    }
+
+    private void initInMainProcess(){
+        LogUtil.e(TAG, "主进程启动初始化操作");
         HandlerUtils.postThread(new Runnable() {
             @Override
             public void run() {
@@ -50,9 +62,6 @@ public class AppApplication extends Application{
             }
         });
         initDB();
-        //复制加载ijk so库
-        new PlugInSoHelper(this).run();
-        LogUtil.e(TAG, "Application start time--->" + (System.currentTimeMillis() - startAppTime));
     }
 
     public static Gson getGson() {
@@ -108,5 +117,20 @@ public class AppApplication extends Application{
 
     public static DaoSession getDaoSession(){
         return mDaoSession;
+    }
+
+    public boolean isMainProcess(){
+        int pid = android.os.Process.myPid();
+        String processName = "";
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for(ActivityManager.RunningAppProcessInfo processInfo : activityManager.getRunningAppProcesses()){
+            if(processInfo.pid == pid){
+                processName = processInfo.processName;
+            }
+        }
+        if(!TextUtils.isEmpty(processName) && processName.equals(getPackageName())){
+            return true;
+        }
+        return false;
     }
 }

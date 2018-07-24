@@ -54,7 +54,8 @@
         <activity android:name=".module.fullscreen.view.FullScreenWatchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:process=":video">
 
         </activity>
 
