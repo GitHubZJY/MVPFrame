@@ -15,6 +15,7 @@ import com.zjyang.mvpframe.net.RequestApi;
 import com.zjyang.mvpframe.utils.Constants;
 import com.zjyang.mvpframe.utils.HandlerUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.mvpframe.utils.ScreenUtils;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -43,6 +44,7 @@ public class AppApplication extends Application{
         super.onCreate();
         long startAppTime = System.currentTimeMillis();
         mContext = this;
+        ScreenUtils.init(this);
         if(isMainProcess()){
 
         }

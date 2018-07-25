@@ -1,5 +1,8 @@
 package com.zjyang.mvpframe.utils;
 
+import android.content.Context;
+import android.util.DisplayMetrics;
+
 import com.zjyang.mvpframe.application.AppApplication;
 
 /**
@@ -7,6 +10,31 @@ import com.zjyang.mvpframe.application.AppApplication;
  */
 
 public class ScreenUtils {
+
+    private static int sScreenWidth;
+    private static int sScreenHeight;
+
+    /**
+     * 获取手机的屏幕的密度
+     *
+     * @param context
+     */
+    public static void init(Context context) {
+        if (context != null) {
+            DisplayMetrics displayMetrics = context.getResources()
+                    .getDisplayMetrics();
+            sScreenWidth = displayMetrics.widthPixels;
+            sScreenHeight = displayMetrics.heightPixels;
+        }
+    }
+
+    public static int getsScreenWidth() {
+        return sScreenWidth;
+    }
+
+    public static int getsScreenHeight() {
+        return sScreenHeight;
+    }
 
     /**
      * 获取状态栏高度

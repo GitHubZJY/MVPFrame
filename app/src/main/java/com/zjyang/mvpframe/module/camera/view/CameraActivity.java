@@ -25,6 +25,7 @@ import com.zjyang.mvpframe.module.camera.model.CameraSetting;
 import com.zjyang.mvpframe.module.share.view.ShareActivity;
 import com.zjyang.mvpframe.utils.DateUtils;
 import com.zjyang.mvpframe.utils.HandlerUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import java.io.File;
 import java.util.Calendar;
@@ -41,6 +42,7 @@ import butterknife.Unbinder;
 
 public class CameraActivity extends BaseActivity implements SurfaceHolder.Callback  {
 
+    public static final String TAG = "CameraActivity";
     private Unbinder unbinder;
 
     @BindView(R.id.surfaceview)
@@ -151,7 +153,7 @@ public class CameraActivity extends BaseActivity implements SurfaceHolder.Callba
             // 这两项需要放在setOutputFormat之后
             mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             mRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
-
+            LogUtil.d(TAG, ""+CameraSetting.VIDEO_WIDTH + ", " +CameraSetting.VIDEO_HEIGHT);
             mRecorder.setVideoSize(CameraSetting.VIDEO_WIDTH, CameraSetting.VIDEO_HEIGHT);
             mRecorder.setVideoFrameRate(CameraSetting.VIDEO_FRAME_RATE);
             mRecorder.setVideoEncodingBitRate(CameraSetting.VIDEO_ENCODING_BIT_RATE);
