@@ -79,7 +79,7 @@ public class FullScreenWatchActivity extends BaseActivity {
         LogUtil.d(TAG, "URL: " + mVideoInfo.getVideoUrl());
 
         mPlayView.start();
-        FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
+        //FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
     }
 
     @Override

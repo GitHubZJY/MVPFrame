@@ -70,7 +70,7 @@ public class MyVideoListAdapter extends RecyclerView.Adapter<MyVideoListAdapter.
         }
         String userName = videoInfo.getUserName();
         holder.mUserNameTv.setText(TextUtils.isEmpty(userName) ? "" : userName);
-        holder.mCenterPlayIv.setOnClickListener(new View.OnClickListener() {
+        holder.mPreviewIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 videoInfo.setStatus(LOADING_STATUS);

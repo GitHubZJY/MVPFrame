@@ -12,9 +12,9 @@ import java.util.List;
 public class CameraSetting {
 
     //最终生成的视频宽度
-    public static int VIDEO_WIDTH = 480;
+    public static int VIDEO_WIDTH = 640;
     //最终生成的视频高度
-    public static int VIDEO_HEIGHT = 640;
+    public static int VIDEO_HEIGHT = 480;
     //设置视频录制的帧率,n帧/s
     public static int VIDEO_FRAME_RATE = 30;
     //设置视频的清晰度，越高越清晰且占用内存越大
