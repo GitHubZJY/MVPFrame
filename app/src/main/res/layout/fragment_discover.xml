@@ -15,6 +15,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
+        android:visibility="gone"
         >
         <include
             android:id="@+id/top_tab"
@@ -34,12 +35,28 @@
             android:layout_alignParentTop="true"/>
     </RelativeLayout>
 
+    <com.zjyang.mvpframe.ui.view.TabContainer
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginLeft="8dp">
+
+
+    </com.zjyang.mvpframe.ui.view.TabContainer>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/discover_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
 
 
     <com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
     </com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView>
 
 </com.zjyang.mvpframe.ui.view.CustomToolBar>

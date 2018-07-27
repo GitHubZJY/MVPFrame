@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -26,6 +27,7 @@ import com.zjyang.mvpframe.utils.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
  * Created by 74215 on 2018/4/15.
@@ -77,9 +79,16 @@ public class FullScreenWatchActivity extends BaseActivity {
         mPlayView.setHudView(mHudView);
         mPlayView.setVideoUrl(mVideoInfo.getVideoUrl());
         LogUtil.d(TAG, "URL: " + mVideoInfo.getVideoUrl());
-
+        mPlayView.setOnPrePareListener(new VideoFrame.OnPreparedListener() {
+            @Override
+            public void onPrepared(IMediaPlayer iMediaPlayer, MediaPlayer mediaPlayer) {
+                if(mPreviewIv != null){
+                    mPreviewIv.setVisibility(View.GONE);
+                }
+            }
+        });
         mPlayView.start();
-        //FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
+        FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
     }
 
     @Override

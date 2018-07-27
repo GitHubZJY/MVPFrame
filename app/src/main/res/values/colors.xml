@@ -13,4 +13,12 @@
     <color name="white">#ffffff</color>
 
     <color name="line">#dadada</color>
+
+    <color name="goplay_home_tab_strip_bottom">#26000000</color>
+    <color name="goplay_home_tab_strip_side">#d1d1d1</color>
+    <color name="goplay_home_tab_strip_fg_tabs_default">#99ffffff</color>
+    <color name="goplay_home_tab_strip_fg_tabs_light">#ffffffff</color>
+    <color name="goplay_home_tab_strip_selected_indicator">#f8de0b</color>
+    <color name="goplay_selecor_view_gap_line_color">#c6c6c6</color>
+    <color name="goplay_selector_child_view_title">#898989</color>
 </resources>

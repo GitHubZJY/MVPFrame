@@ -2,4 +2,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="goplugin_list_item_padding_left">8dip</dimen>
+    <dimen name="goplugin_star_padding_left">3dip</dimen>
+    <dimen name="goplugin_menu_width">168dip</dimen>
+    <dimen name="goplugin_home_tab_strip_selected_indicator_width">2dip</dimen>
+    <dimen name="goplugin_home_tab_strip_selected_indicator_padding">8dip</dimen>
+    <dimen name="goplugin_list_item_padding_right">2dip</dimen>
+    <dimen name="mini_keyboard_offset_y">25dip</dimen>
 </resources>

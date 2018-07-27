@@ -39,4 +39,9 @@ public class HomePagerAdapter extends FragmentPagerAdapter{
         // 最简单解决 notifyDataSetChanged() 页面不刷新问题的方法
         return POSITION_NONE;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return super.getPageTitle(position);
+    }
 }

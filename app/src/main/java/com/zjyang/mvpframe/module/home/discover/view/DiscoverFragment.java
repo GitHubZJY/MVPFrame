@@ -1,6 +1,7 @@
 package com.zjyang.mvpframe.module.home.discover.view;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +14,14 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
 import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,6 +44,8 @@ public class DiscoverFragment extends BaseFragment implements DiscoverTasksContr
     private Unbinder unbinder;
 
 
+    @BindView(R.id.discover_view_pager)
+    public ViewPager mViewPager;
     @BindView(R.id.refresh_view)
     public RefreshLoadRecyclerView mRefreshRecyclerView;
     @BindView(R.id.top_tab_1)
@@ -54,6 +59,9 @@ public class DiscoverFragment extends BaseFragment implements DiscoverTasksContr
     @BindView(R.id.top_tab_5)
     public TextView mTopTab5;
 
+    private HomePagerAdapter mPagerAdapter;
+
+    private List<BaseFragment> mFragmentList;
 
     private VideoListAdapter mVideoAdapter;
     private List<VideoInfo> mVideoList;
@@ -75,6 +83,13 @@ public class DiscoverFragment extends BaseFragment implements DiscoverTasksContr
 
 
     public void initView(){
+
+        mFragmentList =  new ArrayList<>();
+        mFragmentList.add(new DiscoverItemFragment());
+        mFragmentList.add(new DiscoverItemFragment());
+        mFragmentList.add(new DiscoverItemFragment());
+        mPagerAdapter = new HomePagerAdapter(getChildFragmentManager(), mFragmentList);
+        mViewPager.setAdapter(mPagerAdapter);
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mRefreshRecyclerView.setLayoutManager(mLayoutManager);

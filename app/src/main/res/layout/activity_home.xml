@@ -26,13 +26,13 @@
             android:background="#bbffffff"
             />
 
-        <android.support.v4.view.ViewPager
+        <com.zjyang.mvpframe.ui.view.CustomViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/bottom_tab_split">
 
-        </android.support.v4.view.ViewPager>
+        </com.zjyang.mvpframe.ui.view.CustomViewPager>
 
         <RelativeLayout
             android:id="@+id/bottom_camera_llyt"

@@ -28,6 +28,7 @@ import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.presenter.HomePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.dialog.DialogHelper;
+import com.zjyang.mvpframe.ui.view.CustomViewPager;
 import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.PermissionUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
@@ -50,7 +51,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
     private Unbinder unbinder;
 
     @BindView(R.id.view_pager)
-    public ViewPager mViewPager;
+    public CustomViewPager mViewPager;
     @BindView(R.id.bottom_tab)
     public HomeBottomBar mHomeBottombar;
     @BindView(R.id.bottom_camera_llyt)

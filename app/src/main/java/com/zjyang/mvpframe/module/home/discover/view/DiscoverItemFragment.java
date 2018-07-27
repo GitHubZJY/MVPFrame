@@ -1,19 +1,16 @@
 package com.zjyang.mvpframe.module.home.discover.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
 import com.zjyang.mvpframe.module.base.BaseFragment;
 import com.zjyang.mvpframe.module.home.adapter.GridVideoListAdapter;
@@ -25,8 +22,7 @@ import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
-import com.zjyang.mvpframe.ui.view.TabContainer;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,41 +33,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
- * Created by 74215 on 2018/6/9.
+ * Created by zhengjiayang on 2018/7/27.
  */
 
-public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksContract.View{
+public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksContract.View{
 
     private Unbinder unbinder;
 
-    @BindView(R.id.discover_view_pager)
-    public ViewPager mViewPager;
     @BindView(R.id.refresh_view)
     public RefreshLoadRecyclerView mRefreshRecyclerView;
-    @BindView(R.id.top_tab_1)
-    public TextView mTopTab1;
-    @BindView(R.id.top_tab_2)
-    public TextView mTopTab2;
-    @BindView(R.id.top_tab_3)
-    public TextView mTopTab3;
-    @BindView(R.id.top_tab_4)
-    public TextView mTopTab4;
-    @BindView(R.id.top_tab_5)
-    public TextView mTopTab5;
-    @BindView(R.id.top_tab)
-    public View mTopBar;
-
-    @BindView(R.id.tab_container)
-    public TabContainer mTabContainer;
-
-    private HomePagerAdapter mPagerAdapter;
-
-    private List<BaseFragment> mFragmentList;
-
 
     private GridVideoListAdapter mVideoAdapter;
     private List<VideoInfo> mVideoList;
@@ -81,7 +54,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_discover, null);
+        View view = inflater.inflate(R.layout.discover_item_page, null);
         unbinder = ButterKnife.bind(this, view);
         if(!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
@@ -91,23 +64,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
         return view;
     }
 
-
     public void initView(){
-
-        mFragmentList =  new ArrayList<>();
-        mFragmentList.add(new DiscoverItemFragment());
-        mFragmentList.add(new DiscoverItemFragment());
-        mFragmentList.add(new DiscoverItemFragment());
-        mFragmentList.add(new DiscoverItemFragment());
-        mFragmentList.add(new DiscoverItemFragment());
-        mFragmentList.add(new DiscoverItemFragment());
-        mFragmentList.add(new DiscoverItemFragment());
-        mPagerAdapter = new HomePagerAdapter(getChildFragmentManager(), mFragmentList);
-        mViewPager.setAdapter(mPagerAdapter);
-
-        mTabContainer.setViewPager(mViewPager);
-
-        ViewCompat.setElevation(mTopBar, DrawUtils.dp2px(4));
 
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRefreshRecyclerView.setLayoutManager(mLayoutManager);
@@ -163,77 +120,20 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
     }
 
-    @Override
-    public void fillDataToList(List<VideoInfo> data){
-        mVideoList.clear();
-        mVideoList.addAll(data);
-        mVideoAdapter.notifyDataSetChanged();
-    }
-
-
-    @OnClick(R.id.top_tab_1)
-    void clickTab1(){
-        mPresenter.toggleProvince(1);
-    }
-
-    @OnClick(R.id.top_tab_2)
-    void clickTab2(){
-        mPresenter.toggleProvince(2);
-    }
-
-    @OnClick(R.id.top_tab_3)
-    void clickTab3(){
-        mPresenter.toggleProvince(3);
-    }
-
-    @OnClick(R.id.top_tab_4)
-    void clickTab4(){
-        mPresenter.toggleProvince(4);
-    }
-
-    @OnClick(R.id.top_tab_5)
-    void clickTab5(){
-        mPresenter.toggleProvince(5);
-    }
-
 
     @Override
     public void toggleTopTab(int index) {
-        switch (index){
-            case 1:
-                resetAllTopTabColor();
-                mTopTab1.setTextColor(getResources().getColor(R.color.primary_text_color));
-                break;
-            case 2:
-                resetAllTopTabColor();
-                mTopTab2.setTextColor(getResources().getColor(R.color.primary_text_color));
-                break;
-            case 3:
-                resetAllTopTabColor();
-                mTopTab3.setTextColor(getResources().getColor(R.color.primary_text_color));
-                break;
-            case 4:
-                resetAllTopTabColor();
-                mTopTab4.setTextColor(getResources().getColor(R.color.primary_text_color));
-                break;
-            case 5:
-                resetAllTopTabColor();
-                mTopTab5.setTextColor(getResources().getColor(R.color.primary_text_color));
-                break;
-        }
+//        if(mPresenter != null){
+//            mPresenter.initDataBeforeRequest();
+//            mPresenter.toggleProvince(1);
+//        }
     }
 
-    private void resetAllTopTabColor(){
-        mTopTab1.setTextColor(getResources().getColor(R.color.text_color_gray));
-        mTopTab2.setTextColor(getResources().getColor(R.color.text_color_gray));
-        mTopTab3.setTextColor(getResources().getColor(R.color.text_color_gray));
-        mTopTab4.setTextColor(getResources().getColor(R.color.text_color_gray));
-        mTopTab5.setTextColor(getResources().getColor(R.color.text_color_gray));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onFullScreenExitEvent(FullScreenExitEvent exitEvent){
-        mVideoAdapter.exitFullScreenNotify();
+    @Override
+    public void fillDataToList(List<VideoInfo> data) {
+        mVideoList.clear();
+        mVideoList.addAll(data);
+        mVideoAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -249,7 +149,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }
