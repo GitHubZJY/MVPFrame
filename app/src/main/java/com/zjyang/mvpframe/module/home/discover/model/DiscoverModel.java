@@ -1,7 +1,9 @@
 package com.zjyang.mvpframe.module.home.discover.model;
 
+import com.zjyang.mvpframe.event.GetProvinceEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
+import com.zjyang.mvpframe.module.home.discover.model.bean.Province;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.utils.LogUtil;
@@ -26,17 +28,17 @@ public class DiscoverModel implements DiscoverTasksContract.Model{
     private int mCurSelectTabIndex;
 
     @Override
-    public int getCurSelectTabIndex() {
+    public int getCurSelectTabId() {
         return mCurSelectTabIndex;
     }
 
     @Override
-    public void setCurSelectTabIndex(int mCurSelectTabIndex) {
+    public void setCurSelectTabId(int mCurSelectTabIndex) {
         this.mCurSelectTabIndex = mCurSelectTabIndex;
     }
 
     @Override
-    public List<VideoInfo> getDefaultProvinceData() {
+    public List<VideoInfo> getDefaultVideoData() {
         List<VideoInfo> mVideoList = new ArrayList<>();
         String[] picUrl = new String[]{
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg",
@@ -54,23 +56,53 @@ public class DiscoverModel implements DiscoverTasksContract.Model{
             videoInfo.setVideoThumbUrl(picUrl[i]);
             videoInfo.setUserPicUrl(picUrl[i]);
             videoInfo.setUserName("HELLO");
+            videoInfo.setProvinceId(1);
             mVideoList.add(videoInfo);
         }
         return mVideoList;
     }
 
     @Override
-    public void getVideoDataByProvinceId(int provinceId) {
+    public List<Province> getDefaultProvinceData(){
+        List<Province> provinces = new ArrayList<>();
+        Province province1 = new Province(1,"北京");
+        Province province2 = new Province(2,"西藏");
+        Province province3 = new Province(3,"云南");
+        provinces.add(province1);
+        provinces.add(province2);
+        provinces.add(province3);
+        return provinces;
+    }
+
+    @Override
+    public void getVideoDataByProvinceId(final int provinceId) {
         BmobQuery<VideoInfo> bmobQuery = new BmobQuery<VideoInfo>();
         bmobQuery.addWhereEqualTo("provinceId", provinceId);
         bmobQuery.findObjects(new FindListener<VideoInfo>(){
             @Override
             public void done(List<VideoInfo> list, BmobException e) {
                 if(e == null && list.size() > 0){
-                    EventBus.getDefault().post(new RequestVideoListEvent(true, list));
+                    EventBus.getDefault().post(new RequestVideoListEvent(true, provinceId, list));
                 }else{
                     e.printStackTrace();
-                    EventBus.getDefault().post(new RequestVideoListEvent(false, null));
+                    EventBus.getDefault().post(new RequestVideoListEvent(false, provinceId, null));
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void queryAllProvince() {
+        BmobQuery<Province> bmobQuery = new BmobQuery<Province>();
+        bmobQuery.findObjects(new FindListener<Province>(){
+            @Override
+            public void done(List<Province> list, BmobException e) {
+                if(e == null && list.size() > 0){
+                    EventBus.getDefault().post(new GetProvinceEvent(true, list));
+                }else{
+                    e.printStackTrace();
+                    EventBus.getDefault().post(new GetProvinceEvent(false, null));
                 }
             }
         });

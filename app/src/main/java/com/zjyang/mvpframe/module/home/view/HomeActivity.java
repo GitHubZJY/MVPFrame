@@ -79,6 +79,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
         mFragmentList = mPresenter.getChildPages();
         mPagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setOffscreenPageLimit(4);
 
         mHomeBottombar.setTabClickListener(this);
     }

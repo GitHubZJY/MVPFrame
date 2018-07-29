@@ -26,7 +26,7 @@ public class PluginTabStrip extends LinearLayout {
 	private final Paint mSelectedUnderlinePaint;
 	private final int mSelectedUnderlineThickness;
 	private float mSelectionOffset;
-	private int mHightPosition = -1;
+	private int mHightPosition = 0;
 	private int mDefaultColor = 0;
 	private int mHightColor = 0;
 	private int mUnderLineWidth = 0;
@@ -45,7 +45,7 @@ public class PluginTabStrip extends LinearLayout {
 		mSelectedUnderlinePaint.setColor(rsc.getColor(R.color.goplay_home_tab_strip_selected_indicator));
 		mSelectedUnderlinePaint.setStrokeWidth(rsc.getDimensionPixelSize(R.dimen.goplugin_home_tab_strip_selected_indicator_width));
 
-		mDefaultColor = getContext().getResources().getColor(R.color.goplay_home_tab_strip_fg_tabs_default);
+		mDefaultColor = getContext().getResources().getColor(R.color.text_color_gray);
 		mHightColor = getContext().getResources().getColor(R.color.primary_text_color);
 		
 		mUnderLineWidth = ScreenUtils.getsScreenWidth();

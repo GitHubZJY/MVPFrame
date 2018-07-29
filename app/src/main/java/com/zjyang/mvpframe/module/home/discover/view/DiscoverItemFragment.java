@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
@@ -18,6 +19,7 @@ import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
+import com.zjyang.mvpframe.module.home.discover.model.bean.Province;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
@@ -45,6 +47,8 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
 
     @BindView(R.id.refresh_view)
     public RefreshLoadRecyclerView mRefreshRecyclerView;
+
+    private ViewStub mEmptyView;
 
     private GridVideoListAdapter mVideoAdapter;
     private List<VideoInfo> mVideoList;
@@ -113,36 +117,79 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
     }
 
     public void initData(){
-        if(mPresenter != null){
-            mPresenter.initDataBeforeRequest();
-            mPresenter.toggleProvince(1);
-        }
 
     }
 
+    @Override
+    public void refreshTabData(List<Province> data) {
+
+    }
 
     @Override
-    public void toggleTopTab(int index) {
-//        if(mPresenter != null){
-//            mPresenter.initDataBeforeRequest();
-//            mPresenter.toggleProvince(1);
-//        }
+    public void showEmptyTip() {
+        if(mEmptyView == null){
+            if(null != getView()){
+                mEmptyView = getView().findViewById(R.id.empty_tip_view);
+                mEmptyView.inflate();
+            }
+        }else {
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void initVideoList(){
+        if(pageTitle != null && mPresenter != null){
+            mPresenter.toggleProvince(pageTitle.getProvinceId());
+        }
+    }
+
+    @Override
+    public void initProvinceFragment(List<Province> data) {
+
     }
 
     @Override
     public void fillDataToList(List<VideoInfo> data) {
+        if(mEmptyView != null && mEmptyView.getVisibility() == View.VISIBLE){
+            mEmptyView.setVisibility(View.GONE);
+        }
         mVideoList.clear();
         mVideoList.addAll(data);
         mVideoAdapter.notifyDataSetChanged();
     }
 
+    public List<VideoInfo> getVideoList() {
+        return mVideoList;
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRequstVideoListSuccessEvent(RequestVideoListEvent event){
+        if(pageTitle == null){
+            return;
+        }
+        if(event.getProvinceId() != pageTitle.getProvinceId()){
+            return;
+        }
+        List<VideoInfo> videoInfos = event.getVideoInfoList();
+        if(videoInfos == null || videoInfos.isEmpty()){
+            if(mVideoList == null || mVideoList.isEmpty()){
+                //网络请求失败，且当前页面也无缓存数据时
+                showEmptyTip();
+            }
+        }
         mRefreshRecyclerView.stopRefresh();//刷新停止
         if(event.ismIsSuccess()){
+            if(mEmptyView != null){
+                mEmptyView.setVisibility(View.GONE);
+            }
             mVideoList.clear();
             mVideoList.addAll(event.getVideoInfoList());
             mVideoAdapter.notifyDataSetChanged();
+        }else{
+            if(mVideoList == null || mVideoList.isEmpty()){
+                //网络请求失败，且当前页面也无缓存数据时
+                showEmptyTip();
+            }
         }
     }
 
@@ -150,6 +197,9 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        if(mPresenter != null){
+            mPresenter.destroy();
+        }
         EventBus.getDefault().unregister(this);
     }
 }

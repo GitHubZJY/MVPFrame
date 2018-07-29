@@ -40,8 +40,10 @@ public class HomePagerAdapter extends FragmentPagerAdapter{
         return POSITION_NONE;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
+    public String getPagerTitle(int position) {
+        if(mViewList == null || mViewList.isEmpty()){
+            return "";
+        }
+        return mViewList.get(position).getPageTitle().getProvinceName();
     }
 }

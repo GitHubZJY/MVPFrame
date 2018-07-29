@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjyang.mvpframe.application.AppApplication;
+import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -115,6 +117,9 @@ public class TabContainer extends HorizontalScrollView implements
             scrollToChild(arg0, 0);
         } else if (mScrollState == ViewPager.SCROLL_STATE_SETTLING) {
             mTabStrip.updateTextViewState(arg0);
+            if(mListener != null){
+                mListener.toggleItem(arg0);
+            }
         }
     }
 
@@ -130,17 +135,14 @@ public class TabContainer extends HorizontalScrollView implements
 
     private void initChildView() {
         mTabStrip.removeAllViews();
-        PagerAdapter adapter = mViewPager.getAdapter();
+        HomePagerAdapter adapter = (HomePagerAdapter)mViewPager.getAdapter();
         View view;
         int nums = adapter.getCount();
         for (int i = 0; i < nums; i++) {
             final int index = i;
-
+            String title = adapter.getPagerTitle(index);
             TextView textView = new TextView(mContext);
-            textView.setText("北京");
-            if(index == 3){
-                textView.setText("乌鲁木齐");
-            }
+            textView.setText(title);
             textView.setGravity(Gravity.CENTER);
             textView.setTextColor(Color.BLACK);
             textView.setPadding(DrawUtils.dp2px(8), 0, DrawUtils.dp2px(8), 0);
@@ -150,7 +152,10 @@ public class TabContainer extends HorizontalScrollView implements
             if (mTabViewTextSize != 0) {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabViewTextSize);
             }
-            mTabStrip.setOnClickListener(new OnClickListener() {
+            if(index == 0){
+                textView.setTextColor(Color.BLACK);
+            }
+            textView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mViewPager.setCurrentItem(index);
@@ -162,8 +167,17 @@ public class TabContainer extends HorizontalScrollView implements
             layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
             textView.setLayoutParams(layoutParams);
         }
-        mTabStrip.setTitleTextColor(Color.BLACK, Color.BLACK);
         addView(mTabStrip);
+    }
+
+    ToggleItemListener mListener;
+
+    public void setToggleItemListener(ToggleItemListener mListener) {
+        this.mListener = mListener;
+    }
+
+    public interface ToggleItemListener {
+        void toggleItem(int index);
     }
 
     public void setTabViewWidth(int width) {

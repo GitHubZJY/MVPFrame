@@ -12,12 +12,21 @@ import java.util.List;
 public class RequestVideoListEvent {
 
     private boolean mIsSuccess;
-
+    private int mProvinceId;
     private List<VideoInfo> videoInfoList;
 
-    public RequestVideoListEvent(boolean mIsSuccess, List<VideoInfo> videoInfoList) {
+    public RequestVideoListEvent(boolean mIsSuccess, int provinceId, List<VideoInfo> videoInfoList) {
         this.mIsSuccess = mIsSuccess;
+        this.mProvinceId = provinceId;
         this.videoInfoList = videoInfoList;
+    }
+
+    public int getProvinceId() {
+        return mProvinceId;
+    }
+
+    public void setProvinceId(int mProvinceId) {
+        this.mProvinceId = mProvinceId;
     }
 
     public boolean ismIsSuccess() {

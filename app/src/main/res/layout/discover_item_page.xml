@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -15,4 +15,10 @@
         android:visibility="visible">
     </com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView>
 
-</LinearLayout>
+    <ViewStub
+        android:id="@+id/empty_tip_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_empty_data"/>
+
+</RelativeLayout>
