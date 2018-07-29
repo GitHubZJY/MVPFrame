@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.support.v4.view.ViewCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TableLayout;
 
 import com.example.zjy.player.ui.VideoFrame;
@@ -21,6 +23,8 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
+import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.FrescoUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
 
@@ -46,6 +50,10 @@ public class FullScreenWatchActivity extends BaseActivity {
     VideoFrame mPlayView;
     @BindView(R.id.hud_view)
     TableLayout mHudView;
+    @BindView(R.id.comment_edit)
+    EditText mCommentEdit;
+    @BindView(R.id.video_user_pic)
+    SimpleDraweeView mVideoUserPic;
 
     private VideoInfo mVideoInfo;
 
@@ -73,6 +81,7 @@ public class FullScreenWatchActivity extends BaseActivity {
         setContentView(R.layout.activity_full_screen_watch);
         unbinder = ButterKnife.bind(this);
         ViewCompat.setTransitionName(mPreviewIv, JUMP_ANIM_VIEW);
+        mCommentEdit.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(20), Color.parseColor("#33000000")));
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         mVideoInfo = bundle.getParcelable(VIDEO_INFO);
@@ -89,6 +98,7 @@ public class FullScreenWatchActivity extends BaseActivity {
         });
         mPlayView.start();
         FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
+        FrescoUtils.showImgByUrl(mVideoInfo.getUserPicUrl(), mVideoUserPic);
     }
 
     @Override
