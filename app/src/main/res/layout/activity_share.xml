@@ -10,20 +10,21 @@
     app:left_btn_visible="true"
     app:title_text="@string/share_title"
     app:title_visible="true"
-    app:shader_visible="false">
+    app:shader_visible="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:background="@color/white"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
         <RelativeLayout
             android:id="@+id/video_preview_view"
             android:layout_width="120dp"
-            android:layout_height="180dp"
+            android:layout_height="160dp"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:background="@color/black_overlay">
             <com.example.zjy.player.ui.VideoFrame
                 android:id="@+id/share_video_view"
                 android:layout_width="match_parent"
@@ -47,7 +48,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="160dp"
             android:layout_toRightOf="@id/video_preview_view"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="16dp"
@@ -57,6 +58,40 @@
             />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_color_gray"
+        android:layout_marginTop="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/location_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@color/white"
+        >
+        <TextView
+            android:id="@+id/location_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_foot"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:drawablePadding="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14sp"
+            android:text="所在位置"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_color_gray"/>
 
 
     <Button
@@ -64,6 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/yellow"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:textSize="16sp"
         android:textColor="@color/primary_text_color"

@@ -32,7 +32,8 @@ public class LocationUtils {
     /**
      * 启动定位
      */
-    public void startLocation(){
+    public void startLocation(LocationCallback locationCallback){
+        this.mLocationCallback = locationCallback;
         mLocationClient.startLocation();
     }
 
@@ -40,13 +41,14 @@ public class LocationUtils {
      * 停止定位
      */
     public void stopLocation(){
+        mLocationCallback = null;
         mLocationClient.stopLocation();
     }
 
     /**
      * 定位回调监听器
      */
-    public static AMapLocationListener mLocationListener = new AMapLocationListener() {
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
         @Override
         public void onLocationChanged(AMapLocation amapLocation) {
             // 从这里开始就会持续回调
@@ -58,6 +60,9 @@ public class LocationUtils {
                     double currentLon = amapLocation.getLongitude();//获取经度
                     String address = amapLocation.getAddress();
                     amapLocation.getAccuracy();//获取精度信息
+                    if(mLocationCallback != null){
+                        mLocationCallback.getAddress(address);
+                    }
                     LogUtil.i(TAG, "currentLat : " + currentLat + " currentLon : " + currentLon + " address: " + address);
                 } else {
                     //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
@@ -68,4 +73,14 @@ public class LocationUtils {
             }
         }
     };
+
+    LocationCallback mLocationCallback;
+
+    public void setLocationCallback(LocationCallback mLocationCallback){
+        this.mLocationCallback = mLocationCallback;
+    }
+
+    public interface LocationCallback{
+        void getAddress(String address);
+    }
 }

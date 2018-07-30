@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zjy.player.ui.VideoFrame;
@@ -19,6 +22,7 @@ import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.presenter.SharePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.utils.LocationUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -44,6 +48,10 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     ImageView mPlayIv;
     @BindView(R.id.share_btn)
     Button mShareBtn;
+    @BindView(R.id.location_view)
+    RelativeLayout mLocationView;
+    @BindView(R.id.location_tv)
+    TextView mLocationTv;
 
     public static final String VIDEO_PATH = "VIDEO_PATH";
     private String mVideoPath;
@@ -99,6 +107,20 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
             mPreviewIv.setVisibility(View.GONE);
             mShareVideoView.start();
         }
+    }
+
+    @OnClick(R.id.location_view)
+    void clickLocation(){
+        LocationUtils.getInstance().startLocation(new LocationUtils.LocationCallback() {
+            @Override
+            public void getAddress(String address) {
+                LocationUtils.getInstance().stopLocation();
+                if(!TextUtils.isEmpty(address)){
+                    mLocationTv.setTextColor(Color.BLACK);
+                    mLocationTv.setText(address);
+                }
+            }
+        });
     }
 
     @OnClick(R.id.share_btn)
