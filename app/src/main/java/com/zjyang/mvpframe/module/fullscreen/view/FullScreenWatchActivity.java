@@ -34,6 +34,7 @@ import com.zjyang.mvpframe.utils.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 import butterknife.Unbinder;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
@@ -68,6 +69,8 @@ public class FullScreenWatchActivity extends BaseActivity {
     VideoSeekBar mVideoSeekBar;
     @BindView(R.id.close_iv)
     ImageView mCloseIv;
+    @BindView(R.id.center_play_iv)
+    ImageView mCenterPlayIv;
 
     private VideoInfo mVideoInfo;
 
@@ -122,6 +125,18 @@ public class FullScreenWatchActivity extends BaseActivity {
     @OnClick(R.id.close_iv)
     void clickClose(){
         onBackPressed();
+    }
+
+    @OnTouch(R.id.player_view)
+    boolean touchVideo(){
+        if(mPlayView.isPlaying()){
+            mPlayView.pause();
+            mCenterPlayIv.setVisibility(View.VISIBLE);
+        }else{
+            mPlayView.start();
+            mCenterPlayIv.setVisibility(View.GONE);
+        }
+        return false;
     }
 
     @Override

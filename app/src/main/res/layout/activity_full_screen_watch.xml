@@ -31,6 +31,14 @@
 
     </TableLayout>
 
+    <ImageView
+        android:id="@+id/center_play_iv"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_play"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
