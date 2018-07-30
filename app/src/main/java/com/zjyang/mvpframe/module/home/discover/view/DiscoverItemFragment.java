@@ -41,7 +41,7 @@ import butterknife.Unbinder;
  * Created by zhengjiayang on 2018/7/27.
  */
 
-public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksContract.View{
+public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksContract.View.ItemDiscoverView{
 
     private Unbinder unbinder;
 
@@ -78,25 +78,6 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
         mRefreshRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3, 2));
 
-        mRefreshRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int curPlayIndex = VideoFramesModel.getInstance().getCurPlayItemIndex();
-                if(curPlayIndex == -1){
-                    return;
-                }
-                int firstVisibleIndex = mLayoutManager.findFirstVisibleItemPosition();
-                int lastVisibleIndex = mLayoutManager.findLastVisibleItemPosition();
-                if(curPlayIndex < firstVisibleIndex || curPlayIndex > lastVisibleIndex){
-                    VideoFramesModel.getInstance().getCurPlayView().stopPlayback();
-                    mVideoAdapter.notifyItemChanged(curPlayIndex);
-                    VideoFramesModel.getInstance().setCurPlayItemIndex(-1);
-                    mVideoList.get(curPlayIndex).setStatus(VideoListAdapter.STOP_STATUS);
-                }
-            }
-        });
-
         mRefreshRecyclerView.setOnRefreshLoadListener(new RefreshLoadRecyclerView.RefreshLoadListener() {
             @Override
             public void onRefresh() {
@@ -121,11 +102,6 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
     }
 
     @Override
-    public void refreshTabData(List<Province> data) {
-
-    }
-
-    @Override
     public void showEmptyTip() {
         if(mEmptyView == null){
             if(null != getView()){
@@ -144,11 +120,6 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
     }
 
     @Override
-    public void initProvinceFragment(List<Province> data) {
-
-    }
-
-    @Override
     public void fillDataToList(List<VideoInfo> data) {
         if(mEmptyView != null && mEmptyView.getVisibility() == View.VISIBLE){
             mEmptyView.setVisibility(View.GONE);
@@ -158,18 +129,15 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
         mVideoAdapter.notifyDataSetChanged();
     }
 
-    public List<VideoInfo> getVideoList() {
-        return mVideoList;
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onRequstVideoListSuccessEvent(RequestVideoListEvent event){
+    public void onRequstVideoListEvent(RequestVideoListEvent event){
         if(pageTitle == null){
             return;
         }
         if(event.getProvinceId() != pageTitle.getProvinceId()){
             return;
         }
+        mRefreshRecyclerView.stopRefresh();//刷新停止
         List<VideoInfo> videoInfos = event.getVideoInfoList();
         if(videoInfos == null || videoInfos.isEmpty()){
             if(mVideoList == null || mVideoList.isEmpty()){
@@ -177,7 +145,6 @@ public class DiscoverItemFragment extends BaseFragment implements DiscoverTasksC
                 showEmptyTip();
             }
         }
-        mRefreshRecyclerView.stopRefresh();//刷新停止
         if(event.ismIsSuccess()){
             if(mEmptyView != null){
                 mEmptyView.setVisibility(View.GONE);

@@ -82,6 +82,7 @@ public class DiscoverModel implements DiscoverTasksContract.Model{
             @Override
             public void done(List<VideoInfo> list, BmobException e) {
                 if(e == null && list.size() > 0){
+                    LogUtil.d(TAG, "provinceId为"+provinceId +"共查到" + list.size() +"条视频");
                     EventBus.getDefault().post(new RequestVideoListEvent(true, provinceId, list));
                 }else{
                     e.printStackTrace();

@@ -15,7 +15,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.example.zjy.player.ui.VideoFrame;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -30,6 +33,7 @@ import com.zjyang.mvpframe.utils.LogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
@@ -54,6 +58,16 @@ public class FullScreenWatchActivity extends BaseActivity {
     EditText mCommentEdit;
     @BindView(R.id.video_user_pic)
     SimpleDraweeView mVideoUserPic;
+    @BindView(R.id.user_group_view)
+    LinearLayout mAuthorGroupView;
+    @BindView(R.id.author_name_tv)
+    TextView mAuthorNameTv;
+    @BindView(R.id.position_tv)
+    TextView mPositionTv;
+    @BindView(R.id.video_seek_bar)
+    VideoSeekBar mVideoSeekBar;
+    @BindView(R.id.close_iv)
+    ImageView mCloseIv;
 
     private VideoInfo mVideoInfo;
 
@@ -82,9 +96,12 @@ public class FullScreenWatchActivity extends BaseActivity {
         unbinder = ButterKnife.bind(this);
         ViewCompat.setTransitionName(mPreviewIv, JUMP_ANIM_VIEW);
         mCommentEdit.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(20), Color.parseColor("#33000000")));
+        mAuthorGroupView.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(32), Color.parseColor("#33000000")));
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         mVideoInfo = bundle.getParcelable(VIDEO_INFO);
+        mVideoSeekBar.attachVideoView(mPlayView);
+        mVideoSeekBar.resetPlayStatus();
         mPlayView.setHudView(mHudView);
         mPlayView.setVideoUrl(mVideoInfo.getVideoUrl());
         LogUtil.d(TAG, "URL: " + mVideoInfo.getVideoUrl());
@@ -99,6 +116,12 @@ public class FullScreenWatchActivity extends BaseActivity {
         mPlayView.start();
         FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
         FrescoUtils.showImgByUrl(mVideoInfo.getUserPicUrl(), mVideoUserPic);
+        mAuthorNameTv.setText(mVideoInfo.getUserName());
+    }
+
+    @OnClick(R.id.close_iv)
+    void clickClose(){
+        onBackPressed();
     }
 
     @Override

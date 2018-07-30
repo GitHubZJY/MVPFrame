@@ -46,7 +46,7 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/6/9.
  */
 
-public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksContract.View, TabContainer.ToggleItemListener{
+public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksContract.View.BaseDiscoverView, TabContainer.ToggleItemListener{
 
     private Unbinder unbinder;
 
@@ -74,13 +74,10 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
 
 
     public void initView(){
-
         mFragmentList =  new ArrayList<>();
-
         mPagerAdapter = new HomePagerAdapter(getChildFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(8);
-
         mTabContainer.setToggleItemListener(this);
         initData();
     }
@@ -123,15 +120,6 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
             DiscoverItemFragment fragment = (DiscoverItemFragment)mFragmentList.get(index);
             fragment.initVideoList();
         }
-    }
-
-    @Override
-    public void fillDataToList(List<VideoInfo> data){
-    }
-
-    @Override
-    public void showEmptyTip() {
-
     }
 
     @Override

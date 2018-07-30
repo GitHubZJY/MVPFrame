@@ -18,15 +18,23 @@ import java.util.List;
 
 public class DiscoverPresenter implements DiscoverTasksContract.Presenter{
 
-
-    private DiscoverTasksContract.View mDiscoverView;
+    private DiscoverTasksContract.View.BaseDiscoverView mBaseView;
+    private DiscoverTasksContract.View.ItemDiscoverView mItemView;
     private DiscoverTasksContract.Model mDiscoverModel;
 
-    public DiscoverPresenter(DiscoverTasksContract.View mLoginView) {
+    public DiscoverPresenter(DiscoverTasksContract.View.BaseDiscoverView mBaseView) {
         if(!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
-        this.mDiscoverView = mLoginView;
+        this.mBaseView = mBaseView;
+        mDiscoverModel = new DiscoverModel();
+    }
+
+    public DiscoverPresenter(DiscoverTasksContract.View.ItemDiscoverView mItemView) {
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        this.mItemView = mItemView;
         mDiscoverModel = new DiscoverModel();
     }
 
@@ -47,12 +55,16 @@ public class DiscoverPresenter implements DiscoverTasksContract.Presenter{
         int curTabId = mDiscoverModel.getCurSelectTabId();
         for(VideoInfo videoInfo : defaultData){
             if(videoInfo.getProvinceId() == curTabId){
-                mDiscoverView.fillDataToList(defaultData);
+                if(mItemView != null){
+                    mItemView.fillDataToList(defaultData);
+                }
                 break;
             }
         }
         List<Province> defaultProvinceData = mDiscoverModel.getDefaultProvinceData();
-        mDiscoverView.initProvinceFragment(defaultProvinceData);
+        if(mBaseView != null){
+            mBaseView.initProvinceFragment(defaultProvinceData);
+        }
     }
 
     @Override
@@ -66,7 +78,9 @@ public class DiscoverPresenter implements DiscoverTasksContract.Presenter{
     public void onProvinceEvent(GetProvinceEvent event){
         if(event.isSuccess()){
             //成功才更新tab数据
-            mDiscoverView.refreshTabData(event.getProvinceList());
+            if(mBaseView != null){
+                mBaseView.refreshTabData(event.getProvinceList());
+            }
         }
     }
 

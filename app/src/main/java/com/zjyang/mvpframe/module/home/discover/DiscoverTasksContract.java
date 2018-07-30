@@ -12,10 +12,16 @@ import java.util.List;
 public interface DiscoverTasksContract {
 
     interface View {
-        void fillDataToList(List<VideoInfo> data);
-        void refreshTabData(List<Province> data);
-        void initProvinceFragment(List<Province> data);
-        void showEmptyTip();
+        //Discover框架页
+        interface BaseDiscoverView {
+            void refreshTabData(List<Province> data);
+            void initProvinceFragment(List<Province> data);
+        }
+        //Discover区域子页
+        interface ItemDiscoverView {
+            void fillDataToList(List<VideoInfo> data);
+            void showEmptyTip();
+        }
     }
 
     interface Presenter {

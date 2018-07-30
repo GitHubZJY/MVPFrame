@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/controller_root_view"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <TextView
+        android:id="@+id/current_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:text="00:00"
+        />
+    <TextView
+        android:id="@+id/duration_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:text="00:00"
+        />
+
+    <SeekBar
+        android:id="@+id/media_controller_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:thumb="@drawable/seekbar_thumb_normal"
+        android:layout_width="0dip"
+        android:progressDrawable="@drawable/bg_video_seekbar"
+        android:maxHeight="2dp"
+        android:minHeight="2dp"
+        android:layout_weight="1"
+        android:thumbOffset="6dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/current_time_tv"
+        android:layout_toLeftOf="@id/duration_time_tv"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:splitTrack="false"/>
+
+
+
+</RelativeLayout>
