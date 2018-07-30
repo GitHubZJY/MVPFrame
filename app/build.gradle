@@ -101,6 +101,8 @@ dependencies {
         exclude group : 'io.reactivex'
     }
 
+    compile 'com.amap.api:location:latest.integration'
+
 
     testCompile ('org.powermock:powermock-api-mockito:1.6.2') {
         exclude module: 'hamcrest-core'
