@@ -58,12 +58,13 @@ public class LocationUtils {
                     amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
                     double currentLat = amapLocation.getLatitude();//获取纬度
                     double currentLon = amapLocation.getLongitude();//获取经度
+                    String cityCode = amapLocation.getCityCode();
                     String address = amapLocation.getAddress();
                     amapLocation.getAccuracy();//获取精度信息
                     if(mLocationCallback != null){
-                        mLocationCallback.getAddress(address);
+                        mLocationCallback.getAddress(address, Integer.parseInt(cityCode));
                     }
-                    LogUtil.i(TAG, "currentLat : " + currentLat + " currentLon : " + currentLon + " address: " + address);
+                    LogUtil.i(TAG, "cityCode : " + cityCode + " address: " + address);
                 } else {
                     //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                     LogUtil.e(TAG, "location Error, ErrCode:"
@@ -81,6 +82,6 @@ public class LocationUtils {
     }
 
     public interface LocationCallback{
-        void getAddress(String address);
+        void getAddress(String address, int cityCode);
     }
 }

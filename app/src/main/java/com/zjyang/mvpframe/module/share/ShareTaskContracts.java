@@ -9,14 +9,19 @@ public interface ShareTaskContracts {
     interface View {
         void showUpLoadSuccess();
         void showUpLoadFail();
+        void showLocationData(String address);
+        void showProgressDialog();
+        void dismissProgressDialog();
     }
 
     interface Model {
         void uploadVideoFile(String videoPath);
+        void setLocationData(String address, int id);
     }
 
     interface Presenter {
         void destroy();
         void shareVideo(String videoPath);
+        void startLocation();
     }
 }

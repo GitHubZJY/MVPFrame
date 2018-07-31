@@ -1,9 +1,12 @@
 package com.zjyang.mvpframe.module.share.presenter;
 
+import android.text.TextUtils;
+
 import com.zjyang.mvpframe.event.ShareResultEvent;
 import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.model.ShareModel;
+import com.zjyang.mvpframe.utils.LocationUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,9 +32,26 @@ public class SharePresenter extends BasePresenter<ShareTaskContracts.View, Share
 
     @Override
     public void shareVideo(String videoPath) {
+        if(mView != null){
+            mView.showProgressDialog();
+        }
         if(mModel != null){
             mModel.uploadVideoFile(videoPath);
         }
+    }
+
+    @Override
+    public void startLocation() {
+        LocationUtils.getInstance().startLocation(new LocationUtils.LocationCallback() {
+            @Override
+            public void getAddress(String address, int cityCode) {
+                LocationUtils.getInstance().stopLocation();
+                if(!TextUtils.isEmpty(address)){
+                    mView.showLocationData(address);
+                    mModel.setLocationData(address, cityCode);
+                }
+            }
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -39,6 +59,7 @@ public class SharePresenter extends BasePresenter<ShareTaskContracts.View, Share
         if(mView == null){
             return;
         }
+        mView.dismissProgressDialog();
         if(event.isSuccess()){
             mView.showUpLoadSuccess();
         }else{

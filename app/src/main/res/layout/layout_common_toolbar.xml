@@ -36,7 +36,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center"
             android:layout_centerVertical="true"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="15sp"
             android:text="返回"
             android:visibility="gone"
@@ -74,7 +74,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:layout_centerVertical="true"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:textSize="15sp"
             android:text="更多"
             android:visibility="gone"/>

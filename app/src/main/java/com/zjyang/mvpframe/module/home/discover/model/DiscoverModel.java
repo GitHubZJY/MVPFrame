@@ -68,9 +68,11 @@ public class DiscoverModel implements DiscoverTasksContract.Model{
         Province province1 = new Province(1,"北京");
         Province province2 = new Province(2,"西藏");
         Province province3 = new Province(3,"云南");
+        Province province4 = new Province(20,"广州");
         provinces.add(province1);
         provinces.add(province2);
         provinces.add(province3);
+        provinces.add(province4);
         return provinces;
     }
 

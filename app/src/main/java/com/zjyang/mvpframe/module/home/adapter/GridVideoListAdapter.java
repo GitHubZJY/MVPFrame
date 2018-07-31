@@ -85,6 +85,8 @@ public class GridVideoListAdapter extends RecyclerView.Adapter<GridVideoListAdap
                 FullScreenWatchActivity.go(mContext, holder.mPreviewIv, videoInfo);
             }
         });
+        String location = videoInfo.getLocation();
+        holder.mLocationTv.setText(TextUtils.isEmpty(location) ? "" : location);
     }
 
     @Override
@@ -120,6 +122,7 @@ public class GridVideoListAdapter extends RecyclerView.Adapter<GridVideoListAdap
         private TextView mLikeNumTv;
         private TextView mCommentTv;
         private LinearLayout mWatchLlyt;
+        private TextView mLocationTv;
 
 
         public MyViewHolder(View itemView) {
@@ -133,6 +136,7 @@ public class GridVideoListAdapter extends RecyclerView.Adapter<GridVideoListAdap
             mLikeNumTv = (TextView) itemView.findViewById(R.id.item_like_num_tv);
             mCommentTv = (TextView) itemView.findViewById(R.id.item_comment_num_tv);
             mWatchLlyt = (LinearLayout) itemView.findViewById(R.id.watch_num_llyt);
+            mLocationTv = (TextView) itemView.findViewById(R.id.position_tv);
 
             mUserNameTv.setBackground(ShapeUtils.getRoundRectDrawable(20, Color.parseColor("#ffd600")));
             mDurationTv.setBackground(ShapeUtils.getRoundRectDrawable(15, Color.parseColor("#66000000")));

@@ -29,6 +29,14 @@ public class ShareModel implements ShareTaskContracts.Model{
 
     private static final String TAG = "ShareModel";
 
+    private String mCurAddress;
+    private int mCurPositionId;
+
+    @Override
+    public void setLocationData(String address, int id) {
+        mCurAddress = address;
+        mCurPositionId = id;
+    }
 
     @Override
     public void uploadVideoFile(final String videoPath) {
@@ -72,7 +80,8 @@ public class ShareModel implements ShareTaskContracts.Model{
                     String videoStringUrl = video.getFileUrl();
                     VideoInfo videoInfo = new VideoInfo();
                     videoInfo.setVideoUrl(videoStringUrl);
-                    videoInfo.setProvinceId(1);
+                    videoInfo.setProvinceId(mCurPositionId);
+                    videoInfo.setLocation(mCurAddress);
                     videoInfo.setUserId(user.getObjectId());
                     videoInfo.setUserPicUrl(user.getUserPic());
                     videoInfo.setUserName(user.getUserName());

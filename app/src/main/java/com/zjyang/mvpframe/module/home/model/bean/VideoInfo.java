@@ -21,12 +21,21 @@ public class VideoInfo extends BmobObject implements Parcelable {
     private String userPicUrl;
     private String userName;
     private int provinceId;
+    private String location;
     private String watchNum;
     private String duration;
     private List<Comment> commentList;
     private int likeNum;
 
     public VideoInfo() {
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getUserId() {
@@ -137,6 +146,7 @@ public class VideoInfo extends BmobObject implements Parcelable {
         dest.writeString(this.userPicUrl);
         dest.writeString(this.userName);
         dest.writeInt(this.provinceId);
+        dest.writeString(this.location);
         dest.writeString(this.watchNum);
         dest.writeString(this.duration);
         dest.writeList(this.commentList);
@@ -151,6 +161,7 @@ public class VideoInfo extends BmobObject implements Parcelable {
         this.userPicUrl = in.readString();
         this.userName = in.readString();
         this.provinceId = in.readInt();
+        this.location = in.readString();
         this.watchNum = in.readString();
         this.duration = in.readString();
         this.commentList = new ArrayList<Comment>();

@@ -1,5 +1,6 @@
 package com.zjyang.mvpframe.module.share.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -46,12 +47,14 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     SimpleDraweeView mPreviewIv;
     @BindView(R.id.center_pause_iv)
     ImageView mPlayIv;
-    @BindView(R.id.share_btn)
-    Button mShareBtn;
+    @BindView(R.id.toolbar_right_tv)
+    TextView mShareBtn;
     @BindView(R.id.location_view)
     RelativeLayout mLocationView;
     @BindView(R.id.location_tv)
     TextView mLocationTv;
+
+    private ProgressDialog mProgressDialog;
 
     public static final String VIDEO_PATH = "VIDEO_PATH";
     private String mVideoPath;
@@ -92,6 +95,12 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     }
 
     @Override
+    public void showLocationData(String address) {
+        mLocationTv.setTextColor(Color.BLACK);
+        mLocationTv.setText(address);
+    }
+
+    @Override
     public void onCompletion(IMediaPlayer imp, MediaPlayer mp) {
         mPlayIv.setVisibility(View.VISIBLE);
         mPreviewIv.setVisibility(View.VISIBLE);
@@ -111,22 +120,33 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
 
     @OnClick(R.id.location_view)
     void clickLocation(){
-        LocationUtils.getInstance().startLocation(new LocationUtils.LocationCallback() {
-            @Override
-            public void getAddress(String address) {
-                LocationUtils.getInstance().stopLocation();
-                if(!TextUtils.isEmpty(address)){
-                    mLocationTv.setTextColor(Color.BLACK);
-                    mLocationTv.setText(address);
-                }
-            }
-        });
+        if(mPresenter != null){
+            mPresenter.startLocation();
+        }
     }
 
-    @OnClick(R.id.share_btn)
+    @OnClick(R.id.toolbar_right_tv)
     void clickShare(){
         if(mPresenter != null){
             mPresenter.shareVideo(mVideoPath);
+        }
+    }
+
+    @Override
+    public void showProgressDialog() {
+        if(mProgressDialog == null){
+            mProgressDialog = new ProgressDialog(this);
+        }
+        if(mProgressDialog.isShowing()){
+            return;
+        }
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        if(mProgressDialog != null){
+            mProgressDialog.dismiss();
         }
     }
 
