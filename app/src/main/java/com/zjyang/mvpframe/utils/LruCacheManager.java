@@ -5,6 +5,10 @@ import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.example.zjy.player.utils.VideoUtils;
+import com.zjyang.mvpframe.ui.view.SeekBarTipView;
+import com.zjyang.mvpframe.ui.view.SelectTipSeekBar;
+
+import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -48,6 +52,11 @@ public class LruCacheManager {
         }
     }
 
+    /**
+     * 将Bitmap添加到缓存
+     * @param key
+     * @param bitmap
+     */
     public void addBitmapToCache(String key, final Bitmap bitmap) {
         if (getBitmapFromCache(key) == null && bitmap != null) {
             LogUtil.d(TAG, "addBitmapToCache");
@@ -55,15 +64,33 @@ public class LruCacheManager {
         }
     }
 
+    /**
+     * 从缓存中获取Bitmap
+     * @param key
+     * @return
+     */
     public Bitmap getBitmapFromCache(String key) {
         return mLruCache.get(key);
     }
 
+    /**
+     * 加载缓存Bitmap
+     * @param imageView 要用来展示bitmap的控件
+     * @param path 视频路径
+     * @param progress 视频进度某一刻
+     */
     public void loadBitmap(final ImageView imageView, final String path, final long progress){
+        loadBitmap(null, imageView, path, progress);
+    }
+
+    public void loadBitmap(final SelectTipSeekBar seekBarTipView, final ImageView imageView, final String path, final long progress){
         final String key = path + progress;
         Bitmap bitmap = getBitmapFromCache(key);
         if(bitmap != null){
             imageView.setImageBitmap(bitmap);
+            if(seekBarTipView != null){
+                seekBarTipView.setBitmap(bitmap);
+            }
             mFinallyBitmap = bitmap;
             return;
         }
@@ -71,29 +98,43 @@ public class LruCacheManager {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
                 Bitmap thumbBitmap = VideoUtils.getThumbFromVideo(path, progress);
-                LogUtil.d(TAG, "生成bitmap---->" + key);
+                LogUtil.d(TAG, "create thumb bitmap---->" + key);
                 addBitmapToCache(key, thumbBitmap);
                 subscriber.onNext(thumbBitmap);
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Bitmap>() {
             @Override
             public void call(Bitmap bitmap) {
-                LogUtil.d(TAG, "显示bitmap");
+                LogUtil.d(TAG, "show bitmap---->" + key);
                 imageView.setImageBitmap(bitmap);
+                if(seekBarTipView != null){
+                    seekBarTipView.setBitmap(bitmap);
+                }
                 mFinallyBitmap = bitmap;
             }
         });
 
     }
 
+    /**
+     * 获取当前生成的最后一张Bitmap
+     * @return
+     */
     public Bitmap getFinallyBitmap(){
         return mFinallyBitmap;
     }
 
+    /**
+     * 释放内存
+     */
     public void release(){
         if(mLruCache != null){
-            mLruCache = null;
+            Map<String, Bitmap> map = mLruCache.snapshot();
+            if(map != null){
+                map.clear();
+            }
         }
+        mFinallyBitmap.recycle();
     }
 
 }

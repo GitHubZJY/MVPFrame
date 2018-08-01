@@ -107,7 +107,7 @@
     <RelativeLayout
         android:id="@+id/get_preview_view"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="148dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:background="@color/white"
@@ -127,13 +127,15 @@
             android:layout_centerVertical="true"
             android:textColor="@color/text_color_gray"
             android:text="选择封面"/>
-        <SeekBar
+        <com.zjyang.mvpframe.ui.view.SelectTipSeekBar
             android:id="@+id/select_preview_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/select_preview_title"
-            android:layout_toLeftOf="@id/select_preview_iv"/>
+            android:layout_toLeftOf="@id/select_preview_iv">
+
+        </com.zjyang.mvpframe.ui.view.SelectTipSeekBar>
 
     </RelativeLayout>
 

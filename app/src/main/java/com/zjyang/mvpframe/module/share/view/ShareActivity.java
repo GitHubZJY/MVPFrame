@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,7 +26,11 @@ import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.presenter.SharePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.ui.view.SeekBarTipView;
+import com.zjyang.mvpframe.ui.view.SelectTipSeekBar;
+import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.LocationUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.LruCacheManager;
 import com.zjyang.mvpframe.utils.ToastUtils;
 
@@ -57,7 +62,7 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     @BindView(R.id.location_tv)
     TextView mLocationTv;
     @BindView(R.id.select_preview_bar)
-    SeekBar mSelectBar;
+    SelectTipSeekBar mSelectBar;
     @BindView(R.id.select_preview_iv)
     ImageView mSelectIv;
 
@@ -105,25 +110,47 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     public void initSelectView(){
         int duration = VideoUtils.getVideoDuration(mVideoPath);
         mSelectBar.setMax(duration);
-        mSelectBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        mSelectBar.setOnSeekBarChangeListener(new SelectTipSeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 int progress = seekBar.getProgress();
-                if(progress % 500 < 100){
-                    LruCacheManager.getInstance().loadBitmap(mSelectIv, mVideoPath, progress);
+                if(progress % 1000 < 50){
+                    LruCacheManager.getInstance().loadBitmap(mSelectBar, mSelectIv, mVideoPath, progress);
                 }
             }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
         });
+
+//        mSelectBar.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                float x = motionEvent.getRawX();
+//                int[] location = new int[2];
+//                mSelectBar.getLocationOnScreen(location);
+//                int seekbarX = location[0];
+//                float y = location[1];
+//                if(x < seekbarX + mSelectBar.getPaddingStart() || x > seekbarX + mSelectBar.getWidth() - mSelectBar.getPaddingEnd()){
+//                    return true;
+//                }
+//                float curProgress = mSelectBar.getMax()*(x - seekbarX - mSelectBar.getPaddingStart())/(mSelectBar.getWidth() - mSelectBar.getPaddingStart() - mSelectBar.getPaddingEnd());
+//                mSelectBar.setProgress((int)curProgress);
+//                LogUtil.d(TAG, "curProgress: " + curProgress);
+//                switch (motionEvent.getAction()){
+//                    case MotionEvent.ACTION_DOWN:
+//                        mSeekBarTipView.setVisibility(View.VISIBLE);
+//                        mSeekBarTipView.setX(x - mSeekBarTipView.getWidth()/2);
+//                        mSeekBarTipView.setY(y - DrawUtils.dp2px(32) - mSeekBarTipView.getHeight() / 2);
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        mSeekBarTipView.setX(x - mSeekBarTipView.getWidth()/2);
+//                        mSeekBarTipView.setY(y - DrawUtils.dp2px(32) - mSeekBarTipView.getHeight() / 2);
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        mSeekBarTipView.setVisibility(View.GONE);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
     }
 
     @Override
@@ -200,6 +227,7 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LruCacheManager.getInstance().release();
         unbinder.unbind();
     }
 }
