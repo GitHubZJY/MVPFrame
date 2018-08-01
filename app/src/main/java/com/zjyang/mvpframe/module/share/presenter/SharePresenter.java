@@ -1,12 +1,16 @@
 package com.zjyang.mvpframe.module.share.presenter;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
+import android.widget.ImageView;
 
 import com.zjyang.mvpframe.event.ShareResultEvent;
 import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.model.ShareModel;
 import com.zjyang.mvpframe.utils.LocationUtils;
+import com.zjyang.mvpframe.utils.LruCacheManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,7 +40,12 @@ public class SharePresenter extends BasePresenter<ShareTaskContracts.View, Share
             mView.showProgressDialog();
         }
         if(mModel != null){
-            mModel.uploadVideoFile(videoPath);
+            Bitmap bm = LruCacheManager.getInstance().getFinallyBitmap();
+            if(bm != null){
+                mModel.uploadVideoFile(videoPath, bm);
+            }else{
+                mView.dismissProgressDialog();
+            }
         }
     }
 

@@ -39,8 +39,7 @@ public class ShareModel implements ShareTaskContracts.Model{
     }
 
     @Override
-    public void uploadVideoFile(final String videoPath) {
-        Bitmap thumbBm = VideoUtils.getThumbFromVideo(videoPath);
+    public void uploadVideoFile(final String videoPath, Bitmap thumbBm) {
         final BmobFile thumb;
         final String thumbPath = FileUtils.saveBitmapToFile(thumbBm, FileUtils.getFileNameByPath(videoPath));
         if(!TextUtils.isEmpty(thumbPath)){

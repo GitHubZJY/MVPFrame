@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.module.share.view;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.presenter.SharePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.LocationUtils;
+import com.zjyang.mvpframe.utils.LruCacheManager;
 import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -53,6 +56,10 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     RelativeLayout mLocationView;
     @BindView(R.id.location_tv)
     TextView mLocationTv;
+    @BindView(R.id.select_preview_bar)
+    SeekBar mSelectBar;
+    @BindView(R.id.select_preview_iv)
+    ImageView mSelectIv;
 
     private ProgressDialog mProgressDialog;
 
@@ -81,6 +88,7 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
 
 
         initVideoView();
+        initSelectView();
     }
 
     public void initVideoView(){
@@ -94,10 +102,39 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
         mPreviewIv.setImageBitmap(VideoUtils.getThumbFromVideo(mVideoPath));
     }
 
+    public void initSelectView(){
+        int duration = VideoUtils.getVideoDuration(mVideoPath);
+        mSelectBar.setMax(duration);
+        mSelectBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                int progress = seekBar.getProgress();
+                if(progress % 500 < 100){
+                    LruCacheManager.getInstance().loadBitmap(mSelectIv, mVideoPath, progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
     @Override
     public void showLocationData(String address) {
         mLocationTv.setTextColor(Color.BLACK);
         mLocationTv.setText(address);
+    }
+
+    @Override
+    public ImageView getPreviewIv() {
+        return mPreviewIv;
     }
 
     @Override

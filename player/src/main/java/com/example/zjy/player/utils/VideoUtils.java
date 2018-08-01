@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.os.Environment;
+import android.util.Log;
 
 /**
  * Created by 74215 on 2018/5/26.
@@ -12,6 +13,7 @@ import android.os.Environment;
 public class VideoUtils {
 
 
+    public static final String TAG = "VideoUtils";
 
     public static Bitmap getThumbFromVideo(String videoPath) {
         String dataPath = videoPath;
@@ -19,6 +21,23 @@ public class VideoUtils {
         retriever.setDataSource(dataPath);
         Bitmap bitmap = retriever.getFrameAtTime(1*1000*1000,MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
         return bitmap;
+    }
+
+    public static Bitmap getThumbFromVideo(String videoPath, long time) {
+        String dataPath = videoPath;
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(dataPath);
+        Bitmap bitmap = retriever.getFrameAtTime(time*1000,MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+        return bitmap;
+    }
+
+    //获取视频总时长
+    public static int getVideoDuration(String path){
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(path);
+        String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+        Log.e(TAG, "获取视频时长为: " + duration);
+        return Integer.parseInt(duration);
     }
 
 
