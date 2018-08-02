@@ -4,14 +4,5 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <com.zjyang.mvpframe.ui.view.SelectTipSeekBar
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@color/black_overlay"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="16dp">
-
-    </com.zjyang.mvpframe.ui.view.SelectTipSeekBar>
-
 
 </LinearLayout>
