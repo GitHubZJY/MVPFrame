@@ -19,6 +19,7 @@ import com.example.zjy.player.ui.YPlayerView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.camera.view.AliyunVideoRecorder;
 import com.zjyang.mvpframe.module.camera.view.CameraActivity;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
@@ -142,7 +143,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
     }
 
     public void jumpToCameraPage(){
-        Intent intent = new Intent(this, CameraActivity.class);
+        Intent intent = new Intent(this, AliyunVideoRecorder.class);
         startActivity(intent);
     }
 

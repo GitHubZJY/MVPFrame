@@ -51,6 +51,15 @@ public class AppApplication extends Application{
         initInMainProcess();
         //复制加载ijk so库
         new PlugInSoHelper(this).run();
+
+        System.loadLibrary("aliresample");
+        System.loadLibrary("live-openh264");
+        System.loadLibrary("QuCore-ThirdParty");
+        System.loadLibrary("QuCore");
+
+        com.aliyun.common.httpfinal.QupaiHttpFinal.getInstance().initOkHttpFinal();
+        com.aliyun.vod.common.httpfinal.QupaiHttpFinal.getInstance().initOkHttpFinal();
+        
         LogUtil.e(TAG, "Application start time--->" + (System.currentTimeMillis() - startAppTime));
     }
 
