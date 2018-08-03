@@ -218,10 +218,10 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
     private void getStyleParam() {
         mTintColor = R.color.yellow;
         mTimelineDelBgColor = R.color.aliyun_red;
-        mTimelineBgColor = R.color.text_color_gray;
+        mTimelineBgColor = R.color.white;
         mTimelinePosY = (int) 100;
-        mLightDisableRes = R.drawable.ic_like;
-        mLightSwitchRes = R.drawable.ic_like;
+        mLightDisableRes = R.drawable.icon_flash_off;
+        mLightSwitchRes = R.drawable.icon_flash_on;
         mGalleryVisibility = 0;
     }
 
@@ -237,8 +237,8 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
                 previewParams.addRule(RelativeLayout.BELOW, R.id.aliyun_tools_bar);
                 timeLineParams = new RelativeLayout.LayoutParams(screenWidth, TIMELINE_HEIGHT);
                 timeLineParams.addRule(RelativeLayout.BELOW, R.id.aliyun_preview);
-                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                timeLineParams.topMargin = -mTimelinePosY;
+                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                //timeLineParams.topMargin = -mTimelinePosY;
                 mToolBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, mTimelineBgColor);
@@ -255,8 +255,8 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
                 }
                 timeLineParams = new RelativeLayout.LayoutParams(screenWidth, TIMELINE_HEIGHT);
                 timeLineParams.addRule(RelativeLayout.BELOW, R.id.aliyun_preview);
-                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                timeLineParams.topMargin = -mTimelinePosY;
+                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                //timeLineParams.topMargin = -mTimelinePosY;
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, mTimelineBgColor);
                 break;
@@ -267,8 +267,8 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
                 }
                 timeLineParams = new RelativeLayout.LayoutParams(screenWidth, TIMELINE_HEIGHT);
                 timeLineParams.addRule(RelativeLayout.ABOVE, R.id.aliyun_record_layout);
-                timeLineParams.bottomMargin = mTimelinePosY;
-                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                //timeLineParams.bottomMargin = mTimelinePosY;
+                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
                 mToolBar.setBackgroundColor(getResources().getColor(R.color.yellow));
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.yellow));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, R.color.aliyun_qupai_transparent);

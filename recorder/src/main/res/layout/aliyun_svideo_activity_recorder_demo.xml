@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/aliyun_black"
     android:orientation="vertical">
 
 
@@ -30,7 +30,7 @@
             android:id="@+id/aliyun_record_time"
             android:layout_width="30dp"
             android:layout_height="match_parent"
-            android:textColor="@color/primary_text_color"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:layout_gravity="right|center_vertical"
             android:gravity="center"/>
@@ -50,7 +50,7 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="15dp"
             android:visibility="visible"
-            android:src="@drawable/ic_gift"/>
+            android:src="@drawable/icon_flash_off"/>
 
         <ImageView
             android:id="@+id/aliyun_switch_camera"
@@ -59,7 +59,7 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="65dp"
             android:visibility="visible"
-            android:src="@drawable/ic_gift"/>
+            android:src="@drawable/icon_switch_distance"/>
 
         <ImageView
             android:id="@+id/aliyun_switch_beauty"
@@ -68,7 +68,7 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="115dp"
             android:visibility="visible"
-            android:src="@drawable/ic_gift"/>
+            android:src="@drawable/icon_beauty"/>
 
         <ImageView
             android:id="@+id/aliyun_switch_ratio"
@@ -77,7 +77,7 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="165dp"
             android:visibility="gone"
-            android:src="@drawable/ic_gift" />
+            />
     </FrameLayout>
 
     <FrameLayout
@@ -97,7 +97,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="60dp"
             android:layout_gravity="center_vertical|left"
-            android:src="@drawable/ic_gift"
+            android:src="@drawable/ic_delete"
             android:visibility="gone"
             />
         <ImageView
@@ -106,7 +106,7 @@
             android:layout_height="30dp"
             android:layout_marginRight="60dp"
             android:layout_gravity="center_vertical|right"
-            android:src="@drawable/ic_gift"
+            android:src="@drawable/ic_filter"
             android:visibility="gone"/>
         <ImageView
             android:id="@+id/aliyun_icon_default"
@@ -115,7 +115,7 @@
             android:layout_marginLeft="60dp"
             android:layout_gravity="center_vertical|left"
             android:visibility="gone"
-            android:src="@drawable/ic_gift"/>
+            />
     </FrameLayout>
     <TextView
         android:id="@+id/aliyun_filter_txt"
