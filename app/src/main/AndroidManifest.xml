@@ -84,12 +84,6 @@
 
         </service>
 
-        <activity
-            android:name=".module.camera.view.AliyunVideoRecorder"
-            android:screenOrientation="portrait"
-             >
-        </activity>
-
     </application>
 
 </manifest>

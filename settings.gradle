@@ -1,1 +1,1 @@
-include ':app', ':ijkplayer-java', ':ijkplayer-example', ':player', ':AliyunVideoSdk'
+include ':app', ':ijkplayer-java', ':ijkplayer-example', ':player', ':AliyunVideoSdk', ':recorder'

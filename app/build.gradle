@@ -121,7 +121,7 @@ dependencies {
 
     testCompile "org.mockito:mockito-core:2.11.0"
 
-    compile project(':AliyunVideoSdk')
+    compile project(':recorder')
 
     compile project(':player')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

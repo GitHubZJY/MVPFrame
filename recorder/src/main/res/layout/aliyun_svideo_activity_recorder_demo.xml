@@ -6,31 +6,34 @@
     android:orientation="vertical">
 
 
-    <com.zjyang.mvpframe.module.camera.view.AliyunSVideoGlSurfaceView
+    <com.zjyang.recorder.widget.AliyunSVideoGlSurfaceView
         android:id="@+id/aliyun_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/aliyun_tools_bar"
         android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/aliyun_record_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/yellow"
-        android:textSize="14sp"
-        android:layout_above="@+id/aliyun_record_timeline"
-        android:gravity="center"/>
 
-    <com.zjyang.mvpframe.module.camera.view.RecordTimelineView
+
+    <com.zjyang.recorder.widget.RecordTimelineView
         android:id="@+id/aliyun_record_timeline"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_below="@id/aliyun_preview" />
+        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/aliyun_record_layout"/>
 
     <FrameLayout
         android:id="@+id/aliyun_tools_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/aliyun_record_time"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/primary_text_color"
+            android:textSize="15sp"
+            android:layout_gravity="right|center_vertical"
+            android:gravity="center"/>
 
         <ImageView
             android:id="@+id/aliyun_back"
@@ -111,7 +114,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="60dp"
             android:layout_gravity="center_vertical|left"
-            android:visibility="visible"
+            android:visibility="gone"
             android:src="@drawable/ic_gift"/>
     </FrameLayout>
     <TextView

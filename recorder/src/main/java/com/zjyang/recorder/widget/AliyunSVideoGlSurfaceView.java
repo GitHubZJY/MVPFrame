@@ -1,4 +1,4 @@
-package com.zjyang.mvpframe.module.camera.view;
+package com.zjyang.recorder.widget;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;

@@ -6,26 +6,16 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.zjy.player.ui.YPlayerView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BaseFragment;
-import com.zjyang.mvpframe.module.camera.view.AliyunVideoRecorder;
-import com.zjyang.mvpframe.module.camera.view.CameraActivity;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
-import com.zjyang.mvpframe.module.home.model.HomeModel;
-import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.home.presenter.HomePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.dialog.DialogHelper;
@@ -33,8 +23,8 @@ import com.zjyang.mvpframe.ui.view.CustomViewPager;
 import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.PermissionUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
+import com.zjyang.recorder.activity.RecorderActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -143,7 +133,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
     }
 
     public void jumpToCameraPage(){
-        Intent intent = new Intent(this, AliyunVideoRecorder.class);
+        Intent intent = new Intent(this, RecorderActivity.class);
         startActivity(intent);
     }
 

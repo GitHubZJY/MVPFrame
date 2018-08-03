@@ -2,14 +2,13 @@
  * Copyright (C) 2010-2017 Alibaba Group Holding Limited.
  */
 
-package com.zjyang.mvpframe.module.camera.view;
+package com.zjyang.recorder.activity;
 
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
@@ -34,7 +33,6 @@ import android.widget.Toast;
 
 import com.aliyun.common.global.Version;
 import com.aliyun.common.utils.CommonUtil;
-
 import com.aliyun.recorder.AliyunRecorderCreator;
 import com.aliyun.recorder.supply.AliyunIClipManager;
 import com.aliyun.recorder.supply.AliyunIRecorder;
@@ -51,7 +49,11 @@ import com.aliyun.struct.recorder.MediaInfo;
 import com.aliyun.struct.snap.AliyunSnapVideoParam;
 import com.qu.preview.callback.OnFrameCallBack;
 import com.qu.preview.callback.OnTextureIdCallBack;
-import com.zjyang.mvpframe.R;
+import com.zjyang.recorder.R;
+import com.zjyang.recorder.utils.OrientationDetector;
+import com.zjyang.recorder.widget.AliyunSVideoGlSurfaceView;
+import com.zjyang.recorder.widget.RecordTimelineView;
+
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -59,7 +61,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AliyunVideoRecorder extends Activity implements View.OnClickListener, View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener, GestureDetector.OnGestureListener {
+public class RecorderActivity extends Activity implements View.OnClickListener, View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener, GestureDetector.OnGestureListener {
 
     private static final int EFFECT_BEAUTY_LEVEL = 80;
     private static final int TIMELINE_HEIGHT = 20;
@@ -102,7 +104,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
     private TextView mRecordTimeTxt;
     private FrameLayout mToolBar, mRecorderBar;
     private FlashType mFlashType = FlashType.OFF;
-    private CameraType mCameraType = CameraType.FRONT;
+    private CameraType mCameraType = CameraType.BACK;
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
     private float mScaleFactor;
@@ -151,7 +153,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
     }
 
     public static void startRecordForResult(Activity activity,int requestCode,AliyunSnapVideoParam param){
-        Intent intent = new Intent(activity,AliyunVideoRecorder.class);
+        Intent intent = new Intent(activity,RecorderActivity.class);
         intent.putExtra(AliyunSnapVideoParam.VIDEO_RESOLUTION,param.getResolutionMode());
         intent.putExtra(AliyunSnapVideoParam.VIDEO_RATIO,param.getRatioMode());
         intent.putExtra(AliyunSnapVideoParam.RECORD_MODE,param.getRecordMode());
@@ -179,7 +181,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
     }
 
     public static void startRecord(Context context,AliyunSnapVideoParam param){
-        Intent intent = new Intent(context,AliyunVideoRecorder.class);
+        Intent intent = new Intent(context,RecorderActivity.class);
         intent.putExtra(AliyunSnapVideoParam.VIDEO_RESOLUTION,param.getResolutionMode());
         intent.putExtra(AliyunSnapVideoParam.VIDEO_RATIO,param.getRatioMode());
         intent.putExtra(AliyunSnapVideoParam.RECORD_MODE,param.getRecordMode());
@@ -226,7 +228,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
     private void reSizePreview() {
         RelativeLayout.LayoutParams previewParams = null;
         RelativeLayout.LayoutParams timeLineParams = null;
-        RelativeLayout.LayoutParams durationTxtParams = null;
+        FrameLayout.LayoutParams durationTxtParams = null;
         int screenWidth = getResources().getDisplayMetrics().widthPixels;
         int screenHeight = getResources().getDisplayMetrics().heightPixels;
         switch (mRatioMode) {
@@ -235,8 +237,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
                 previewParams.addRule(RelativeLayout.BELOW, R.id.aliyun_tools_bar);
                 timeLineParams = new RelativeLayout.LayoutParams(screenWidth, TIMELINE_HEIGHT);
                 timeLineParams.addRule(RelativeLayout.BELOW, R.id.aliyun_preview);
-                durationTxtParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                durationTxtParams.addRule(RelativeLayout.ABOVE, R.id.aliyun_record_timeline);
+                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 timeLineParams.topMargin = -mTimelinePosY;
                 mToolBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
@@ -254,8 +255,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
                 }
                 timeLineParams = new RelativeLayout.LayoutParams(screenWidth, TIMELINE_HEIGHT);
                 timeLineParams.addRule(RelativeLayout.BELOW, R.id.aliyun_preview);
-                durationTxtParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                durationTxtParams.addRule(RelativeLayout.ABOVE, R.id.aliyun_record_timeline);
+                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 timeLineParams.topMargin = -mTimelinePosY;
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, mTimelineBgColor);
@@ -268,8 +268,7 @@ public class AliyunVideoRecorder extends Activity implements View.OnClickListene
                 timeLineParams = new RelativeLayout.LayoutParams(screenWidth, TIMELINE_HEIGHT);
                 timeLineParams.addRule(RelativeLayout.ABOVE, R.id.aliyun_record_layout);
                 timeLineParams.bottomMargin = mTimelinePosY;
-                durationTxtParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                durationTxtParams.addRule(RelativeLayout.ABOVE, R.id.aliyun_record_timeline);
+                durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 mToolBar.setBackgroundColor(getResources().getColor(R.color.yellow));
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.yellow));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, R.color.aliyun_qupai_transparent);

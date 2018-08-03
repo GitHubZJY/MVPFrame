@@ -2,7 +2,7 @@
  * Copyright (C) 2010-2017 Alibaba Group Holding Limited.
  */
 
-package com.zjyang.mvpframe.module.camera.view;
+package com.zjyang.recorder.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
