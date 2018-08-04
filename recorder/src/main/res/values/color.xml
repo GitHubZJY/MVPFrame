@@ -14,6 +14,10 @@
 
     <color name="line">#dadada</color>
 
+    <color name="tran">#00000000</color>
+    <color name="half_tran">#40000000</color>
+
+
 
     <color name="qupai_text_dialog_vcode">#b3000000</color>
     <color name="qupai_text_dialog_nickname">#4d000000</color>

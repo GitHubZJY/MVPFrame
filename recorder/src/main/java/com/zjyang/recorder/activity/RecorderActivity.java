@@ -92,7 +92,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
     private int mRecordMode;
     private VideoQuality mVideoQuality = VideoQuality.HD;
     private VideoCodecs mVideoCodec = VideoCodecs.H264_HARDWARE;
-    private int mRatioMode = AliyunSnapVideoParam.RATIO_MODE_3_4;
+    private int mRatioMode = AliyunSnapVideoParam.RATIO_MODE_9_16;
     private int mSortMode = AliyunSnapVideoParam.SORT_MODE_MERGE;
     private AliyunIRecorder mRecorder;
     private AliyunIClipManager mClipManager;
@@ -239,7 +239,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
                 timeLineParams.addRule(RelativeLayout.BELOW, R.id.aliyun_preview);
                 durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
                 //timeLineParams.topMargin = -mTimelinePosY;
-                mToolBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
+                mToolBar.setBackgroundColor(getResources().getColor(R.color.aliyun_halftransparent));
                 mRecorderBar.setBackgroundColor(getResources().getColor(R.color.aliyun_transparent));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, mTimelineBgColor);
                 break;
@@ -269,8 +269,8 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
                 timeLineParams.addRule(RelativeLayout.ABOVE, R.id.aliyun_record_layout);
                 //timeLineParams.bottomMargin = mTimelinePosY;
                 durationTxtParams = new FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                mToolBar.setBackgroundColor(getResources().getColor(R.color.yellow));
-                mRecorderBar.setBackgroundColor(getResources().getColor(R.color.yellow));
+                mToolBar.setBackgroundColor(getResources().getColor(R.color.half_tran));
+                mRecorderBar.setBackgroundColor(getResources().getColor(R.color.half_tran));
                 mRecordTimelineView.setColor(mTintColor, mTimelineDelBgColor, R.color.qupai_black_opacity_70pct, R.color.aliyun_qupai_transparent);
                 break;
         }
@@ -278,10 +278,10 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
             mGlSurfaceView.setLayoutParams(previewParams);
         }
         if (timeLineParams != null) {
-            mRecordTimelineView.setLayoutParams(timeLineParams);
+            //mRecordTimelineView.setLayoutParams(timeLineParams);
         }
         if(durationTxtParams != null){
-            mRecordTimeTxt.setLayoutParams(durationTxtParams);
+            //mRecordTimeTxt.setLayoutParams(durationTxtParams);
         }
     }
 
@@ -501,7 +501,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
         setFilterList(getIntent().getStringArrayExtra(AliyunSnapVideoParam.FILTER_LIST));
         mBeautyLevel = getIntent().getIntExtra(AliyunSnapVideoParam.BEAUTY_LEVEL,80);
         setBeautyLevel(mBeautyLevel);
-        setBeautyStatus(getIntent().getBooleanExtra(AliyunSnapVideoParam.BEAUTY_STATUS,true));
+        setBeautyStatus(getIntent().getBooleanExtra(AliyunSnapVideoParam.BEAUTY_STATUS,false));
         setCameraType((CameraType) getIntent().getSerializableExtra(AliyunSnapVideoParam.CAMERA_TYPE));
         setFlashType((FlashType) getIntent().getSerializableExtra(AliyunSnapVideoParam.FLASH_TYPE));
         mRecorder.setExposureCompensationRatio(mExposureCompensationRatio);
@@ -556,7 +556,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
         mResolutionMode = getIntent().getIntExtra(AliyunSnapVideoParam.VIDEO_RESOLUTION, AliyunSnapVideoParam.RESOLUTION_540P);
         mMinDuration = getIntent().getIntExtra(AliyunSnapVideoParam.MIN_DURATION, 2000);
         mMaxDuration = getIntent().getIntExtra(AliyunSnapVideoParam.MAX_DURATION, 30000);
-        mRatioMode = getIntent().getIntExtra(AliyunSnapVideoParam.VIDEO_RATIO, AliyunSnapVideoParam.RATIO_MODE_3_4);
+        mRatioMode = getIntent().getIntExtra(AliyunSnapVideoParam.VIDEO_RATIO, AliyunSnapVideoParam.RATIO_MODE_9_16);
         mGop = getIntent().getIntExtra(AliyunSnapVideoParam.VIDEO_GOP, 5);
         mBitrate = getIntent().getIntExtra(AliyunSnapVideoParam.VIDEO_BITRATE, 0);
         mVideoQuality = (VideoQuality) getIntent().getSerializableExtra(AliyunSnapVideoParam.VIDEO_QUALITY);
