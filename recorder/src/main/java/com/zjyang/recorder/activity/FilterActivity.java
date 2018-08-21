@@ -61,12 +61,11 @@ public class FilterActivity extends Activity implements View.OnClickListener{
     private AliyunICompose mCompose;
     private Uri mUri;
     private String mVideoPath;
-    private int composeCount = 0;
 
     private String mConfig;
     private String mOutputPath = Environment.getExternalStorageDirectory() + File.separator + "output_compose_video.mp4";
-
-
+    //后台解析视频滤镜压缩包
+    private PasteFilterDataTask mPasteTask;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +76,6 @@ public class FilterActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.layout_filter);
         Fresco.initialize(this);
         mGlSurfaceContainer = (FrameLayout) findViewById(R.id.glsurface_view);
-
         mSurfaceView = (SurfaceView) findViewById(R.id.play_view);
         mFilterLv = (RecyclerView) findViewById(R.id.filter_lv);
         mBackIv = (ImageView) findViewById(R.id.filter_back_iv);
@@ -89,17 +87,37 @@ public class FilterActivity extends Activity implements View.OnClickListener{
         mUri = Uri.fromFile(new File(mVideoPath));
         mConfig = mVideoPath;
 
+        initPlayer();
+        initGlSurfaceView();
+        initFilterListView();
+
+
+        copyAssets();
+
+
+        mCompose = ComposeFactory.INSTANCE.getInstance();
+        mCompose.init(this);
+        mComposeDialog = new ComposeDialog(this);
+    }
+
+    private void initGlSurfaceView() {
+        if (mAliyunIPlayer != null) {
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mGlSurfaceContainer.getLayoutParams();
+            layoutParams.height = RelativeLayout.LayoutParams.MATCH_PARENT;
+
+            mGlSurfaceContainer.setLayoutParams(layoutParams);
+        }
+    }
+
+    private void initPlayer(){
         mAliyunIEditor = AliyunEditorFactory.creatAliyunEditor(mUri);
         mAliyunIEditor.init(mSurfaceView);
         mAliyunIPlayer = mAliyunIEditor.createAliyunPlayer();
         if (mAliyunIPlayer == null) {
-            ToastUtil.showToast(this, "Create AliyunPlayer failed");
+            ToastUtil.showToast(this, "Create player failed");
             finish();
             return;
         }
-        initGlSurfaceView();
-        initFilterListView();
-
         mAliyunIPlayer.setOnPreparedListener(new OnPreparedListener() {
             @Override
             public void onPrepared() {
@@ -133,22 +151,6 @@ public class FilterActivity extends Activity implements View.OnClickListener{
                 return 0;
             }
         });
-
-        copyAssets();
-
-
-        mCompose = ComposeFactory.INSTANCE.getInstance();
-        mCompose.init(this);
-        mComposeDialog = new ComposeDialog(this);
-    }
-
-    private void initGlSurfaceView() {
-        if (mAliyunIPlayer != null) {
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mGlSurfaceContainer.getLayoutParams();
-            layoutParams.height = RelativeLayout.LayoutParams.MATCH_PARENT;
-
-            mGlSurfaceContainer.setLayoutParams(layoutParams);
-        }
     }
 
     private void initFilterListView(){
@@ -223,29 +225,30 @@ public class FilterActivity extends Activity implements View.OnClickListener{
     }
 
     private void copyAssets() {
-        new AsyncTask() {
+        mPasteTask = new PasteFilterDataTask();
+        mPasteTask.execute();
+    }
 
-            @Override
-            protected Object doInBackground(Object[] params) {
-                FilterModel.copyAll(FilterActivity.this);
-                return null;
-            }
+    public class PasteFilterDataTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            FilterModel.copyAll(FilterActivity.this);
+            return null;
+        }
 
-            @Override
-            protected void onPostExecute(Object o) {
-                List<EffectFilter> effectList = new ArrayList<>();
-                List<String> filterList = FilterModel.getColorFilterList();
-                EffectFilter noFilterEffect = new EffectFilter("-");
-                effectList.add(noFilterEffect);
-                for(String str : filterList){
-                    EffectFilter filter = new EffectFilter(str);
-                    effectList.add(filter);
-                }
-                mFilterAdapter.setFilterList(effectList);
-                mFilterAdapter.notifyDataSetChanged();
-//                resCopy.setVisibility(View.GONE);
+        @Override
+        protected void onPostExecute(Object o) {
+            List<EffectFilter> effectList = new ArrayList<>();
+            List<String> filterList = FilterModel.getColorFilterList();
+            EffectFilter noFilterEffect = new EffectFilter("-");
+            effectList.add(noFilterEffect);
+            for(String str : filterList){
+                EffectFilter filter = new EffectFilter(str);
+                effectList.add(filter);
             }
-        }.execute();
+            mFilterAdapter.setFilterList(effectList);
+            mFilterAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -267,5 +270,8 @@ public class FilterActivity extends Activity implements View.OnClickListener{
     protected void onDestroy() {
         super.onDestroy();
         mCompose.release();
+        if(mPasteTask != null){
+            mPasteTask.cancel(true);
+        }
     }
 }
