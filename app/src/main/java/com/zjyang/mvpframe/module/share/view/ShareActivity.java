@@ -33,6 +33,7 @@ import com.zjyang.mvpframe.utils.LocationUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.LruCacheManager;
 import com.zjyang.mvpframe.utils.ToastUtils;
+import com.zjyang.recorder.Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,10 +102,14 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
         if(bundle == null){
             return;
         }
-        mVideoPath = bundle.getString(VIDEO_PATH);
+        mVideoPath = bundle.getString(Constant.INTENT_VIDEO_PATH);
         mShareVideoView.setVideoUrl(mVideoPath);
         mShareVideoView.setOnCompletionListener(this);
-        mPreviewIv.setImageBitmap(VideoUtils.getThumbFromVideo(mVideoPath));
+        Bitmap thumb = VideoUtils.getThumbFromVideo(mVideoPath);
+        if(thumb != null){
+            mPreviewIv.setImageBitmap(thumb);
+        }
+
     }
 
     public void initSelectView(){

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AliyunVideoSdk/AliyunVideoSdk.iml" filepath="$PROJECT_DIR$/AliyunVideoSdk/AliyunVideoSdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/AliyunVideoSdk/AliyunVideoSdk.iml" filepath="$PROJECT_DIR$/AliyunVideoSdk/AliyunVideoSdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/MVPFrame.iml" filepath="$PROJECT_DIR$/MVPFrame.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ijkplayer-example/ijkplayer-example.iml" filepath="$PROJECT_DIR$/ijkplayer-example/ijkplayer-example.iml" />

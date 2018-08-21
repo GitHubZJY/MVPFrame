@@ -49,6 +49,7 @@ import com.aliyun.struct.recorder.MediaInfo;
 import com.aliyun.struct.snap.AliyunSnapVideoParam;
 import com.qu.preview.callback.OnFrameCallBack;
 import com.qu.preview.callback.OnTextureIdCallBack;
+import com.zjyang.recorder.Constant;
 import com.zjyang.recorder.R;
 import com.zjyang.recorder.utils.OrientationDetector;
 import com.zjyang.recorder.widget.AliyunSVideoGlSurfaceView;
@@ -866,7 +867,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
         List<String> tempFileList = mClipManager.getVideoPathList();
         Class editor = null;
         try {
-            editor = Class.forName("com.aliyun.demo.editor.EditorActivity");
+            editor = Class.forName("com.zjyang.recorder.activity.FilterActivity");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -880,7 +881,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
         mVideoParam.setOutputWidth(resolutions[0]);
         mVideoParam.setOutputHeight(resolutions[1]);
         intent.putExtra("video_param", mVideoParam);
-        intent.putExtra("project_json_path", projectUri.getPath());
+        intent.putExtra(Constant.INTENT_VIDEO_PATH, projectUri.getPath());
         intent.putStringArrayListExtra("temp_file_list", (ArrayList<String>) tempFileList);
 //        intent.putExtra(AliyunConfig.KEY_FROM, getIntent().getStringExtra(AliyunConfig.KEY_FROM));
         try{

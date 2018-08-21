@@ -16,10 +16,16 @@ public class VideoUtils {
     public static final String TAG = "VideoUtils";
 
     public static Bitmap getThumbFromVideo(String videoPath) {
-        String dataPath = videoPath;
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(dataPath);
-        Bitmap bitmap = retriever.getFrameAtTime(1*1000*1000,MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+        Bitmap bitmap = null;
+        try{
+            String dataPath = videoPath;
+            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+            retriever.setDataSource(dataPath);
+            bitmap = retriever.getFrameAtTime(1*1000*1000,MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return bitmap;
     }
 
@@ -33,10 +39,16 @@ public class VideoUtils {
 
     //获取视频总时长
     public static int getVideoDuration(String path){
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(path);
-        String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        Log.e(TAG, "获取视频时长为: " + duration);
+        String duration = "0";
+        try{
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            mmr.setDataSource(path);
+            duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            Log.e(TAG, "获取视频时长为: " + duration);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return Integer.parseInt(duration);
     }
 

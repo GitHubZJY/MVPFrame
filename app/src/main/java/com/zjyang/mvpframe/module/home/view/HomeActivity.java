@@ -66,7 +66,6 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
         mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffd600")));
         mCameraBg.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffffff")));
 
-
         mFragmentList = mPresenter.getChildPages();
         mPagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);

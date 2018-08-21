@@ -134,7 +134,9 @@ public class LruCacheManager {
                 map.clear();
             }
         }
-        mFinallyBitmap.recycle();
+        if(mFinallyBitmap != null){
+            mFinallyBitmap.recycle();
+        }
     }
 
 }
