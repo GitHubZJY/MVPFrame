@@ -63,7 +63,7 @@ public class FilterActivity extends Activity implements View.OnClickListener{
     private String mVideoPath;
 
     private String mConfig;
-    private String mOutputPath = Environment.getExternalStorageDirectory() + File.separator + "output_compose_video.mp4";
+    private String mOutputPath = Constant.FINALLY_VIDEO_OUTPUT_PATH;
     //后台解析视频滤镜压缩包
     private PasteFilterDataTask mPasteTask;
 
@@ -269,7 +269,9 @@ public class FilterActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mCompose.release();
+        if(mCompose != null){
+            mCompose.release();
+        }
         if(mPasteTask != null){
             mPasteTask.cancel(true);
         }

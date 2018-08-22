@@ -48,7 +48,8 @@
         <activity android:name=".module.home.view.HomeActivity"
             android:theme="@style/ActivityFullScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
 
         </activity>
 

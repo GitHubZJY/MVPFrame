@@ -91,7 +91,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
     private int mBitrate;
     private int mBeautyLevel;
     private int mRecordMode;
-    private VideoQuality mVideoQuality = VideoQuality.HD;
+    private VideoQuality mVideoQuality = VideoQuality.LD;
     private VideoCodecs mVideoCodec = VideoCodecs.H264_HARDWARE;
     private int mRatioMode = AliyunSnapVideoParam.RATIO_MODE_9_16;
     private int mSortMode = AliyunSnapVideoParam.SORT_MODE_MERGE;
@@ -562,7 +562,7 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
         mBitrate = getIntent().getIntExtra(AliyunSnapVideoParam.VIDEO_BITRATE, 0);
         mVideoQuality = (VideoQuality) getIntent().getSerializableExtra(AliyunSnapVideoParam.VIDEO_QUALITY);
         if(mVideoQuality == null){
-            mVideoQuality = VideoQuality.HD;
+            mVideoQuality = VideoQuality.LD;
         }
         mVideoCodec = (VideoCodecs) getIntent().getSerializableExtra(AliyunSnapVideoParam.VIDEO_CODEC);
         if(mVideoCodec == null) {
@@ -714,6 +714,12 @@ public class RecorderActivity extends Activity implements View.OnClickListener, 
             mOrientationDetector.setOrientationChangedListener(null);
         }
         AliyunRecorderCreator.destroyRecorderInstance();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, R.anim.bottom_activity_close_exit);
     }
 
     @Override
