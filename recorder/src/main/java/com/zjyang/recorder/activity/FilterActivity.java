@@ -269,8 +269,12 @@ public class FilterActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mCompose != null){
-            mCompose.release();
+        try{
+            if(mCompose != null){
+                mCompose.release();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         if(mPasteTask != null){
             mPasteTask.cancel(true);
