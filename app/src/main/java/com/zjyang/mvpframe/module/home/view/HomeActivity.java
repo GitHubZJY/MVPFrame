@@ -134,6 +134,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
     public void jumpToCameraPage(){
         Intent intent = new Intent(this, RecorderActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.bottom_activity_open_enter, 0);
     }
 
 

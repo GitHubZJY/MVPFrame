@@ -23,6 +23,7 @@ import com.example.zjy.player.utils.VideoUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
+import com.zjyang.mvpframe.module.home.view.HomeActivity;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.presenter.SharePresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
@@ -56,6 +57,8 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     SimpleDraweeView mPreviewIv;
     @BindView(R.id.center_pause_iv)
     ImageView mPlayIv;
+    @BindView(R.id.toolbar_left_tv)
+    TextView mCancelTv;
     @BindView(R.id.toolbar_right_tv)
     TextView mShareBtn;
     @BindView(R.id.location_view)
@@ -194,6 +197,11 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
         }
     }
 
+    @OnClick(R.id.toolbar_left_tv)
+    void clickCancel(){
+        finish();
+    }
+
     @OnClick(R.id.toolbar_right_tv)
     void clickShare(){
         if(mPresenter != null){
@@ -222,6 +230,8 @@ public class ShareActivity extends BaseActivity<SharePresenter> implements Share
     @Override
     public void showUpLoadSuccess() {
         ToastUtils.showToast(this, getResources().getString(R.string.share_success));
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
