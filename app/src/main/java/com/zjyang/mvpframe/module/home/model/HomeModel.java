@@ -7,7 +7,7 @@ import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.discover.view.GridDiscoverFragment;
 import com.zjyang.mvpframe.module.home.focus.FocusFragment;
 import com.zjyang.mvpframe.module.home.me.view.MeFragment;
-import com.zjyang.mvpframe.module.home.message.MessageFragment;
+import com.zjyang.mvpframe.module.home.tripcircle.view.TripCircleFragment;
 import com.zjyang.mvpframe.module.home.model.bean.TabInfo;
 import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.TabComparator;
@@ -32,7 +32,7 @@ public class HomeModel extends BaseModel implements HomeTasksContract.Model{
     private List<BaseFragment> fragments = new ArrayList<>();
     GridDiscoverFragment mDiscoverFragment;
     FocusFragment mFocusFragment;
-    MessageFragment mMessageFragment;
+    TripCircleFragment mTripCircleFragment;
     MeFragment mMeFragment;
 
     private List<TabInfo> mTabInfoList = new ArrayList<>();
@@ -67,9 +67,9 @@ public class HomeModel extends BaseModel implements HomeTasksContract.Model{
             mFocusFragment = new FocusFragment();
             fragments.add(mFocusFragment);
         }
-        if(mMessageFragment == null){
-            mMessageFragment = new MessageFragment();
-            fragments.add(mMessageFragment);
+        if(mTripCircleFragment == null){
+            mTripCircleFragment = new TripCircleFragment();
+            fragments.add(mTripCircleFragment);
         }
         if(mMeFragment == null){
             mMeFragment = new MeFragment();
@@ -87,7 +87,7 @@ public class HomeModel extends BaseModel implements HomeTasksContract.Model{
                 mFocusFragment.setSort(tabInfo.getSort());
             }
             if(tabInfo.getTabName().equals(MESSAGE_TAB_NAME)){
-                mMessageFragment.setSort(tabInfo.getSort());
+                mTripCircleFragment.setSort(tabInfo.getSort());
             }
             if(tabInfo.getTabName().equals(USER_TAB_NAME)){
                 mMeFragment.setSort(tabInfo.getSort());

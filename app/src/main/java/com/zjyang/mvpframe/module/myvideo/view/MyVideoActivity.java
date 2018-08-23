@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -86,7 +87,7 @@ public class MyVideoActivity extends BaseActivity implements MyVideoTasksContrac
         mVideoAdapter = new MyVideoListAdapter(this, mVideoList);
         mRefreshRecyclerView.setAdapter(mVideoAdapter);
         mRefreshRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3, 3));
+        mRefreshRecyclerView.addItemDecoration(new SpaceItemDecoration(3, 3, LinearLayoutManager.VERTICAL));
 
         //优先检查当前是否有缓存数据
         mPresenter.checkCacheDataAndNotify();

@@ -240,7 +240,7 @@ public class FilterActivity extends Activity implements View.OnClickListener{
         protected void onPostExecute(Object o) {
             List<EffectFilter> effectList = new ArrayList<>();
             List<String> filterList = FilterModel.getColorFilterList();
-            EffectFilter noFilterEffect = new EffectFilter("-");
+            EffectFilter noFilterEffect = new EffectFilter(null);
             effectList.add(noFilterEffect);
             for(String str : filterList){
                 EffectFilter filter = new EffectFilter(str);
