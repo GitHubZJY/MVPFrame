@@ -1,4 +1,4 @@
-package com.zjyang.mvpframe.module.home.tripcircle.view;
+package com.zjyang.mvpframe.module.home.tripcircle.widget;
 
 import android.content.Context;
 import android.os.Handler;

@@ -8,13 +8,13 @@
     app:title_visible="true"
     app:shader_visible="true">
 
-    <com.zjyang.mvpframe.module.home.tripcircle.view.BannerViewPager
+    <com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="#000000">
 
-    </com.zjyang.mvpframe.module.home.tripcircle.view.BannerViewPager>
+    </com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager>
 
     <TextView
         android:layout_width="wrap_content"

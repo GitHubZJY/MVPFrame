@@ -1,7 +1,6 @@
 package com.zjyang.mvpframe.module.home.tripcircle.view;
 
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import com.zjyang.mvpframe.module.home.tripcircle.TripCircleTasksContract;
 import com.zjyang.mvpframe.module.home.tripcircle.adapter.WonderfulVideoAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.TripCirclePresenter;
+import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 
 import java.util.ArrayList;
