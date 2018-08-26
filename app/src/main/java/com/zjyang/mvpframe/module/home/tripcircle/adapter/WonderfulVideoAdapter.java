@@ -1,5 +1,7 @@
 package com.zjyang.mvpframe.module.home.tripcircle.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
+import com.zjyang.mvpframe.module.home.tripcircle.view.VideoDetailActivity;
 import com.zjyang.mvpframe.utils.FrescoUtils;
 
 import java.util.List;
@@ -20,8 +23,10 @@ import java.util.List;
 public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAdapter.WonderfulVideoViewHolder>{
 
     private List<WonderfulVideo> mVideoList;
+    private Context mContext;
 
-    public WonderfulVideoAdapter(List<WonderfulVideo> videoList) {
+    public WonderfulVideoAdapter(Context mContext, List<WonderfulVideo> videoList) {
+        this.mContext = mContext;
         this.mVideoList = videoList;
     }
 
@@ -39,6 +44,14 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
         if(!TextUtils.isEmpty(previewPic)){
             FrescoUtils.showImgByUrl(previewPic, holder.mPreviewIv);
         }
+
+        holder.mPreviewIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, VideoDetailActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

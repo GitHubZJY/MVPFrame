@@ -48,7 +48,7 @@ public class PlayerGestureManager {
     private Activity mActivity;
     private RelativeLayout rootView;
     private VideoFrame mVideoView;
-    private QVMediaController mediaController;
+    private ItemVideoController mediaController;
     private ImageView mCenterPauseIv;
     //滑动的起点位置
     int mStartX,mStartY;
@@ -66,7 +66,7 @@ public class PlayerGestureManager {
         this.mActivity = activity;
         rootView = (RelativeLayout) activity.findViewById(R.id.root_view);
         mVideoView = (VideoFrame) activity.findViewById(R.id.video_frame);
-        mediaController = (QVMediaController) activity.findViewById(R.id.media_controller);
+        mediaController = (ItemVideoController) activity.findViewById(R.id.item_controller);
         mCenterPauseIv = (ImageView) activity.findViewById(R.id.center_pause_iv);
         audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
         mMaxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);

@@ -1,10 +1,12 @@
 package com.example.zjy.player.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
@@ -49,6 +51,12 @@ public class VideoFrame extends RelativeLayout {
 
         mIjkVideoView = new IjkVideoView(context);
         mIjkVideoView.setLayoutParams(params);
+
+        ImageView videoBg = new ImageView(context);
+        videoBg.setBackgroundColor(Color.BLACK);
+        RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        videoBg.setLayoutParams(bgParams);
+        addView(videoBg);
 
 
         switch (VideoSetting.getVideoType()){
@@ -276,6 +284,33 @@ public class VideoFrame extends RelativeLayout {
         }
     }
 
+    public void setOnInfoListener(final OnInfoListener infoListener){
+        switch (VideoSetting.getVideoType()){
+            case VideoSetting.ANDROID_VIDEO_VIEW:
+                mAndroidVideoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(MediaPlayer mediaPlayer, int i, int i1) {
+                        if(infoListener != null){
+                            infoListener.onInfo(null, mediaPlayer, i, i1);
+                        }
+                        return true;
+                    }
+                });
+                break;
+            case VideoSetting.IJK_VIDEO_VIEW:
+                mIjkVideoView.setOnInfoListener(new IMediaPlayer.OnInfoListener() {
+                    @Override
+                    public boolean onInfo(IMediaPlayer mp, int what, int extra) {
+                        if(infoListener != null){
+                            infoListener.onInfo(mp, null, what, extra);
+                        }
+                        return true;
+                    }
+                });
+                break;
+        }
+    }
+
 
     public interface OnPreparedListener{
         void onPrepared(IMediaPlayer iMediaPlayer, MediaPlayer mediaPlayer);
@@ -287,5 +322,9 @@ public class VideoFrame extends RelativeLayout {
 
     public interface OnCompleteListener{
         void onCompletion(IMediaPlayer imp, MediaPlayer mp);
+    }
+
+    public interface OnInfoListener {
+        void onInfo(IMediaPlayer imp, MediaPlayer mp, int what, int extra);
     }
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/user_pic"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        fresco:roundAsCircle="true"
+        />
+
+    <TextView
+        android:id="@+id/user_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@id/user_pic"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/yellow"
+        android:textSize="14sp"
+        android:text="随手起个名"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name_tv"
+        android:layout_toRightOf="@id/user_pic"
+        android:textColor="@color/text_color_gray"
+        android:textSize="12sp"
+        android:layout_marginLeft="8dp"
+        android:text="2018/09/26"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/ic_like"
+        android:drawablePadding="4dp"
+        android:textColor="@color/text_color_gray"
+        android:textSize="14sp"
+        android:text="334"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_pic"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp"
+        android:text="去过还想再去去过还想再去去过还想再去去过还想再去去过还想再去去过还想再去"/>
+
+</RelativeLayout>

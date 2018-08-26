@@ -53,7 +53,7 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
         videoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
         videoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
         videoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
-        mWonderfulAdapter = new WonderfulVideoAdapter(videoList);
+        mWonderfulAdapter = new WonderfulVideoAdapter(getContext(), videoList);
         mWonderfulLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mWonderfulVideoLv.addItemDecoration(new SpaceItemDecoration(6, 1, LinearLayoutManager.HORIZONTAL));
         mWonderfulVideoLv.setLayoutManager(mWonderfulLayoutManager);

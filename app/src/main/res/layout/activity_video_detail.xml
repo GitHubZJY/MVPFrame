@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.zjy.player.ui.YPlayerView
+        android:id="@+id/video_frame"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+    </com.example.zjy.player.ui.YPlayerView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_frame">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/video_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/primary_text_color"
+                android:textSize="20sp"
+                android:text="凤凰古城"/>
+
+            <LinearLayout
+                android:id="@+id/video_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_below="@id/video_title"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:padding="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="云南"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:padding="4dp"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="世界文化遗产"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/video_describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@id/video_tag"
+                android:textColor="@color/text_color_gray"
+                android:textSize="14sp"
+                android:text="香格里拉（Shangri-la）藏语意为“心中的日月”，是云南省迪庆藏族自治州下辖市及首府所在地，位于云南省西北部、青藏高原横断山区腹地，是滇、川、藏三省区交界地，也是世界自然遗产“三江并流”景区所在地。"/>
+
+
+            <TextView
+                android:id="@+id/comment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/video_describe"
+                android:textColor="@color/primary_text_color"
+                android:textSize="14sp"
+                android:text="旅友之见"/>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="8dp"
+                android:layout_below="@id/comment_title"
+                android:background="@color/line"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/comment_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line"
+                android:nestedScrollingEnabled="false">
+
+            </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/commit_comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="14sp"
+            android:text="发布"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/commit_comment_tv"
+            android:background="@color/white"
+            android:paddingLeft="16dp"
+            android:hint="评论这条视频"
+            android:textSize="14sp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentTop="true"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

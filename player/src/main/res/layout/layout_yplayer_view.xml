@@ -21,6 +21,15 @@
 
     </TableLayout>
 
+    <ProgressBar
+        android:id="@+id/video_loading_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/video_loading_progress"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -50,6 +59,7 @@
             android:textSize="16sp"
             android:textColor="#fff"
             android:text="Menu"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/play_video_name_tv"
@@ -75,9 +85,18 @@
         android:id="@+id/media_controller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
     </com.example.zjy.player.controller.QVMediaController>
+
+    <com.example.zjy.player.controller.ItemVideoController
+        android:id="@+id/item_controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+    </com.example.zjy.player.controller.ItemVideoController>
 
     <ImageView
         android:id="@+id/lock_iv"

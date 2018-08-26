@@ -4,28 +4,33 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.VideoView;
 
 import com.example.zjy.player.R;
+import com.example.zjy.player.controller.ItemVideoController;
 import com.example.zjy.player.controller.PlayerGestureManager;
 import com.example.zjy.player.controller.QVMediaController;
 import com.example.zjy.player.setting.VideoSetting;
 import com.example.zjy.player.utils.ScreenUtils;
 
 import tv.danmaku.ijk.media.example.widget.media.IjkVideoView;
+import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 /**
  * Created by 74215 on 2018/3/24.
  */
 
-public class YPlayerView extends RelativeLayout implements QVMediaController.ControllerListener{
+public class YPlayerView extends RelativeLayout implements ItemVideoController.ControllerListener, View.OnTouchListener, VideoFrame.OnInfoListener{
 
     private Context mContext;
     private Activity mActivity;
@@ -34,8 +39,12 @@ public class YPlayerView extends RelativeLayout implements QVMediaController.Con
     private VideoFrame mVideoFrame;
     //Ijk需要的hudView
     private TableLayout mHudView;
+    //视频播放之前的LoadingView
+    private ProgressBar mLoadingView;
     //底部控制面板
     private QVMediaController mMediaController;
+    //底部控制面板样式2
+    private ItemVideoController mItemController;
     //顶部标题栏
     private RelativeLayout mToolBar;
     //手势控制器
@@ -64,18 +73,23 @@ public class YPlayerView extends RelativeLayout implements QVMediaController.Con
         mRootView = (RelativeLayout) view.findViewById(R.id.root_view);
         mVideoFrame = (VideoFrame) view.findViewById(R.id.video_frame);
         mHudView = (TableLayout) view.findViewById(R.id.hud_view);
+        mLoadingView = (ProgressBar) view.findViewById(R.id.video_loading_view);
         mMediaController = (QVMediaController) view.findViewById(R.id.media_controller);
+        mItemController = (ItemVideoController) view.findViewById(R.id.item_controller);
         mToolBar = (RelativeLayout) view.findViewById(R.id.toolbar);
         mVideoFrame.setHudView(mHudView);
+        mVideoFrame.setOnTouchListener(this);
+        mVideoFrame.setOnInfoListener(this);
 
         //RelativeLayout.LayoutParams toolbarParams = (RelativeLayout.LayoutParams)mToolBar.getLayoutParams();
         mToolBar.setPadding(0, ScreenUtils.px2dip(context, ScreenUtils.getStatusBarHeight(context)), 0, 0);
 
-        mMediaController.attachVideoView(mVideoFrame);
-        mMediaController.setControllerListener(this);
-        mMediaController.setNarrowEnable(true);
+        mItemController.attachVideoView(mVideoFrame);
+        mItemController.setControllerListener(this);
+        mItemController.setNarrowEnable(true);
 
 
+        mLoadingView.setVisibility(VISIBLE);
 
         addView(view);
 
@@ -89,7 +103,7 @@ public class YPlayerView extends RelativeLayout implements QVMediaController.Con
     public void addVideoFrame(VideoFrame videoFrame){
         mRootView.removeView(mVideoFrame);
         mVideoFrame = videoFrame;
-        mMediaController.attachVideoView(videoFrame);
+        mItemController.attachVideoView(videoFrame);
         ViewGroup parentView = (ViewGroup) videoFrame.getParent();
         if(parentView != null){
             parentView.removeView(videoFrame);
@@ -119,8 +133,23 @@ public class YPlayerView extends RelativeLayout implements QVMediaController.Con
         mVideoFrame.start();
     }
 
+    public void pause(){
+        mVideoFrame.pause();
+    }
+
+    public void stopPlayback(){
+        mVideoFrame.stopPlayback();
+    }
+
     public void stop(){
         mVideoFrame.stopPlayback();
+    }
+
+    @Override
+    public void onInfo(IMediaPlayer imp, MediaPlayer mp, int what, int extra) {
+        if(mLoadingView != null){
+            mLoadingView.setVisibility(GONE);
+        }
     }
 
     public void setControllerStatus(boolean mIsPlaying){
@@ -162,15 +191,15 @@ public class YPlayerView extends RelativeLayout implements QVMediaController.Con
 
     }
 
-    @Override
-    public void clickNext() {
-
-    }
-
-    @Override
-    public void clickPre() {
-
-    }
+//    @Override
+//    public void clickNext() {
+//
+//    }
+//
+//    @Override
+//    public void clickPre() {
+//
+//    }
 
     @Override
     public void forward(String curTime, String durTime, long lTime, long duration) {
@@ -197,5 +226,21 @@ public class YPlayerView extends RelativeLayout implements QVMediaController.Con
 
     }
 
-
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                if(view == mVideoFrame){
+                    if(mItemController.getVisibility() == VISIBLE){
+                        mToolBar.setVisibility(GONE);
+                        mItemController.setVisibility(GONE);
+                    }else{
+                        mToolBar.setVisibility(VISIBLE);
+                        mItemController.setVisibility(VISIBLE);
+                    }
+                }
+                break;
+        }
+        return true;
+    }
 }
