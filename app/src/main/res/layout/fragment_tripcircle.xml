@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zjyang.mvpframe.ui.view.CustomToolBar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +21,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text_color"
+        android:textSize="18sp"
+        android:text="最佳镜头"/>
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/top_scene_iv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        fresco:actualImageScaleType="focusCrop"
+        fresco:roundedCornerRadius="3dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/second_scene_iv"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:roundedCornerRadius="3dp"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/third_scene_iv"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:roundedCornerRadius="3dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
         android:textStyle="bold"
         android:textColor="@color/primary_text_color"
         android:textSize="18sp"

@@ -87,7 +87,7 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
         mItemController.attachVideoView(mVideoFrame);
         mItemController.setControllerListener(this);
         mItemController.setNarrowEnable(true);
-
+        mItemController.resetPlayStatus();
 
         mLoadingView.setVisibility(VISIBLE);
 
@@ -135,6 +135,7 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
 
     public void pause(){
         mVideoFrame.pause();
+        mItemController.setPauseStatus();
     }
 
     public void stopPlayback(){
