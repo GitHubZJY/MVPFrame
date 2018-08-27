@@ -19,6 +19,46 @@ public class WonderfulVideo {
         this.preivewPic = preivewPic;
     }
 
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public List<String> getTag() {
+        return tag;
+    }
+
+    public void setTag(List<String> tag) {
+        this.tag = tag;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public List<CommentInfo> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<CommentInfo> commentList) {
+        this.commentList = commentList;
+    }
+
     public String getPreivewPic() {
         return preivewPic;
     }

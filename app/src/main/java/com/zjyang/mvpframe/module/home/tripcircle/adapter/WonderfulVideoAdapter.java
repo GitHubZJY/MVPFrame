@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
@@ -41,9 +42,13 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
     public void onBindViewHolder(WonderfulVideoViewHolder holder, int position) {
         WonderfulVideo wonderfulVideo = mVideoList.get(position);
         String previewPic = wonderfulVideo.getPreivewPic();
+        String title = wonderfulVideo.getTitle();
+        String describe = wonderfulVideo.getDescribe();
         if(!TextUtils.isEmpty(previewPic)){
             FrescoUtils.showImgByUrl(previewPic, holder.mPreviewIv);
         }
+        holder.mTitleTv.setText(TextUtils.isEmpty(title) ? "" : title);
+        holder.mDescribeTv.setText(TextUtils.isEmpty(describe) ? "" : describe);
 
         holder.mPreviewIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,10 +66,14 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
 
     public class WonderfulVideoViewHolder extends RecyclerView.ViewHolder {
         SimpleDraweeView mPreviewIv;
+        TextView mTitleTv;
+        TextView mDescribeTv;
         public WonderfulVideoViewHolder(View itemView) {
             super(itemView);
 
             mPreviewIv = (SimpleDraweeView) itemView.findViewById(R.id.preview_iv);
+            mTitleTv = (TextView) itemView.findViewById(R.id.title_tv);
+            mDescribeTv = (TextView) itemView.findViewById(R.id.describe_tv);
         }
     }
 }
