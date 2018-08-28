@@ -9,6 +9,8 @@ public interface PlayerListener {
 
     void clickNarrow();
 
+    void clickBack();
+
 //    void clickPlay(boolean isPlay);
 //
 //    void progress(int progress) ;

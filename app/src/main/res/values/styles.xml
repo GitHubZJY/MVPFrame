@@ -19,7 +19,7 @@
     <style name="ActivityFullScreen" parent="AppTheme">
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:windowAnimationStyle">@style/AppWindowAnimation</item>
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 

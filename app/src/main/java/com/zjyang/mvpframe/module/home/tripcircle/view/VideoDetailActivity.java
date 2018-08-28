@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.zjy.player.ui.PlayerListener;
 import com.example.zjy.player.ui.VideoFrame;
 import com.example.zjy.player.ui.YPlayerView;
 import com.zjyang.mvpframe.R;
@@ -27,7 +28,7 @@ import butterknife.Unbinder;
  * Created by zhengjiayang on 2018/8/24.
  */
 
-public class VideoDetailActivity extends BaseActivity{
+public class VideoDetailActivity extends BaseActivity implements PlayerListener{
 
     private Unbinder unbinder;
 
@@ -52,7 +53,7 @@ public class VideoDetailActivity extends BaseActivity{
                         WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.activity_video_detail);
         unbinder = ButterKnife.bind(this);
-
+        mVideoFrame.setPlayerListener(this);
         mVideoFrame.setVideoUrl("http://bmob-cdn-18798.b0.upaiyun.com/2018/08/26/c3e45865408a5b10807865469083b339.mp4");
         mVideoFrame.start();
 
@@ -66,6 +67,16 @@ public class VideoDetailActivity extends BaseActivity{
         mCommentAdapter = new CommentListAdapter(commentInfoList, this);
         mCommentLv.setLayoutManager(new LinearLayoutManager(this));
         mCommentLv.setAdapter(mCommentAdapter);
+    }
+
+    @Override
+    public void clickNarrow() {
+
+    }
+
+    @Override
+    public void clickBack() {
+        finish();
     }
 
     @Override

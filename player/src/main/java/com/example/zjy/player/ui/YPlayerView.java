@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -30,7 +31,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  * Created by 74215 on 2018/3/24.
  */
 
-public class YPlayerView extends RelativeLayout implements ItemVideoController.ControllerListener, View.OnTouchListener, VideoFrame.OnInfoListener{
+public class YPlayerView extends RelativeLayout implements ItemVideoController.ControllerListener, View.OnTouchListener, VideoFrame.OnInfoListener, View.OnClickListener{
 
     private Context mContext;
     private Activity mActivity;
@@ -47,6 +48,8 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
     private ItemVideoController mItemController;
     //顶部标题栏
     private RelativeLayout mToolBar;
+    //顶部返回按钮
+    private ImageView mBackIv;
     //手势控制器
     private PlayerGestureManager mPlayerGesture;
     //播放界面的相关监听
@@ -77,9 +80,11 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
         mMediaController = (QVMediaController) view.findViewById(R.id.media_controller);
         mItemController = (ItemVideoController) view.findViewById(R.id.item_controller);
         mToolBar = (RelativeLayout) view.findViewById(R.id.toolbar);
+        mBackIv = (ImageView) view.findViewById(R.id.play_video_back_iv);
         mVideoFrame.setHudView(mHudView);
         mVideoFrame.setOnTouchListener(this);
         mVideoFrame.setOnInfoListener(this);
+        mBackIv.setOnClickListener(this);
 
         //RelativeLayout.LayoutParams toolbarParams = (RelativeLayout.LayoutParams)mToolBar.getLayoutParams();
         mToolBar.setPadding(0, ScreenUtils.px2dip(context, ScreenUtils.getStatusBarHeight(context)), 0, 0);
@@ -225,6 +230,15 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
     @Override
     public void startScroll() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mBackIv){
+            if(mListener != null){
+                mListener.clickBack();
+            }
+        }
     }
 
     @Override
