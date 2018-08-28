@@ -22,9 +22,9 @@ public class TripCircleModel implements TripCircleTasksContract.Model{
     @Override
     public List<String> getBannerData() {
         List<String> urlList = new ArrayList<>();
-        urlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg");
-        urlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523824983803&di=49ac1e588634c0405b8b43ace1170a29&imgtype=0&src=http%3A%2F%2Fpic.qiantucdn.com%2F58pic%2F16%2F96%2F59%2F33t58PICARc_1024.jpg");
-        urlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523825017835&di=90359e5215580dbbea56efaa3f90ed7c&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F25%2F28%2F31b1OOOPIC3e.jpg");
+        urlList.add("http://pic41.photophoto.cn/20161217/0017030086344808_b.jpg");
+        urlList.add("http://photocdn.sohu.com/20150114/Img407794285.jpg");
+        urlList.add("http://img.zcool.cn/community/015372554281b00000019ae9803e5c.jpg");
         return urlList;
     }
 

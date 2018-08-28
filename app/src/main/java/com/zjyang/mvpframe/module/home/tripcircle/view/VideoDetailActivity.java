@@ -1,5 +1,7 @@
 package com.zjyang.mvpframe.module.home.tripcircle.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.tripcircle.adapter.CommentListAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.CommentInfo;
+import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.VideoDetailPresenter;
 
 import java.util.ArrayList;
@@ -37,7 +40,18 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
     @BindView(R.id.comment_lv)
     RecyclerView mCommentLv;
 
-    CommentListAdapter mCommentAdapter;
+    private CommentListAdapter mCommentAdapter;
+    private static final String INTENT_DATA = "INTENT_DATA";
+    private WonderfulVideo mDataInfo;
+
+    public static void go(Context context, WonderfulVideo wonderfulVideo){
+        Intent intent = new Intent(context, VideoDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(INTENT_DATA, wonderfulVideo);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
 
     @Override
     public BasePresenter createPresenter() {
@@ -67,6 +81,18 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
         mCommentAdapter = new CommentListAdapter(commentInfoList, this);
         mCommentLv.setLayoutManager(new LinearLayoutManager(this));
         mCommentLv.setAdapter(mCommentAdapter);
+
+        getIntentData();
+    }
+
+    public void getIntentData(){
+        Intent intent = getIntent();
+        if(intent != null){
+            Bundle bundle = intent.getExtras();
+            if(bundle != null){
+                mDataInfo = bundle.getParcelable(INTENT_DATA);
+            }
+        }
     }
 
     @Override

@@ -54,8 +54,8 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
     SimpleDraweeView mSecondSceneIv;
     @BindView(R.id.third_scene_iv)
     SimpleDraweeView mThirdSceneIv;
-    @BindView(R.id.search_entrance_tv)
-    TextView mSearchTv;
+    @BindView(R.id.search_entrance)
+    RelativeLayout mSearchView;
     @BindView(R.id.scroll_view)
     CustomScrollView mScrollView;
     @BindView(R.id.tool_bar)
@@ -76,29 +76,24 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
         unbinder = ButterKnife.bind(this, view);
 
         mToolbarBg.getLayoutParams().height = DrawUtils.dp2px(48) + ScreenUtils.getStatusBarHeight();
-        mToolbar.setPadding(0, ScreenUtils.getStatusBarHeight(), 0, 0);
+        RelativeLayout.LayoutParams toolbarParams = (RelativeLayout.LayoutParams) mToolbar.getLayoutParams();
+        toolbarParams.setMargins(0, ScreenUtils.getStatusBarHeight(), 0, 0);
 
         mPresenter = new TripCirclePresenter(this);
         mPresenter.initTripCircleData();
 
         mWonderfulVideoList = new ArrayList<>();
-        //mWonderfulVideoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
-        //mWonderfulVideoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
-        //mWonderfulVideoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
-        //mWonderfulVideoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
-        //mWonderfulVideoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
-        //mWonderfulVideoList.add(new WonderfulVideo("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg"));
         mWonderfulAdapter = new WonderfulVideoAdapter(getContext(), mWonderfulVideoList);
         mWonderfulLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mWonderfulVideoLv.addItemDecoration(new SpaceItemDecoration(6, 1, LinearLayoutManager.HORIZONTAL));
+        mWonderfulVideoLv.addItemDecoration(new SpaceItemDecoration(10, 1, LinearLayoutManager.HORIZONTAL));
         mWonderfulVideoLv.setLayoutManager(mWonderfulLayoutManager);
         mWonderfulVideoLv.setAdapter(mWonderfulAdapter);
 
         FrescoUtils.showImgByUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535397882896&di=09c6277a19464f5a7c83b2450927da96&imgtype=0&src=http%3A%2F%2Fimg06.tooopen.com%2Fimages%2F20180116%2Ftooopen_sy_232320877961.jpg", mTopSceneIv);
-        FrescoUtils.showUrlBlur(mSecondSceneIv, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536055305&di=9c893f74135893a9b4e13283d9d0c5ad&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.juimg.com%2Ftuku%2Fyulantu%2F120410%2F8881-12041016294579.jpg", 15);
-        FrescoUtils.showImgByUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg", mThirdSceneIv);
+        FrescoUtils.showUrlBlur(mSecondSceneIv, "http://thumbs.dreamstime.com/t/摄影师剪影-7849367.jpg", 5);
+        FrescoUtils.showUrlBlur(mThirdSceneIv, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535480340747&di=b92fa9e60888de9454e34a8cdf6ce09a&imgtype=0&src=http%3A%2F%2Fwww.bjsyqw.com%2Fqiye%2Fupload%2F123%2Fadmin%2F20180606%2F5f3e438e17856714d8f69895a41341d8.jpg", 5);
 
-        mSearchTv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(18), Color.parseColor("#EDEDED")));
+        mSearchView.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(25), Color.parseColor("#ffffff")));
 
         mScrollView.setOnScrollListener(new CustomScrollView.OnScrollListener() {
             @Override
