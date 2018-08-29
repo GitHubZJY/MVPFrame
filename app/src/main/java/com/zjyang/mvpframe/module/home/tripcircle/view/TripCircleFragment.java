@@ -119,7 +119,9 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
 
     @Override
     public void onPageSelected(int position) {
-        mIndicator.setCurrentPosition(position);
+        if(mIndicator != null){
+            mIndicator.setCurrentPosition(position);
+        }
     }
 
     @Override
