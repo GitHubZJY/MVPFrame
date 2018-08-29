@@ -19,6 +19,7 @@ import com.zjyang.mvpframe.module.home.tripcircle.TripCircleTasksContract;
 import com.zjyang.mvpframe.module.home.tripcircle.adapter.WonderfulVideoAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.TripCirclePresenter;
+import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerIndicator;
 import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.view.CustomScrollView;
@@ -39,13 +40,15 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/5/12.
  */
 
-public class TripCircleFragment extends BaseFragment implements TripCircleTasksContract.View{
+public class TripCircleFragment extends BaseFragment implements TripCircleTasksContract.View, BannerViewPager.ScrollPageListener{
     private Unbinder unbinder;
 
     @BindView(R.id.root_view)
     RelativeLayout mRootView;
     @BindView(R.id.view_pager)
     BannerViewPager mViewPager;
+    @BindView(R.id.banner_indicator)
+    BannerIndicator mIndicator;
     @BindView(R.id.wonderful_video_list)
     RecyclerView mWonderfulVideoLv;
     @BindView(R.id.top_scene_iv)
@@ -108,8 +111,25 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
 
     @Override
     public void initBannerView(List<String> urlList){
+        mViewPager.setScrollPageListener(this);
         mViewPager.setBannerData(urlList);
         mViewPager.startPlay(2000);
+        mIndicator.setCellCount(urlList.size());
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mIndicator.setCurrentPosition(position);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     @Override

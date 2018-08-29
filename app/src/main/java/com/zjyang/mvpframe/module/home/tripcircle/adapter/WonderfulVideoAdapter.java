@@ -40,7 +40,7 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
 
     @Override
     public void onBindViewHolder(WonderfulVideoViewHolder holder, int position) {
-        WonderfulVideo wonderfulVideo = mVideoList.get(position);
+        final WonderfulVideo wonderfulVideo = mVideoList.get(position);
         String previewPic = wonderfulVideo.getPreivewPic();
         String title = wonderfulVideo.getTitle();
         String describe = wonderfulVideo.getDescribe();
@@ -53,8 +53,7 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
         holder.mPreviewIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, VideoDetailActivity.class);
-                mContext.startActivity(intent);
+                VideoDetailActivity.go(mContext, wonderfulVideo);
             }
         });
     }

@@ -37,6 +37,12 @@
                     android:layout_height="40dp"
                     android:layout_gravity="bottom"
                     android:background="@drawable/bg_controller"/>
+
+                <com.zjyang.mvpframe.module.home.tripcircle.widget.BannerIndicator
+                    android:id="@+id/banner_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|center_horizontal"/>
             </FrameLayout>
 
 

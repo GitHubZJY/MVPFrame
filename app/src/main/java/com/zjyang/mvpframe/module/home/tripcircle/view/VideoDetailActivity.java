@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.zjy.player.ui.PlayerListener;
 import com.example.zjy.player.ui.VideoFrame;
@@ -39,6 +41,11 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
     YPlayerView mVideoFrame;
     @BindView(R.id.comment_lv)
     RecyclerView mCommentLv;
+    @BindView(R.id.video_title)
+    TextView mTitleTv;
+    @BindView(R.id.video_describe)
+    TextView mDescribeTv;
+
 
     private CommentListAdapter mCommentAdapter;
     private static final String INTENT_DATA = "INTENT_DATA";
@@ -91,8 +98,16 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
             Bundle bundle = intent.getExtras();
             if(bundle != null){
                 mDataInfo = bundle.getParcelable(INTENT_DATA);
+                initData();
             }
         }
+    }
+
+    public void initData(){
+        String title = mDataInfo.getTitle();
+        String describe = mDataInfo.getDescribe();
+        mTitleTv.setText(TextUtils.isEmpty(title) ? "" : title);
+        mDescribeTv.setText(TextUtils.isEmpty(describe) ? "" : describe);
     }
 
     @Override
