@@ -22,5 +22,7 @@
     <color name="goplay_selecor_view_gap_line_color">#c6c6c6</color>
     <color name="goplay_selector_child_view_title">#898989</color>
 
+    <color name="orange">#f15c0e</color>
+
 
 </resources>

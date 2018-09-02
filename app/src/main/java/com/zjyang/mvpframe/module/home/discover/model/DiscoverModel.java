@@ -56,6 +56,8 @@ public class DiscoverModel implements DiscoverTasksContract.Model{
             videoInfo.setVideoThumbUrl(picUrl[i]);
             videoInfo.setUserPicUrl(picUrl[i]);
             videoInfo.setUserName("HELLO");
+            videoInfo.setDescribe("这是一段难忘的旅行难忘的旅途难忘的旅行难忘的旅行难忘的旅行");
+            videoInfo.setWatchNum("2333");
             videoInfo.setProvinceId(1);
             mVideoList.add(videoInfo);
         }

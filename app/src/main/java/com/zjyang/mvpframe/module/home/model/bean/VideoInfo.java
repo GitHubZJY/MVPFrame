@@ -26,8 +26,17 @@ public class VideoInfo extends BmobObject implements Parcelable {
     private String duration;
     private List<Comment> commentList;
     private int likeNum;
+    private String describe;
 
     public VideoInfo() {
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public String getLocation() {
@@ -151,6 +160,7 @@ public class VideoInfo extends BmobObject implements Parcelable {
         dest.writeString(this.duration);
         dest.writeList(this.commentList);
         dest.writeInt(this.likeNum);
+        dest.writeString(this.describe);
     }
 
     protected VideoInfo(Parcel in) {
@@ -167,6 +177,7 @@ public class VideoInfo extends BmobObject implements Parcelable {
         this.commentList = new ArrayList<Comment>();
         in.readList(this.commentList, Comment.class.getClassLoader());
         this.likeNum = in.readInt();
+        this.describe = in.readString();
     }
 
     public static final Parcelable.Creator<VideoInfo> CREATOR = new Parcelable.Creator<VideoInfo>() {

@@ -1,5 +1,6 @@
 package com.zjyang.mvpframe.module.home.tripcircle.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.TripCirclePresenter;
 import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerIndicator;
 import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager;
+import com.zjyang.mvpframe.module.rank.view.RankActivity;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.view.CustomScrollView;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
@@ -34,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -141,6 +144,12 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
             mWonderfulVideoList.addAll(wonderfulVideos);
             mWonderfulAdapter.notifyDataSetChanged();
         }
+    }
+
+    @OnClick(R.id.top_scene_iv)
+    void clickRankEntrance(){
+        Intent intent = new Intent(getContext(), RankActivity.class);
+        startActivity(intent);
     }
 
     @Override
