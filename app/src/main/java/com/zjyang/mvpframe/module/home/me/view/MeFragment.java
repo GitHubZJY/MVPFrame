@@ -1,5 +1,6 @@
 package com.zjyang.mvpframe.module.home.me.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -16,6 +17,7 @@ import com.zjyang.mvpframe.module.base.BaseFragment;
 import com.zjyang.mvpframe.module.home.me.MeTasksContract;
 import com.zjyang.mvpframe.module.home.me.presenter.MePresenter;
 import com.zjyang.mvpframe.module.login.model.bean.User;
+import com.zjyang.mvpframe.module.mapmark.view.MapMarkActivity;
 import com.zjyang.mvpframe.module.myvideo.view.MyVideoActivity;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.ColorUtils;
@@ -125,7 +127,8 @@ public class MeFragment extends BaseFragment implements AppBarLayout.OnOffsetCha
 
     @OnClick(R.id.my_zuji_item)
     void clickFootMark(){
-
+        Intent intent = new Intent(getContext(), MapMarkActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.like_video_history_item)
