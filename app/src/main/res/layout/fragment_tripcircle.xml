@@ -24,13 +24,13 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="198dp">
-                <com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager
+                <com.zjyang.mvpframe.ui.view.BannerView
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="198dp"
                     >
 
-                </com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager>
+                </com.zjyang.mvpframe.ui.view.BannerView>
 
                 <ImageView
                     android:layout_width="match_parent"

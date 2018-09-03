@@ -13,7 +13,7 @@ import com.zjyang.recorder.R;
 
 public class ComposeDialog extends AppCompatDialog{
 
-    private ProgressBar mProgressBar;
+    private CircleProgressBar mProgressBar;
 
 
     public ComposeDialog(Context context) {
@@ -29,10 +29,9 @@ public class ComposeDialog extends AppCompatDialog{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_compose_dialog);
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        mProgressBar = (CircleProgressBar) findViewById(R.id.progress_bar);
         if(mProgressBar != null){
             mProgressBar.setProgress(0);
-            mProgressBar.setMax(100);
         }
 
     }

@@ -24,6 +24,7 @@ import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerIndicator;
 import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerViewPager;
 import com.zjyang.mvpframe.module.rank.view.RankActivity;
 import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.ui.view.BannerView;
 import com.zjyang.mvpframe.ui.view.CustomScrollView;
 import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 import com.zjyang.mvpframe.utils.DrawUtils;
@@ -49,7 +50,7 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
     @BindView(R.id.root_view)
     RelativeLayout mRootView;
     @BindView(R.id.view_pager)
-    BannerViewPager mViewPager;
+    BannerView mViewPager;
     @BindView(R.id.banner_indicator)
     BannerIndicator mIndicator;
     @BindView(R.id.wonderful_video_list)
@@ -114,10 +115,7 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
 
     @Override
     public void initBannerView(List<String> urlList){
-        mViewPager.setScrollPageListener(this);
         mViewPager.setBannerData(urlList);
-        mViewPager.startPlay(2000);
-        mIndicator.setCellCount(urlList.size());
     }
 
     @Override

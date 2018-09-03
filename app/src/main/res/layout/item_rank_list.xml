@@ -43,15 +43,15 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/user_pic_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_toRightOf="@id/video_preview_view"
         fresco:actualImageScaleType="focusCrop"
         fresco:roundAsCircle="true" />
     <TextView
         android:id="@+id/user_name_tv"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_height="20dp"
         android:gravity="center_vertical"
         android:layout_toRightOf="@id/user_pic_iv"
         android:layout_marginLeft="4dp"
@@ -66,10 +66,10 @@
         android:layout_below="@id/user_pic_iv"
         android:layout_toRightOf="@id/video_preview_view"
         android:layout_marginTop="4dp"
-        android:maxLines="1"
+        android:maxLines="2"
         android:ellipsize="end"
         android:textColor="@color/text_color_gray"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:text="这是一场难以忘记的旅途这是一场难以忘记的旅途这是一场难以忘记的旅途"/>
     <TextView
         android:id="@+id/watch_num_tv"
@@ -81,6 +81,6 @@
         android:layout_alignBottom="@id/video_preview_view"
         android:drawablePadding="2dp"
         android:textColor="@color/orange"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:text="33444"/>
 </RelativeLayout>
