@@ -1,11 +1,20 @@
 package com.zjyang.mvpframe.module.mapmark.view;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.Projection;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.Marker;
@@ -16,6 +25,7 @@ import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.mapmark.MapMarkTasksContract;
 import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 import com.zjyang.mvpframe.module.mapmark.presenter.MapMarkPresenter;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import java.util.List;
 
@@ -61,9 +71,45 @@ public class MapMarkActivity extends BaseActivity<MapMarkPresenter> implements M
             markerOption.draggable(true);//设置Marker可拖动
             markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
                     .decodeResource(getResources(),R.drawable.ic_mark)));
-            aMap.addMarker(markerOption);
+            Marker marker = aMap.addMarker(markerOption);
+            dropInto(marker);
         }
     }
+
+    //掉下来还回弹一次
+    private void dropInto(final Marker marker) {
+
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        final LatLng markerLatlng = marker.getPosition();
+        Projection proj = aMap.getProjection();
+        Point markerPoint = proj.toScreenLocation(markerLatlng);
+        Point startPoint = new Point(markerPoint.x, 0);// 从marker的屏幕上方下落
+        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
+        final long duration = 500;// 动画总时长
+        final Interpolator interpolator = new AccelerateInterpolator();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed
+                        / duration);
+                if(t > 1.0){
+                    t = 1;
+                }
+                double lng = t * markerLatlng.longitude + (1 - t)
+                        * startLatLng.longitude;
+                double lat = t * markerLatlng.latitude + (1 - t)
+                        * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+                if (t < 1.0) {
+                    handler.postDelayed(this, 16);
+                }
+            }
+        });
+    }
+
+
 
     @Override
     protected void onResume() {

@@ -170,7 +170,7 @@
                             android:layout_height="70dp"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:background="@drawable/ripple_bg"
                             android:gravity="center">
                             <ImageView
                                 android:layout_width="30dp"
@@ -199,7 +199,7 @@
                             android:layout_height="70dp"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/ripple_bg"
                             android:gravity="center">
                             <ImageView
                                 android:layout_width="25dp"
@@ -228,7 +228,7 @@
                             android:layout_height="70dp"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/ripple_bg"
                             android:gravity="center">
                             <ImageView
                                 android:layout_width="35dp"
@@ -250,7 +250,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:background="@drawable/ripple_bg"
                     app:left_icon_src="@drawable/ic_foot"
                     app:bottom_line_margin="56dp"
                     app:content_text="我的足迹">
@@ -260,7 +260,7 @@
                     android:id="@+id/like_video_history_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:background="@drawable/ripple_bg"
                     app:left_icon_src="@drawable/ic_support"
                     app:content_text="赞过的视频"
                     app:top_line_visible="false">
