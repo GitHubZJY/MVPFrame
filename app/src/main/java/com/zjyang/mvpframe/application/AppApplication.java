@@ -20,6 +20,7 @@ import com.zjyang.mvpframe.utils.ScreenUtils;
 import org.greenrobot.greendao.database.Database;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobConfig;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -111,9 +112,13 @@ public class AppApplication extends Application{
     }
 
     public void initBombSDK(){
-        Bmob.initialize(this, Constants.BMOB_APP_KEY);
+        //Bmob.initialize(this, Constants.BMOB_APP_KEY);
         // 注:自v3.5.2开始，数据sdk内部缝合了统计sdk，开发者无需额外集成，传渠道参数即可，不传默认没开启数据统计功能
         //Bmob.initialize(this, "Your Application ID","bmob");
+        BmobConfig config = new BmobConfig.Builder(this)
+                .setApplicationId(Constants.BMOB_APP_KEY)//设置appkey
+                .setConnectTimeout(1000).build();
+        Bmob.initialize(config);
     }
 
     public void initFresco(){

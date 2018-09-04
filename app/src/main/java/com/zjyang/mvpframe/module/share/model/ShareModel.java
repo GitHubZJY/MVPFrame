@@ -8,6 +8,7 @@ import com.zjyang.mvpframe.event.ShareResultEvent;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.login.model.bean.User;
+import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.utils.FileUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
@@ -29,13 +30,11 @@ public class ShareModel implements ShareTaskContracts.Model{
 
     private static final String TAG = "ShareModel";
 
-    private String mCurAddress;
-    private int mCurPositionId;
+    private MapMark mMapMark;
 
     @Override
-    public void setLocationData(String address, int id) {
-        mCurAddress = address;
-        mCurPositionId = id;
+    public void setLocationData(MapMark mapMark) {
+        mMapMark = mapMark;
     }
 
     @Override
@@ -79,8 +78,8 @@ public class ShareModel implements ShareTaskContracts.Model{
                     String videoStringUrl = video.getFileUrl();
                     VideoInfo videoInfo = new VideoInfo();
                     videoInfo.setVideoUrl(videoStringUrl);
-                    videoInfo.setProvinceId(mCurPositionId);
-                    videoInfo.setLocation(mCurAddress);
+                    videoInfo.setProvinceId(Integer.parseInt(mMapMark.getCityCode()));
+                    videoInfo.setLocation(mMapMark.getMarkLocation());
                     videoInfo.setUserId(user.getObjectId());
                     videoInfo.setUserPicUrl(user.getUserPic());
                     videoInfo.setUserName(user.getUserName());
@@ -89,6 +88,7 @@ public class ShareModel implements ShareTaskContracts.Model{
                         @Override
                         public void done(String s, BmobException e) {
                             if (e == null) {
+                                uploadAddressData(mMapMark);
                                 EventBus.getDefault().post(new ShareResultEvent(true));
                             }else{
                                 EventBus.getDefault().post(new ShareResultEvent(false));
@@ -98,6 +98,19 @@ public class ShareModel implements ShareTaskContracts.Model{
                 }else {
                     EventBus.getDefault().post(new ShareResultEvent(false));
                     LogUtil.d(TAG, "上传视频失败-->"+e.getErrorCode());
+                }
+            }
+        });
+    }
+
+    private void uploadAddressData(MapMark mapMark){
+        mapMark.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    LogUtil.d(TAG, "上传位置信息成功");
+                }else{
+                    LogUtil.d(TAG, "上传位置信息失败-->"+e.getErrorCode());
                 }
             }
         });

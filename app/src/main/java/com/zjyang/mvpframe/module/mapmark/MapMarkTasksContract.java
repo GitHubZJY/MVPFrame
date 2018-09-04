@@ -17,7 +17,7 @@ public interface MapMarkTasksContract {
 
 
     interface Model {
-        void getMarkDataByUserId(int userId);
+        void getMarkDataByUserId(String userId);
     }
 
     interface Presenter {

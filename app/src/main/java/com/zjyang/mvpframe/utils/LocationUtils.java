@@ -4,6 +4,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
 import com.zjyang.mvpframe.application.AppApplication;
+import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 
 /**
  * Created by zhengjiayang on 2018/7/30.
@@ -60,9 +61,17 @@ public class LocationUtils {
                     double currentLon = amapLocation.getLongitude();//获取经度
                     String cityCode = amapLocation.getCityCode();
                     String address = amapLocation.getAddress();
+                    String city = amapLocation.getCity();
                     amapLocation.getAccuracy();//获取精度信息
+                    MapMark mapMark = new MapMark();
+                    mapMark.setLatitude(currentLat+"");
+                    mapMark.setLongitude(currentLon+"");
+                    mapMark.setCityCode(cityCode);
+                    mapMark.setCity(city);
+                    mapMark.setMarkTime(DateUtils.getCurDateFormat());
+                    mapMark.setMarkLocation(address);
                     if(mLocationCallback != null){
-                        mLocationCallback.getAddress(address, Integer.parseInt(cityCode));
+                        mLocationCallback.getAddress(mapMark);
                     }
                     LogUtil.i(TAG, "cityCode : " + cityCode + " address: " + address);
                 } else {
@@ -82,6 +91,6 @@ public class LocationUtils {
     }
 
     public interface LocationCallback{
-        void getAddress(String address, int cityCode);
+        void getAddress(MapMark mapMark);
     }
 }

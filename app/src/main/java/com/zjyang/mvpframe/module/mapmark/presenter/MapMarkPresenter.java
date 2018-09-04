@@ -1,8 +1,11 @@
 package com.zjyang.mvpframe.module.mapmark.presenter;
 
+import android.text.TextUtils;
+
 import com.zjyang.mvpframe.event.GetMapMarkEvent;
 import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.mapmark.MapMarkTasksContract;
 import com.zjyang.mvpframe.module.mapmark.model.MapMarkModel;
 import com.zjyang.mvpframe.module.mapmark.view.MapMarkActivity;
@@ -15,7 +18,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by zhengjiayang on 2018/9/3.
  */
 
-public class MapMarkPresenter extends BasePresenter<MapMarkActivity, MapMarkModel> implements MapMarkTasksContract.Presenter{
+public class MapMarkPresenter extends BasePresenter<MapMarkTasksContract.View, MapMarkTasksContract.Model> implements MapMarkTasksContract.Presenter{
 
     public MapMarkPresenter() {
         if(!EventBus.getDefault().isRegistered(this)){
@@ -30,7 +33,10 @@ public class MapMarkPresenter extends BasePresenter<MapMarkActivity, MapMarkMode
 
     @Override
     public void fillMarkData() {
-        mModel.getMarkDataByUserId(1);
+        User user = UserDataManager.getInstance().getCurUser();
+        if(user != null && !TextUtils.isEmpty(user.getObjectId())){
+            mModel.getMarkDataByUserId(user.getObjectId());
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

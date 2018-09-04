@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.zjyang.mvpframe.event.ShareResultEvent;
 import com.zjyang.mvpframe.module.base.BasePresenter;
+import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.model.ShareModel;
 import com.zjyang.mvpframe.utils.LocationUtils;
@@ -53,11 +54,12 @@ public class SharePresenter extends BasePresenter<ShareTaskContracts.View, Share
     public void startLocation() {
         LocationUtils.getInstance().startLocation(new LocationUtils.LocationCallback() {
             @Override
-            public void getAddress(String address, int cityCode) {
+            public void getAddress(MapMark mapMark) {
                 LocationUtils.getInstance().stopLocation();
+                String address = mapMark.getMarkLocation();
                 if(!TextUtils.isEmpty(address)){
                     mView.showLocationData(address);
-                    mModel.setLocationData(address, cityCode);
+                    mModel.setLocationData(mapMark);
                 }
             }
         });

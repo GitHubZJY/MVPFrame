@@ -3,6 +3,8 @@ package com.zjyang.mvpframe.module.share;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
+
 /**
  * Created by 74215 on 2018/5/13.
  */
@@ -20,7 +22,7 @@ public interface ShareTaskContracts {
 
     interface Model {
         void uploadVideoFile(String videoPath, Bitmap thumbBm);
-        void setLocationData(String address, int id);
+        void setLocationData(MapMark mapMark);
     }
 
     interface Presenter {

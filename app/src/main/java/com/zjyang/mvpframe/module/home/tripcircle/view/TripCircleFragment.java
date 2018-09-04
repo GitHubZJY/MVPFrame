@@ -49,7 +49,7 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
 
     @BindView(R.id.root_view)
     RelativeLayout mRootView;
-    @BindView(R.id.view_pager)
+    @BindView(R.id.view_pager_tripcircle)
     BannerView mViewPager;
     @BindView(R.id.banner_indicator)
     BannerIndicator mIndicator;

@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.LatLng;
@@ -46,7 +47,7 @@ public class MapMarkActivity extends BaseActivity<MapMarkPresenter> implements M
         unbinder = ButterKnife.bind(this);
         mMapView.onCreate(savedInstanceState);
         aMap = mMapView.getMap();
-
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(4));
         mPresenter.fillMarkData();
     }
 
@@ -54,12 +55,12 @@ public class MapMarkActivity extends BaseActivity<MapMarkPresenter> implements M
     public void setMarkDataInMap(List<MapMark> mapMarks) {
         for (MapMark mapMark : mapMarks){
             MarkerOptions markerOption = new MarkerOptions();
-            markerOption.position(new LatLng(34.341568, 108.940174));
-            markerOption.title("2017.04.22").snippet("西安市");
+            markerOption.position(new LatLng(Double.parseDouble(mapMark.getLatitude()), Double.parseDouble(mapMark.getLongitude())));
+            markerOption.title(mapMark.getMarkTime()).snippet(mapMark.getCity());
 
             markerOption.draggable(true);//设置Marker可拖动
             markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                    .decodeResource(getResources(),R.drawable.ic_position)));
+                    .decodeResource(getResources(),R.drawable.ic_mark)));
             aMap.addMarker(markerOption);
         }
     }
