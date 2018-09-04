@@ -25,11 +25,15 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BasePresenter;
+import com.zjyang.mvpframe.module.fullscreen.FullWatchTasksContract;
+import com.zjyang.mvpframe.module.fullscreen.presenter.FullWatchPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.mvpframe.ui.view.FocusButton;
 import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.FrescoUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +46,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  * Created by 74215 on 2018/4/15.
  */
 
-public class FullScreenWatchActivity extends BaseActivity {
+public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> implements FullWatchTasksContract.View{
 
     private static final String TAG = "FullScreenWatchActivity";
     private static final String VIDEO_INFO = "VIDEO_INFO";
@@ -61,6 +65,8 @@ public class FullScreenWatchActivity extends BaseActivity {
     SimpleDraweeView mVideoUserPic;
     @BindView(R.id.user_group_view)
     LinearLayout mAuthorGroupView;
+    @BindView(R.id.focus_btn)
+    FocusButton mFocusBtn;
     @BindView(R.id.author_name_tv)
     TextView mAuthorNameTv;
     @BindView(R.id.position_tv)
@@ -75,8 +81,8 @@ public class FullScreenWatchActivity extends BaseActivity {
     private VideoInfo mVideoInfo;
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public FullWatchPresenter createPresenter() {
+        return new FullWatchPresenter();
     }
 
     public static void go(Context context, View previewIv, VideoInfo videoInfo){
@@ -120,6 +126,19 @@ public class FullScreenWatchActivity extends BaseActivity {
         FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
         FrescoUtils.showImgByUrl(mVideoInfo.getUserPicUrl(), mVideoUserPic);
         mAuthorNameTv.setText(mVideoInfo.getUserName());
+    }
+
+    @Override
+    public void focusSuccess() {
+        mFocusBtn.setIsFocus(true);
+        ToastUtils.showToast(this, "关注成功");
+    }
+
+    @OnClick(R.id.focus_btn)
+    void clickFocus(){
+        if(!mFocusBtn.isFocus()){
+            mPresenter.focusVideoAuthor(mVideoInfo.getUserId());
+        }
     }
 
     @OnClick(R.id.close_iv)

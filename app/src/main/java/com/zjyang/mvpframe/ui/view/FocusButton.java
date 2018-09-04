@@ -18,7 +18,7 @@ import static android.view.Gravity.CENTER;
 
 public class FocusButton extends TextView{
 
-    private boolean mIsChecked;
+    private boolean mIsFocus;
     Drawable mFocuedDrawable;
     Drawable mUnFocusDrawable;
 
@@ -51,18 +51,24 @@ public class FocusButton extends TextView{
 
     public void setIsFocus(boolean isFocus){
         if(isFocus){
+            mIsFocus = true;
             setCompoundDrawables(mFocuedDrawable, null, null, null);
             setText("已关注");
         }else{
+            mIsFocus = false;
             setCompoundDrawables(mUnFocusDrawable, null, null, null);
             setText("关注");
         }
     }
 
+    public boolean isFocus(){
+        return mIsFocus;
+    }
+
     private OnClickListener mClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(!mIsChecked){
+            if(!mIsFocus){
                 setIsFocus(true);
             }
         }
