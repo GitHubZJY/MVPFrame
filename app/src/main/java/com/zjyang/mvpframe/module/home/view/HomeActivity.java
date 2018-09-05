@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
@@ -102,6 +103,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
 
     @Override
     public void clickTab(int index) {
+        if(index == 4 && !UserDataManager.getInstance().checkLogin(this)){
+            return;
+        }
         mViewPager.setCurrentItem(index - 1);
     }
 

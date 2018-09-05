@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -32,6 +33,7 @@ import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.presenter.LoginPresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.view.JellyInterpolator;
+import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -52,7 +54,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @BindView(R.id.password_ed)
     public EditText mPasswordEd;
     @BindView(R.id.login_btn)
-    public ImageView mLoginBtn;
+    public CardView mLoginBtn;
     @BindView(R.id.layout_progress)
     public View mProgress;
     @BindView(R.id.input_layout)
@@ -61,6 +63,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public LinearLayout mAccountLlyt;
     @BindView(R.id.input_layout_psw)
     public LinearLayout mPwLlyt;
+    @BindView(R.id.toolbar_left_btn)
+    Button mBackBtn;
 
 
     @Override
@@ -157,9 +161,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout,
                 "scaleX", 1f, 0.5f);
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(mLoginBtn,
+                "alpha", 1f, 0.0f);
         set.setDuration(500);
         set.setInterpolator(new LinearInterpolator());
-        set.playTogether(animator, animator2);
+
+        set.playTogether(animator, animator2, animator3);
         set.start();
         set.addListener(new Animator.AnimatorListener() {
 
@@ -226,24 +233,32 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         params.rightMargin = 0;
         mInputLayout.setLayoutParams(params);
 
-
+        AnimatorSet set = new AnimatorSet();
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout, "scaleX", 0.5f,1f );
-        animator2.setDuration(500);
-        animator2.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator2.start();
+
+        ObjectAnimator loginBtnAnimator = ObjectAnimator.ofFloat(mLoginBtn, "alpha", 0.0f,1f );
+
+        set.setDuration(500);
+        set.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.playTogether(loginBtnAnimator, animator2);
+        set.start();
     }
 
     public void clickLoginBtnAnim(){
         ObjectAnimator animatorX = ObjectAnimator.ofFloat(mLoginBtn,
-                "scaleX", 1f, 1.2f, 1f);
+                "scaleX", 1f, 1.0f, 1f);
         ObjectAnimator animatorY = ObjectAnimator.ofFloat(mLoginBtn,
-                "scaleY", 1f, 1.2f, 1f);
+                "scaleY", 1f, 1.0f, 1f);
         AnimatorSet set = new AnimatorSet();
         set.playTogether(animatorX, animatorY);
         set.setDuration(300);
         set.start();
     }
 
+    @OnClick(R.id.toolbar_left_btn)
+    void clickClose(){
+        finish();
+    }
 
 
     @Override

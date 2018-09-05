@@ -17,6 +17,7 @@ public interface FullWatchTasksContract {
 
     interface Model {
         void insertFocusData(String curUserId, String authorUserId);
+        void isFocusCurUser(String curUserId, String authorUserId);
     }
 
     interface Presenter {
