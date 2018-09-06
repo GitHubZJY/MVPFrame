@@ -42,7 +42,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     @Override
     public void onBindViewHolder(CommentViewHolder holder, int position) {
-        FrescoUtils.showImgByUrl(UserDataManager.getInstance().getCurUser().getUserPic(), holder.mUserPic);
+        FrescoUtils.showImgByUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523797863813&di=c1a82078d1672426d666cf4c8bd284d1&imgtype=0&src=http%3A%2F%2Fwww.rui2.net%2Fuploadfile%2Fdata%2F2015%2F0623%2F20150623114232290.jpg", holder.mUserPic);
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder{

@@ -29,12 +29,12 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dip"
                 android:layout_marginBottom="15dp"
-                app:cardCornerRadius="63dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="4dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_launcher" />
+                    android:background="@drawable/login_page_logo" />
             </android.support.v7.widget.CardView>
 
 

@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
@@ -31,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -42,6 +44,8 @@ public class MapMarkActivity extends BaseActivity<MapMarkPresenter> implements M
     private Unbinder unbinder;
     @BindView(R.id.map_view)
     public MapView mMapView;
+    @BindView(R.id.toolbar_left_btn)
+    Button mBackBtn;
 
     private AMap aMap;
 
@@ -59,6 +63,11 @@ public class MapMarkActivity extends BaseActivity<MapMarkPresenter> implements M
         aMap = mMapView.getMap();
         aMap.moveCamera(CameraUpdateFactory.zoomTo(4));
         mPresenter.fillMarkData();
+    }
+
+    @OnClick(R.id.toolbar_left_btn)
+    void clickBack(){
+        finish();
     }
 
     @Override
