@@ -59,6 +59,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
         }
         String filterName = filter.getName();
         holder.nameTv.setText(TextUtils.isEmpty(filterName) ? "原片" : filterName);
+        holder.mDefaultTv.setVisibility(TextUtils.isEmpty(filterName) ? View.VISIBLE : View.GONE);
         Log.d("filter", filter.getPath() + "/icon.png");
         holder.previewIv.setImageURI(Uri.parse("file://"+filter.getPath() + "/icon.png"));
         if(mCurSelectIndex == position){
@@ -100,6 +101,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
         private SimpleDraweeView previewIv;
         private ImageView previewBgIv;
         private TextView nameTv;
+        private TextView mDefaultTv;
 
 
         public MyViewHolder(View itemView) {
@@ -107,6 +109,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
             previewIv = itemView.findViewById(R.id.filter_preview_pic);
             previewBgIv = itemView.findViewById(R.id.bg_filter_pic);
             nameTv = itemView.findViewById(R.id.filter_name_tv);
+            mDefaultTv = itemView.findViewById(R.id.default_tv);
         }
     }
 

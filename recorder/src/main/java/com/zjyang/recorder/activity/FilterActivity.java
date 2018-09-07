@@ -162,7 +162,7 @@ public class FilterActivity extends Activity implements View.OnClickListener{
             @Override
             public void changeFilter(EffectBean effectBean) {
                 if(TextUtils.isEmpty(effectBean.getPath())){
-                    mAliyunIEditor.applyFilter(null);
+                    mAliyunIEditor.applyFilter(effectBean);
                     return;
                 }
                 mAliyunIEditor.applyFilter(effectBean);
@@ -240,7 +240,9 @@ public class FilterActivity extends Activity implements View.OnClickListener{
         protected void onPostExecute(Object o) {
             List<EffectFilter> effectList = new ArrayList<>();
             List<String> filterList = FilterModel.getColorFilterList();
-            EffectFilter noFilterEffect = new EffectFilter(null);
+            EffectFilter noFilterEffect = new EffectFilter("");
+            noFilterEffect.setDuration(-1);
+            noFilterEffect.setStartTime(-1);
             effectList.add(noFilterEffect);
             for(String str : filterList){
                 EffectFilter filter = new EffectFilter(str);
