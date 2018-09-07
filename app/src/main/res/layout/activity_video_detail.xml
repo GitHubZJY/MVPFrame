@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -99,38 +100,46 @@
     </ScrollView>
 
 
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white">
-        <TextView
-            android:id="@+id/commit_comment_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingLeft="8dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/primary_text_color"
-            android:textSize="14sp"
-            android:text="发布"/>
-        <EditText
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/commit_comment_tv"
-            android:background="@color/white"
-            android:paddingLeft="16dp"
-            android:hint="评论这条视频"
-            android:textSize="14sp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line"
-            android:layout_alignParentTop="true"/>
-    </RelativeLayout>
+            android:layout_height="60dp"
+            >
+            <TextView
+                android:id="@+id/commit_comment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="8dp"
+                android:paddingRight="16dp"
+                android:gravity="center"
+                android:textColor="@color/primary_text_color"
+                android:textSize="14sp"
+                android:text="发布"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_toLeftOf="@id/commit_comment_tv"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:hint="评论这条视频"
+                android:textSize="14sp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
+    </ScrollView>
+
+
 
 
 </RelativeLayout>

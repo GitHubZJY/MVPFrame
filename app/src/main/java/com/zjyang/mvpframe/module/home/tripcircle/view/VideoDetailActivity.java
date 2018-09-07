@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zjy.player.ui.PlayerListener;
@@ -21,6 +22,7 @@ import com.zjyang.mvpframe.module.home.tripcircle.adapter.CommentListAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.CommentInfo;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.VideoDetailPresenter;
+import com.zjyang.mvpframe.utils.KeyboardPatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
 
     private Unbinder unbinder;
 
+    @BindView(R.id.root_view)
+    RelativeLayout mRootView;
     @BindView(R.id.video_frame)
     YPlayerView mVideoFrame;
     @BindView(R.id.comment_lv)
@@ -50,6 +54,8 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
     private CommentListAdapter mCommentAdapter;
     private static final String INTENT_DATA = "INTENT_DATA";
     private WonderfulVideo mDataInfo;
+
+    private KeyboardPatch keyboardPatch;
 
     public static void go(Context context, WonderfulVideo wonderfulVideo){
         Intent intent = new Intent(context, VideoDetailActivity.class);
@@ -74,6 +80,8 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
                         WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.activity_video_detail);
         unbinder = ButterKnife.bind(this);
+        keyboardPatch = new KeyboardPatch(this, mRootView);
+        keyboardPatch.enable();
         mVideoFrame.setPlayerListener(this);
         mVideoFrame.setVideoUrl("http://bmob-cdn-18798.b0.upaiyun.com/2018/08/26/c3e45865408a5b10807865469083b339.mp4");
         mVideoFrame.start();
@@ -130,6 +138,7 @@ public class VideoDetailActivity extends BaseActivity implements PlayerListener{
     protected void onDestroy() {
         super.onDestroy();
         mVideoFrame.stopPlayback();
+        keyboardPatch.disable();
         if(unbinder != null){
             unbinder.unbind();
         }
