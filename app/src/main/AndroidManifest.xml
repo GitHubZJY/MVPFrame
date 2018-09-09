@@ -88,6 +88,11 @@
         <activity android:name=".module.mapmark.view.MapMarkActivity"
             android:theme="@style/ActivityFullScreen"/>
 
+        <activity android:name=".module.enlarge.view.EnlargeWatchActivity"
+            android:theme="@style/ActivityFullScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"/>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="27f0d4c2abc0de6bf09e31968c4b2159">

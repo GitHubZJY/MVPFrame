@@ -2,11 +2,13 @@ package com.zjyang.mvpframe.module.home.tripcircle.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -14,6 +16,7 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.view.VideoDetailActivity;
 import com.zjyang.mvpframe.utils.FrescoUtils;
+import com.zjyang.mvpframe.utils.LogUtil;
 
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
         holder.mTitleTv.setText(TextUtils.isEmpty(title) ? "" : title);
         holder.mDescribeTv.setText(TextUtils.isEmpty(describe) ? "" : describe);
 
-        holder.mPreviewIv.setOnClickListener(new View.OnClickListener() {
+        holder.mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 VideoDetailActivity.go(mContext, wonderfulVideo);
@@ -64,12 +67,13 @@ public class WonderfulVideoAdapter extends RecyclerView.Adapter<WonderfulVideoAd
     }
 
     public class WonderfulVideoViewHolder extends RecyclerView.ViewHolder {
+        CardView mRootView;
         SimpleDraweeView mPreviewIv;
         TextView mTitleTv;
         TextView mDescribeTv;
         public WonderfulVideoViewHolder(View itemView) {
             super(itemView);
-
+            mRootView = (CardView) itemView.findViewById(R.id.item_wonderful_root_view);
             mPreviewIv = (SimpleDraweeView) itemView.findViewById(R.id.preview_iv);
             mTitleTv = (TextView) itemView.findViewById(R.id.title_tv);
             mDescribeTv = (TextView) itemView.findViewById(R.id.describe_tv);

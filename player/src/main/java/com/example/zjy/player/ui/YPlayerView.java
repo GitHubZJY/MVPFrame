@@ -123,6 +123,13 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
         }
     }
 
+    public boolean isPlaying(){
+        if(mVideoFrame == null){
+            return false;
+        }
+        return mVideoFrame.isPlaying();
+    }
+
 
     public void setVideoUrl(String videoUrl){
         mVideoFrame.setVideoUrl(videoUrl);
@@ -136,6 +143,7 @@ public class YPlayerView extends RelativeLayout implements ItemVideoController.C
 
     public void start(){
         mVideoFrame.start();
+        mItemController.resetPlayStatus();
     }
 
     public void pause(){
