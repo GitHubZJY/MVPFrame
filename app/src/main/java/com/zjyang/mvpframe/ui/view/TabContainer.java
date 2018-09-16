@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjyang.mvpframe.application.AppApplication;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.LogUtil;
@@ -47,7 +49,7 @@ public class TabContainer extends HorizontalScrollView implements
     public static final int SCROLL_LEFT = 2;
 
     private int mTabViewWidth = DrawUtils.dp2px(20);
-    private int mTabViewTextNormalColor = Color.parseColor("#aaaaaa");
+    private int mTabViewTextNormalColor = SkinManager.getInstance().getPrimaryTextColor();
     private int mTabViewTextSize = DrawUtils.dp2px(15);
 
 
@@ -144,7 +146,7 @@ public class TabContainer extends HorizontalScrollView implements
             TextView textView = new TextView(mContext);
             textView.setText(title);
             textView.setGravity(Gravity.CENTER);
-            textView.setTextColor(Color.BLACK);
+            textView.setTextColor(SkinManager.getInstance().getPrimaryTextColor());
             textView.setPadding(DrawUtils.dp2px(8), 0, DrawUtils.dp2px(8), 0);
             if (mTabViewTextNormalColor != -1) {
                 textView.setTextColor(mTabViewTextNormalColor);
@@ -153,7 +155,8 @@ public class TabContainer extends HorizontalScrollView implements
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabViewTextSize);
             }
             if(index == 0){
-                textView.setTextColor(Color.BLACK);
+                textView.setTypeface(Typeface.DEFAULT_BOLD);
+                textView.setTextColor(SkinManager.getInstance().getPrimaryTextColor());
             }
             textView.setOnClickListener(new OnClickListener() {
                 @Override

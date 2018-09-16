@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjyang.mvpframe.ui.view.CustomToolBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:left_btn_src="@drawable/ic_close_black"
+    app:left_btn_visible="true"
+    app:title_text="@string/setting"
+    app:title_visible="true"
+    app:shader_visible="true">
+
+    <com.zjyang.mvpframe.module.home.me.view.BaseSettingItem
+        android:id="@+id/setting_theme_entrance"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/ripple_bg"
+        app:left_icon_src="@drawable/ic_change_theme"
+        app:bottom_line_margin="56dp"
+        app:content_text="个性换肤">
+
+    </com.zjyang.mvpframe.module.home.me.view.BaseSettingItem>
+</com.zjyang.mvpframe.ui.view.CustomToolBar>

@@ -23,6 +23,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -92,6 +94,13 @@
             android:theme="@style/ActivityFullScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"/>
+
+        <activity android:name=".module.setting.SettingActivity"
+            android:theme="@style/ActivityFullScreen"/>
+
+        <activity android:name=".module.setting.theme.ThemeSettingActivity"
+            android:theme="@style/ActivityFullScreen"/>
+
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

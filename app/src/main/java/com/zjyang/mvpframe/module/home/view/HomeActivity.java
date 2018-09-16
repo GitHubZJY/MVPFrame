@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.zjyang.mvpframe.R;
+import com.zjyang.mvpframe.event.FinishActivityEvent;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
@@ -25,6 +27,10 @@ import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.PermissionUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
 import com.zjyang.recorder.activity.RecorderActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -64,7 +70,10 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);// 允许使用transitions
         setContentView(R.layout.activity_home);
         unbinder = ButterKnife.bind(this);
-        mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffd600")));
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, SkinManager.getInstance().getPrimaryColor()));
         mCameraBg.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffffff")));
 
         mFragmentList = mPresenter.getChildPages();
@@ -141,6 +150,11 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
         overridePendingTransition(R.anim.bottom_activity_open_enter, 0);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFinishActivityEvent(FinishActivityEvent event){
+        finish();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -156,6 +170,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
         if(mPresenter != null){
             mPresenter.destroy();
         }

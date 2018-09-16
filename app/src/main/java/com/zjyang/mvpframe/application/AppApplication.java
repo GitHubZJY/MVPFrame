@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.zjyang.mvpframe.db.DBConfig;
 import com.zjyang.mvpframe.db.base.DaoMaster;
 import com.zjyang.mvpframe.db.base.DaoSession;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.net.RequestApi;
 import com.zjyang.mvpframe.utils.Constants;
 import com.zjyang.mvpframe.utils.HandlerUtils;
@@ -46,6 +47,7 @@ public class AppApplication extends Application{
         long startAppTime = System.currentTimeMillis();
         mContext = this;
         ScreenUtils.init(this);
+        SkinManager.getInstance().init();
         if(isMainProcess()){
 
         }

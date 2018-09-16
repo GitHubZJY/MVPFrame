@@ -2,6 +2,7 @@ package com.zjyang.mvpframe.ui.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zjyang.mvpframe.R;
+import com.zjyang.mvpframe.module.base.SkinManager;
+import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.ScreenUtils;
 
 /**
@@ -121,16 +124,24 @@ public class CustomToolBar extends LinearLayout implements View.OnClickListener{
         leftTv.setText(leftTvText);
         rightTv.setText(rightTvText);
         titleTv.setText(titleText);
-        titleTv.setTextColor(getResources().getColor(R.color.primary_text_color));
+        titleTv.setTextColor(SkinManager.getInstance().getPrimaryTextColor());
 
         if(leftResId != -1){
             leftBtn.setBackgroundResource(leftResId);
+            if(SkinManager.getInstance().isDefaultTheme()){
+                leftBtn.setBackground(ShapeUtils.drawColor(getResources().getDrawable(leftResId), Color.parseColor("#000000")));
+            }else{
+                leftBtn.setBackground(ShapeUtils.drawColor(getResources().getDrawable(leftResId), Color.parseColor("#ffffff")));
+            }
         }
         if(rightResId != -1){
             rightBtn.setBackgroundResource(rightResId);
         }
         if(backgroundResId != -1){
-            barRlyt.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            barRlyt.setBackgroundColor(backgroundResId);
+        }else{
+            barRlyt.setBackgroundColor(SkinManager.getInstance().getPrimaryColor());
+            paddingView.setBackgroundColor(SkinManager.getInstance().getPrimaryColor());
         }
         if(isShaderVisible){
             shaderView.setVisibility(VISIBLE);

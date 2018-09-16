@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjyang.mvpframe.R;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.ScreenUtils;
 
@@ -45,8 +47,8 @@ public class PluginTabStrip extends LinearLayout {
 		mSelectedUnderlinePaint.setColor(rsc.getColor(R.color.goplay_home_tab_strip_selected_indicator));
 		mSelectedUnderlinePaint.setStrokeWidth(rsc.getDimensionPixelSize(R.dimen.goplugin_home_tab_strip_selected_indicator_width));
 
-		mDefaultColor = getContext().getResources().getColor(R.color.text_color_gray);
-		mHightColor = getContext().getResources().getColor(R.color.primary_text_color);
+		mDefaultColor = SkinManager.getInstance().getPrimaryTextColor();
+		mHightColor = SkinManager.getInstance().getPrimaryTextColor();
 		
 		mUnderLineWidth = ScreenUtils.getsScreenWidth();
 	}
@@ -83,6 +85,7 @@ public class PluginTabStrip extends LinearLayout {
 				TextView labelText = (TextView)getChildAt(mHightPosition);
 				if (labelText != null) {
 					labelText.setTextColor(mDefaultColor);
+					labelText.setTypeface(Typeface.DEFAULT);
 				}
 			}
 
@@ -90,6 +93,7 @@ public class PluginTabStrip extends LinearLayout {
 				TextView labelText = (TextView)getChildAt(hightPosition);
 				if (labelText != null) {
 					labelText.setTextColor(mHightColor);
+					labelText.setTypeface(Typeface.DEFAULT_BOLD);
 				}
 			}
 			mHightPosition = hightPosition;

@@ -2,6 +2,8 @@ package com.zjyang.mvpframe.module.home.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -12,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjyang.mvpframe.R;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.model.HomeModel;
+import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.DrawUtils;
 
 import java.util.ArrayList;
@@ -43,7 +47,16 @@ public class HomeBottomBar extends LinearLayout{
     private TextView mMessageTv;
     private TextView mMeTv;
 
+    private Drawable mDiscoverNormal = getResources().getDrawable(R.drawable.bottom_bar_video_nomarl);
+    private Drawable mFocusNormal = getResources().getDrawable(R.drawable.bottom_bar_focus_normal);
+    private Drawable mCircleNormal = getResources().getDrawable(R.drawable.bottom_bar_circle_normal);
+    private Drawable mMeNormal = getResources().getDrawable(R.drawable.bottom_bar_me_normal);
 
+
+    private Drawable mDiscoverActive = ShapeUtils.drawColor(getResources().getDrawable(R.drawable.bottom_bar_video_nomarl), SkinManager.getInstance().getPrimaryColor());
+    private Drawable mFocusActive = ShapeUtils.drawColor(getResources().getDrawable(R.drawable.bottom_bar_focus_normal), SkinManager.getInstance().getPrimaryColor());
+    private Drawable mCircleActive = ShapeUtils.drawColor(getResources().getDrawable(R.drawable.bottom_bar_circle_normal), SkinManager.getInstance().getPrimaryColor());
+    private Drawable mMeNorActive = ShapeUtils.drawColor(getResources().getDrawable(R.drawable.bottom_bar_me_normal), SkinManager.getInstance().getPrimaryColor());
 
     public HomeBottomBar(Context context) {
         this(context, null);
@@ -83,16 +96,20 @@ public class HomeBottomBar extends LinearLayout{
         mTabItemList.add(mMeTab);
 
 
-        LinearLayout.LayoutParams mItemIvParams = new LinearLayout.LayoutParams(DrawUtils.dp2px(26), DrawUtils.dp2px(26));
+        LinearLayout.LayoutParams mItemIvParams = new LinearLayout.LayoutParams(DrawUtils.dp2px(24), DrawUtils.dp2px(24));
+        mItemIvParams.setMargins(0,0,0, DrawUtils.dp2px(3));
 
-
-        mDiscoverIv.setBackgroundResource(R.drawable.ic_bottom_tab_hot);
+        mDiscoverIv.setImageDrawable(mDiscoverNormal);
+        //mDiscoverIv.setBackgroundResource(R.drawable.bottom_bar_video_nomarl);
         mDiscoverIv.setLayoutParams(mItemIvParams);
-        mFocusIv.setBackgroundResource(R.drawable.ic_bottom_tab_like);
+        mFocusIv.setImageDrawable(mFocusNormal);
+        //mFocusIv.setBackgroundResource(R.drawable.bottom_bar_focus_normal);
         mFocusIv.setLayoutParams(mItemIvParams);
-        mMessageIv.setBackgroundResource(R.drawable.ic_bottom_tab_msg);
+        mMessageIv.setImageDrawable(mCircleNormal);
+        //mMessageIv.setBackgroundResource(R.drawable.bottom_bar_circle_normal);
         mMessageIv.setLayoutParams(mItemIvParams);
-        mMeIv.setBackgroundResource(R.drawable.ic_bottom_tab_me);
+        mMeIv.setImageDrawable(mMeNormal);
+        //mMeIv.setBackgroundResource(R.drawable.bottom_bar_me_normal);
         mMeIv.setLayoutParams(mItemIvParams);
         mDiscoverTab.addView(mDiscoverIv);
         mFocusTab.addView(mFocusIv);
@@ -146,6 +163,19 @@ public class HomeBottomBar extends LinearLayout{
         mMeTab.setTag(HomeModel.USER_TAB_SORT);
         Collections.sort(mTabItemList, new TabItemComparator());
         for(int i=0; i < mTabItemList.size(); i++){
+            if(i == 0){
+                Drawable mFirstActiveDrawable;
+                if(mTabItemList.get(i) == mDiscoverTab){
+                    mFirstActiveDrawable = mDiscoverActive;
+                }else if(mTabItemList.get(i) == mFocusTab){
+                    mFirstActiveDrawable = mFocusActive;
+                }else if(mTabItemList.get(i) == mMessageTab){
+                    mFirstActiveDrawable = mCircleActive;
+                }else{
+                    mFirstActiveDrawable = mMeNorActive;
+                }
+                ((ImageView)mTabItemList.get(i).getChildAt(0)).setImageDrawable(mFirstActiveDrawable);
+            }
             if(i == 2){
                 addView(mCenterSpace);
             }
@@ -157,6 +187,14 @@ public class HomeBottomBar extends LinearLayout{
         mDiscoverTab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                mDiscoverIv.setImageDrawable(mDiscoverActive);
+                mFocusIv.setImageDrawable(mFocusNormal);
+                mMessageIv.setImageDrawable(mCircleNormal);
+                mMeIv.setImageDrawable(mMeNormal);
+                mDiscoverTv.setTextColor(SkinManager.getInstance().getPrimaryColor());
+                mFocusTv.setTextColor(Color.BLACK);
+                mMessageTv.setTextColor(Color.BLACK);
+                mMeTv.setTextColor(Color.BLACK);
                 if(mTabClickListener != null){
                     mTabClickListener.clickTab((Integer) mDiscoverTab.getTag());
                 }
@@ -165,6 +203,14 @@ public class HomeBottomBar extends LinearLayout{
         mFocusTab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                mDiscoverIv.setImageDrawable(mDiscoverNormal);
+                mFocusIv.setImageDrawable(mFocusActive);
+                mMessageIv.setImageDrawable(mCircleNormal);
+                mMeIv.setImageDrawable(mMeNormal);
+                mDiscoverTv.setTextColor(Color.BLACK);
+                mFocusTv.setTextColor(SkinManager.getInstance().getPrimaryColor());
+                mMessageTv.setTextColor(Color.BLACK);
+                mMeTv.setTextColor(Color.BLACK);
                 if(mTabClickListener != null){
                     mTabClickListener.clickTab((Integer) mFocusTab.getTag());
                 }
@@ -173,6 +219,14 @@ public class HomeBottomBar extends LinearLayout{
         mMessageTab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                mDiscoverIv.setImageDrawable(mDiscoverNormal);
+                mFocusIv.setImageDrawable(mFocusNormal);
+                mMessageIv.setImageDrawable(mCircleActive);
+                mMeIv.setImageDrawable(mMeNormal);
+                mDiscoverTv.setTextColor(Color.BLACK);
+                mFocusTv.setTextColor(Color.BLACK);
+                mMessageTv.setTextColor(SkinManager.getInstance().getPrimaryColor());
+                mMeTv.setTextColor(Color.BLACK);
                 if(mTabClickListener != null){
                     mTabClickListener.clickTab((Integer) mMessageTab.getTag());
                 }
@@ -181,6 +235,14 @@ public class HomeBottomBar extends LinearLayout{
         mMeTab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                mDiscoverIv.setImageDrawable(mDiscoverNormal);
+                mFocusIv.setImageDrawable(mFocusNormal);
+                mMessageIv.setImageDrawable(mCircleNormal);
+                mMeIv.setImageDrawable(mMeNorActive);
+                mDiscoverTv.setTextColor(Color.BLACK);
+                mFocusTv.setTextColor(Color.BLACK);
+                mMessageTv.setTextColor(Color.BLACK);
+                mMeTv.setTextColor(SkinManager.getInstance().getPrimaryColor());
                 if(mTabClickListener != null){
                     mTabClickListener.clickTab((Integer) mMeTab.getTag());
                 }

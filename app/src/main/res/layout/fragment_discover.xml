@@ -2,12 +2,12 @@
 <com.zjyang.mvpframe.ui.view.CustomToolBar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/tools"
+    xmlns:skin="http://schemas.android.com/android/skin"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:right_tv_text=""
     app:right_tv_visible="true"
-    app:left_btn_visible="true"
     app:title_text="@string/app_name"
     app:title_visible="true"
     app:shader_visible="false">
@@ -28,7 +28,7 @@
                 android:id="@+id/tab_container"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:layout_marginLeft="8dp">
+                skin:enable="true">
 
             </com.zjyang.mvpframe.ui.view.TabContainer>
         </android.support.v7.widget.CardView>

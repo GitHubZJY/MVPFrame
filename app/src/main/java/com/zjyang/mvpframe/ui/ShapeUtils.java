@@ -3,8 +3,10 @@ package com.zjyang.mvpframe.ui;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
+import android.support.v4.graphics.drawable.DrawableCompat;
 
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.application.AppApplication;
@@ -56,5 +58,24 @@ public class ShapeUtils {
         drawable.getPaint().setAntiAlias(true);
         drawable.getPaint().setStyle(Paint.Style.FILL);//描边
         return drawable;
+    }
+
+    /**
+
+     * 重绘Drawable，将drawable颜色着色为color
+
+     * @param drawable
+
+     * @param color
+
+     * @return 重绘后的Drawable
+
+     */
+
+    public static Drawable drawColor(Drawable drawable, int color) {
+        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        wrappedDrawable.mutate();
+        DrawableCompat.setTint(wrappedDrawable, color);
+        return wrappedDrawable;
     }
 }

@@ -6,6 +6,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.postprocessors.IterativeBoxBlurPostProcessor;
@@ -56,5 +57,12 @@ public class FrescoUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void setBorderColor(SimpleDraweeView simpleDraweeView, int color){
+        RoundingParams roundingParams = RoundingParams.fromCornersRadius(DrawUtils.dp2px(30));
+        roundingParams.setBorder(color, DrawUtils.dp2px(1));
+        simpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
     }
 }

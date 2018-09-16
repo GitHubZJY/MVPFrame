@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zjyang.mvpframe.ui.view.CustomToolBar xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:right_tv_text="注册"
-    app:right_tv_visible="true"
-    app:left_btn_visible="true"
-    app:left_btn_src="@drawable/ic_close_black"
-    app:shader_visible="false"
     >
+
+    <View
+        android:id="@+id/padding_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/close_login_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_black"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="6dp"/>
+        <TextView
+            android:id="@+id/register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text_color"
+            android:textSize="14sp"
+            android:text="注册"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:padding="6dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,4 +135,4 @@
 
 
 
-</com.zjyang.mvpframe.ui.view.CustomToolBar>
+</LinearLayout>

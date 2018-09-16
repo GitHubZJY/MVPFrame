@@ -14,4 +14,7 @@
     <string name="my_video">我的视频</string>
     <string name="foot_mark">我的足迹</string>
 
+    <string name="setting">设置</string>
+    <string name="change_theme">个性换肤</string>
+
 </resources>

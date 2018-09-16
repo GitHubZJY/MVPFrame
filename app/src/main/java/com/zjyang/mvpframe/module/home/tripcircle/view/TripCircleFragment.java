@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.tripcircle.TripCircleTasksContract;
 import com.zjyang.mvpframe.module.home.tripcircle.adapter.WonderfulVideoAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
@@ -83,6 +84,7 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
         unbinder = ButterKnife.bind(this, view);
 
         mToolbarBg.getLayoutParams().height = DrawUtils.dp2px(48) + ScreenUtils.getStatusBarHeight();
+        mToolbarBg.setBackgroundColor(SkinManager.getInstance().getPrimaryColor());
         RelativeLayout.LayoutParams toolbarParams = (RelativeLayout.LayoutParams) mToolbar.getLayoutParams();
         toolbarParams.setMargins(0, ScreenUtils.getStatusBarHeight(), 0, 0);
 

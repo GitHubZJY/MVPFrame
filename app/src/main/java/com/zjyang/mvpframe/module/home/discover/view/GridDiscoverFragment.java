@@ -17,6 +17,7 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
 import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.adapter.GridVideoListAdapter;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
 import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
@@ -79,6 +80,7 @@ public class GridDiscoverFragment extends BaseFragment implements DiscoverTasksC
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(8);
         mTabContainer.setToggleItemListener(this);
+        mTabContainer.setBackgroundColor(SkinManager.getInstance().getPrimaryColor());
         initData();
     }
 

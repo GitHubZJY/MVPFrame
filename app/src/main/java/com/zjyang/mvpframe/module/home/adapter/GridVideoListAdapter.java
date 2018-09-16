@@ -20,6 +20,7 @@ import com.example.zjy.player.controller.ItemVideoController;
 import com.example.zjy.player.ui.VideoFrame;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
+import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.fullscreen.view.FullScreenWatchActivity;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
@@ -138,7 +139,9 @@ public class GridVideoListAdapter extends RecyclerView.Adapter<GridVideoListAdap
             mWatchLlyt = (LinearLayout) itemView.findViewById(R.id.watch_num_llyt);
             mLocationTv = (TextView) itemView.findViewById(R.id.position_tv);
 
-            mUserNameTv.setBackground(ShapeUtils.getRoundRectDrawable(20, Color.parseColor("#ffd600")));
+            FrescoUtils.setBorderColor(mUserPicIv, SkinManager.getInstance().getPrimaryColor());
+            mUserNameTv.setTextColor(SkinManager.getInstance().getPrimaryTextColor());
+            mUserNameTv.setBackground(ShapeUtils.getRoundRectDrawable(20, SkinManager.getInstance().getPrimaryColor()));
             mDurationTv.setBackground(ShapeUtils.getRoundRectDrawable(15, Color.parseColor("#66000000")));
             mLikeNumTv.setBackground(ShapeUtils.getRoundRectDrawable(15));
             mCommentTv.setBackground(ShapeUtils.getRoundRectDrawable(15));

@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.zjyang.mvpframe.module.home.me.presenter.MePresenter;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.mapmark.view.MapMarkActivity;
 import com.zjyang.mvpframe.module.myvideo.view.MyVideoActivity;
+import com.zjyang.mvpframe.module.setting.SettingActivity;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.ColorUtils;
 import com.zjyang.mvpframe.utils.FrescoUtils;
@@ -68,6 +70,10 @@ public class MeFragment extends BaseFragment implements AppBarLayout.OnOffsetCha
     BaseSettingItem mFootMarkItem;
     @BindView(R.id.like_video_history_item)
     BaseSettingItem mLikeHistoryItem;
+    @BindView(R.id.setting_iv)
+    ImageView mSettingIv;
+    @BindView(R.id.toolbar_setting_iv)
+    ImageView mBlackSettingIv;
 
 
     MeTasksContract.Presenter mPresenter;
@@ -134,6 +140,18 @@ public class MeFragment extends BaseFragment implements AppBarLayout.OnOffsetCha
     @OnClick(R.id.like_video_history_item)
     void clickLikeHistory(){
 
+    }
+
+    @OnClick(R.id.setting_iv)
+    void clickSetting(){
+        Intent intent = new Intent(getContext(), SettingActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.toolbar_setting_iv)
+    void clickToolbarSetting() {
+        Intent intent = new Intent(getContext(), SettingActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -5,7 +5,12 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -27,13 +32,13 @@ import android.widget.Toast;
 import com.zjyang.mvpframe.MainActivity;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.view.HomeActivity;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.presenter.LoginPresenter;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.ui.view.JellyInterpolator;
 import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.mvpframe.utils.ScreenUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -63,8 +68,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public LinearLayout mAccountLlyt;
     @BindView(R.id.input_layout_psw)
     public LinearLayout mPwLlyt;
-    @BindView(R.id.toolbar_left_btn)
-    Button mBackBtn;
+    @BindView(R.id.close_login_iv)
+    ImageView mBackBtn;
+    @BindView(R.id.padding_view)
+    View mPaddingView;
 
 
     @Override
@@ -78,6 +85,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
 
     public void initView(){
+        mPaddingView.getLayoutParams().height = ScreenUtils.getStatusBarHeight();
         mPresenter.checkUserCache();
     }
 
@@ -255,7 +263,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         set.start();
     }
 
-    @OnClick(R.id.toolbar_left_btn)
+    @OnClick(R.id.close_login_iv)
     void clickClose(){
         finish();
     }
