@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.zjyang.mvpframe.MainActivity;
 import com.zjyang.mvpframe.R;
+import com.zjyang.mvpframe.event.FinishActivityEvent;
 import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.home.view.HomeActivity;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
@@ -40,6 +41,8 @@ import com.zjyang.mvpframe.ui.view.JellyInterpolator;
 import com.zjyang.mvpframe.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.ScreenUtils;
 import com.zjyang.mvpframe.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,6 +119,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void jumpToHomeActivity() {
+        EventBus.getDefault().post(new FinishActivityEvent());
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
         finish();

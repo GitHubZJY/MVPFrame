@@ -42,6 +42,11 @@ public class ThemeSettingActivity extends BaseActivity {
     @BindView(R.id.orange_iv)
     ImageView mOrangeIv;
 
+    @BindView(R.id.bottom_camera_iv)
+    ImageView mCameraIv;
+    @BindView(R.id.bottom_camera_bg)
+    public ImageView mCameraBg;
+
 
     @Override
     public BasePresenter createPresenter() {
@@ -53,6 +58,9 @@ public class ThemeSettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_theme);
         unbinder = ButterKnife.bind(this);
+
+        mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, SkinManager.getInstance().getPrimaryColor()));
+        mCameraBg.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffffff")));
 
         mYellowIv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(10), Color.parseColor(SkinManager.YELLOW)));
         mBlueIv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(10), Color.parseColor(SkinManager.BLUE)));

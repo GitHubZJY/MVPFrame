@@ -137,7 +137,6 @@
                         android:id="@+id/toolbar_setting_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="4dp"
                         android:src="@drawable/ic_setting_black"
                         android:layout_alignParentRight="true"
                         android:layout_alignBottom="@id/user_name_toolbar_tv"
