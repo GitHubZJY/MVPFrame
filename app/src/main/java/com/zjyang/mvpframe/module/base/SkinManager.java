@@ -2,7 +2,11 @@ package com.zjyang.mvpframe.module.base;
 
 import android.graphics.Color;
 
+import com.zjyang.mvpframe.module.setting.theme.ThemeInfo;
 import com.zjyang.mvpframe.utils.SpUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 74215 on 2018/9/15.
@@ -19,6 +23,8 @@ public class SkinManager {
     public static final String BLUE = "#00c1de";
     public static final String RED = "#ff6600";
     public static final String ORANGE = "#FE9D01";
+
+    public final List<ThemeInfo> themeList = new ArrayList<>();
 
     private int primaryColor = Color.parseColor("#ffD600");
     private int primaryTextColor = Color.parseColor("#000000");
@@ -39,6 +45,12 @@ public class SkinManager {
         if(curTheme != -1){
             toggleTheme(curTheme);
         }
+        themeList.clear();
+        themeList.add(new ThemeInfo(YELLOW_THEME, YELLOW, "#ffffff"));
+        themeList.add(new ThemeInfo(BLUE_THEME, BLUE, "#ffffff"));
+        themeList.add(new ThemeInfo(RED_THEME, RED, "#ffffff"));
+        themeList.add(new ThemeInfo(ORANGE_THEME, ORANGE, "#ffffff"));
+
     }
 
     public int getCurTheme(){
@@ -92,5 +104,10 @@ public class SkinManager {
                 setPrimaryTextColor(Color.parseColor("#ffffff"));
                 break;
         }
+    }
+
+
+    public List<ThemeInfo> getThemeList() {
+        return themeList;
     }
 }

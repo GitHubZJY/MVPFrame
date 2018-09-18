@@ -6,7 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zjyang.mvpframe.MainActivity;
 import com.zjyang.mvpframe.R;
@@ -17,6 +21,7 @@ import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.view.HomeActivity;
 import com.zjyang.mvpframe.ui.ShapeUtils;
 import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.mvpframe.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,23 +34,25 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/9/16.
  */
 
-public class ThemeSettingActivity extends BaseActivity {
+public class ThemeSettingActivity extends BaseActivity implements ThemeSettingAdapter.SelectThemeListener{
 
     private Unbinder unbinder;
-
-    @BindView(R.id.yellow_iv)
-    ImageView mYellowIv;
-    @BindView(R.id.blue_iv)
-    ImageView mBlueIv;
-    @BindView(R.id.red_iv)
-    ImageView mRedIv;
-    @BindView(R.id.orange_iv)
-    ImageView mOrangeIv;
 
     @BindView(R.id.bottom_camera_iv)
     ImageView mCameraIv;
     @BindView(R.id.bottom_camera_bg)
-    public ImageView mCameraBg;
+    ImageView mCameraBg;
+    @BindView(R.id.tab_group)
+    LinearLayout mTabGroup;
+    @BindView(R.id.title_tv)
+    TextView mTitleTv;
+    @BindView(R.id.toolbar_right_tv)
+    TextView mSaveTv;
+
+    @BindView(R.id.theme_lv)
+    RecyclerView mThemeLv;
+
+    ThemeSettingAdapter mThemeAdapter;
 
 
     @Override
@@ -62,35 +69,30 @@ public class ThemeSettingActivity extends BaseActivity {
         mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, SkinManager.getInstance().getPrimaryColor()));
         mCameraBg.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor("#ffffff")));
 
-        mYellowIv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(10), Color.parseColor(SkinManager.YELLOW)));
-        mBlueIv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(10), Color.parseColor(SkinManager.BLUE)));
-        mRedIv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(10), Color.parseColor(SkinManager.RED)));
-        mOrangeIv.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(10), Color.parseColor(SkinManager.ORANGE)));
+        mThemeAdapter = new ThemeSettingAdapter(this, SkinManager.getInstance().getThemeList());
+        mThemeAdapter.setSelectThemeListener(this);
+        mThemeLv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mThemeLv.setAdapter(mThemeAdapter);
     }
 
-    @OnClick(R.id.yellow_iv)
-    void clickYellow(){
-        SkinManager.getInstance().toggleTheme(SkinManager.YELLOW_THEME);
+    @Override
+    public void select(ThemeInfo themeInfo) {
+        mTabGroup.setBackgroundColor(Color.parseColor(themeInfo.getThemeColor()));
+        mTitleTv.setBackgroundColor(Color.parseColor(themeInfo.getThemeColor()));
+        mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor(themeInfo.getThemeColor())));
+    }
+
+    @OnClick(R.id.toolbar_right_tv)
+    void clickSave(){
+        if(mThemeAdapter.getCurApplyTheme() == null){
+            ToastUtils.showToast(this, "应用失败");
+            return;
+        }
+        SkinManager.getInstance().toggleTheme(mThemeAdapter.getCurApplyTheme().getThemeId());
         restart();
     }
 
-    @OnClick(R.id.blue_iv)
-    void clickBlue(){
-        SkinManager.getInstance().toggleTheme(SkinManager.BLUE_THEME);
-        restart();
-    }
 
-    @OnClick(R.id.red_iv)
-    void clickRed(){
-        SkinManager.getInstance().toggleTheme(SkinManager.RED_THEME);
-        restart();
-    }
-
-    @OnClick(R.id.orange_iv)
-    void clickOrange(){
-        SkinManager.getInstance().toggleTheme(SkinManager.ORANGE_THEME);
-        restart();
-    }
 
     public void restart(){
         EventBus.getDefault().post(new FinishActivityEvent());
