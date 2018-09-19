@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.module.base;
 import android.graphics.Color;
 
 import com.zjyang.mvpframe.module.setting.theme.ThemeInfo;
+import com.zjyang.mvpframe.utils.LogUtil;
 import com.zjyang.mvpframe.utils.SpUtils;
 
 import java.util.ArrayList;
@@ -94,16 +95,26 @@ public class SkinManager {
                 setPrimaryTextColor(Color.parseColor("#ffffff"));
                 break;
             case RED_THEME:
-                SpUtils.obtain().save(CUR_THEME_SP, BLUE_THEME);
+                SpUtils.obtain().save(CUR_THEME_SP, RED_THEME);
                 setPrimaryColor(Color.parseColor(RED));
                 setPrimaryTextColor(Color.parseColor("#ffffff"));
                 break;
             case ORANGE_THEME:
-                SpUtils.obtain().save(CUR_THEME_SP, BLUE_THEME);
+                SpUtils.obtain().save(CUR_THEME_SP, ORANGE_THEME);
                 setPrimaryColor(Color.parseColor(ORANGE));
                 setPrimaryTextColor(Color.parseColor("#ffffff"));
                 break;
         }
+    }
+
+    public int getCurThemeIndexInList(){
+        for (int i=0; i<themeList.size(); i++){
+            LogUtil.d("SkinManager", ""+themeList.get(i).getThemeId() + ", " + getCurTheme());
+            if(themeList.get(i).getThemeId() == getCurTheme()){
+                return i;
+            }
+        }
+        return 0;
     }
 
 

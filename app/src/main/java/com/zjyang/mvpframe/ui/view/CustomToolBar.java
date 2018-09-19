@@ -104,6 +104,12 @@ public class CustomToolBar extends LinearLayout implements View.OnClickListener{
         rightBtn.setOnClickListener(this);
         rightTv.setOnClickListener(this);
 
+        if(SkinManager.getInstance().isDefaultTheme()){
+            rightTv.setTextColor(Color.parseColor("#000000"));
+        }else{
+            rightTv.setTextColor(Color.parseColor("#ffffff"));
+        }
+
         paddingView.getLayoutParams().height = ScreenUtils.getStatusBarHeight();
 
         if(isLeftBtnVisible){

@@ -71,8 +71,19 @@ public class ThemeSettingActivity extends BaseActivity implements ThemeSettingAd
 
         mThemeAdapter = new ThemeSettingAdapter(this, SkinManager.getInstance().getThemeList());
         mThemeAdapter.setSelectThemeListener(this);
+        mThemeAdapter.setCurSelect(SkinManager.getInstance().getCurThemeIndexInList());
         mThemeLv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mThemeLv.setAdapter(mThemeAdapter);
+        mThemeAdapter.notifyDataSetChanged();
+
+        mTabGroup.setBackgroundColor(SkinManager.getInstance().getPrimaryColor());
+        mTitleTv.setBackgroundColor(SkinManager.getInstance().getPrimaryColor());
+        mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, SkinManager.getInstance().getPrimaryColor()));
+        mTitleTv.setTextColor(SkinManager.getInstance().getPrimaryTextColor());
+        for(int i=0; i<mTabGroup.getChildCount(); i++){
+            TextView mTabTv = (TextView)(mTabGroup.getChildAt(i));
+            mTabTv.setTextColor(SkinManager.getInstance().getPrimaryTextColor());
+        }
     }
 
     @Override
@@ -80,6 +91,11 @@ public class ThemeSettingActivity extends BaseActivity implements ThemeSettingAd
         mTabGroup.setBackgroundColor(Color.parseColor(themeInfo.getThemeColor()));
         mTitleTv.setBackgroundColor(Color.parseColor(themeInfo.getThemeColor()));
         mCameraIv.setBackground(ShapeUtils.getRoundRectDrawable(180, Color.parseColor(themeInfo.getThemeColor())));
+        mTitleTv.setTextColor(Color.parseColor(themeInfo.getTextColor()));
+        for(int i=0; i<mTabGroup.getChildCount(); i++){
+            TextView mTabTv = (TextView)(mTabGroup.getChildAt(i));
+            mTabTv.setTextColor(Color.parseColor(themeInfo.getTextColor()));
+        }
     }
 
     @OnClick(R.id.toolbar_right_tv)
@@ -99,11 +115,6 @@ public class ThemeSettingActivity extends BaseActivity implements ThemeSettingAd
         Intent mStartActivity = new Intent(this, HomeActivity.class);
         startActivity(mStartActivity);
         finish();
-        //int mPendingIntentId = 123456;
-        //PendingIntent mPendingIntent = PendingIntent.getActivity(this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-        //AlarmManager mgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        //mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 10, mPendingIntent);
-        //System.exit(0);
     }
 
     @Override

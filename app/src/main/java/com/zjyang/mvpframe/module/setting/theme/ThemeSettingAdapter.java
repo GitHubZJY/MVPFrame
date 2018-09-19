@@ -79,6 +79,10 @@ public class ThemeSettingAdapter extends RecyclerView.Adapter<ThemeSettingAdapte
         return mThemeList.get(curSelect);
     }
 
+    public void setCurSelect(int curSelect) {
+        this.curSelect = curSelect;
+    }
+
     SelectThemeListener mListener;
 
     public void setSelectThemeListener(SelectThemeListener mListener) {
