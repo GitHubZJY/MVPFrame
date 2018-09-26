@@ -19,11 +19,15 @@ public class SkinManager {
     public static final int BLUE_THEME = 2;
     public static final int RED_THEME = 3;
     public static final int ORANGE_THEME = 4;
+    public static final int GREEN_THEME = 5;
+    public static final int PINK_THEME = 6;
 
     public static final String YELLOW = "#ffD600";
     public static final String BLUE = "#00c1de";
     public static final String RED = "#ff6600";
     public static final String ORANGE = "#FE9D01";
+    public static final String GREEN = "#66C2AE";
+    public static final String PINK = "#ffc0cb";
 
     public final List<ThemeInfo> themeList = new ArrayList<>();
 
@@ -51,7 +55,8 @@ public class SkinManager {
         themeList.add(new ThemeInfo(BLUE_THEME, BLUE, "#ffffff"));
         themeList.add(new ThemeInfo(RED_THEME, RED, "#ffffff"));
         themeList.add(new ThemeInfo(ORANGE_THEME, ORANGE, "#ffffff"));
-
+        themeList.add(new ThemeInfo(GREEN_THEME, GREEN, "#ffffff"));
+        themeList.add(new ThemeInfo(PINK_THEME, PINK, "#ffffff"));
     }
 
     public int getCurTheme(){
@@ -102,6 +107,16 @@ public class SkinManager {
             case ORANGE_THEME:
                 SpUtils.obtain().save(CUR_THEME_SP, ORANGE_THEME);
                 setPrimaryColor(Color.parseColor(ORANGE));
+                setPrimaryTextColor(Color.parseColor("#ffffff"));
+                break;
+            case GREEN_THEME:
+                SpUtils.obtain().save(CUR_THEME_SP, GREEN_THEME);
+                setPrimaryColor(Color.parseColor(GREEN));
+                setPrimaryTextColor(Color.parseColor("#ffffff"));
+                break;
+            case PINK_THEME:
+                SpUtils.obtain().save(CUR_THEME_SP, PINK_THEME);
+                setPrimaryColor(Color.parseColor(PINK));
                 setPrimaryTextColor(Color.parseColor("#ffffff"));
                 break;
         }
