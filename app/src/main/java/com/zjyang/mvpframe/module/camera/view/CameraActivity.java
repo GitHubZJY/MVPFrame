@@ -1,35 +1,29 @@
 package com.zjyang.mvpframe.module.camera.view;
 
 
-import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.zjyang.base.base.BaseActivity;
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.camera.model.CameraModel;
 import com.zjyang.mvpframe.module.camera.model.CameraSetting;
 import com.zjyang.mvpframe.module.share.view.ShareActivity;
-import com.zjyang.mvpframe.utils.DateUtils;
-import com.zjyang.mvpframe.utils.HandlerUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.DateUtils;
+import com.zjyang.base.utils.HandlerUtils;
+import com.zjyang.base.utils.LogUtil;
 
 import java.io.File;
-import java.util.Calendar;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

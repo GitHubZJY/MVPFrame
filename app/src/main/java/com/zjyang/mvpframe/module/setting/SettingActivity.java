@@ -3,11 +3,11 @@ package com.zjyang.mvpframe.module.setting;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.zjyang.base.base.BaseActivity;
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FinishActivityEvent;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
-import com.zjyang.mvpframe.module.home.me.view.BaseSettingItem;
+import com.zjyang.base.widget.BaseSettingItem;
 import com.zjyang.mvpframe.module.setting.theme.ThemeSettingActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,7 +23,7 @@ import butterknife.Unbinder;
  * Created by 74215 on 2018/9/16.
  */
 
-public class SettingActivity extends BaseActivity{
+public class SettingActivity extends BaseActivity {
 
     private Unbinder unbinder;
 

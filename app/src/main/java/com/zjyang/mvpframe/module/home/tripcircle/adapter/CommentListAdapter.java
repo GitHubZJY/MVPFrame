@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.UserDataManager;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.CommentInfo;
-import com.zjyang.mvpframe.utils.FrescoUtils;
+import com.zjyang.base.utils.FrescoUtils;
 
 import java.util.List;
 

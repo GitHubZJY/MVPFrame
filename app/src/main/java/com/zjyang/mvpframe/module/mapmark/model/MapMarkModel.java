@@ -1,14 +1,13 @@
 package com.zjyang.mvpframe.module.mapmark.model;
 
+import com.zjyang.base.base.BaseModel;
 import com.zjyang.mvpframe.event.GetMapMarkEvent;
-import com.zjyang.mvpframe.module.base.BaseModel;
 import com.zjyang.mvpframe.module.mapmark.MapMarkTasksContract;
 import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;

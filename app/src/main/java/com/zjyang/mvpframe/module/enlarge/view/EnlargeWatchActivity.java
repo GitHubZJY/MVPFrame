@@ -2,17 +2,16 @@ package com.zjyang.mvpframe.module.enlarge.view;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.zjy.player.ui.PlayerListener;
 import com.example.zjy.player.ui.YPlayerView;
+import com.zjyang.base.base.BaseActivity;
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.enlarge.EnlargeTasksContract;
 
 import org.greenrobot.eventbus.EventBus;

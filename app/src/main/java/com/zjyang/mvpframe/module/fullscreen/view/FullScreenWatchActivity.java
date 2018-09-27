@@ -1,7 +1,6 @@
 package com.zjyang.mvpframe.module.fullscreen.view;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,18 +21,17 @@ import android.widget.TextView;
 
 import com.example.zjy.player.ui.VideoFrame;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.zjyang.base.base.BaseActivity;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.fullscreen.FullWatchTasksContract;
 import com.zjyang.mvpframe.module.fullscreen.presenter.FullWatchPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.ui.ShapeUtils;
+import com.zjyang.base.utils.ShapeUtils;
 import com.zjyang.mvpframe.ui.view.FocusButton;
-import com.zjyang.mvpframe.utils.DrawUtils;
-import com.zjyang.mvpframe.utils.FrescoUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
-import com.zjyang.mvpframe.utils.ToastUtils;
+import com.zjyang.base.utils.DrawUtils;
+import com.zjyang.base.utils.FrescoUtils;
+import com.zjyang.base.utils.LogUtil;
+import com.zjyang.base.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

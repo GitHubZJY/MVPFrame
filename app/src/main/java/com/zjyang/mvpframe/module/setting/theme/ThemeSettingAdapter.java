@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.zjyang.base.bean.ThemeInfo;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.SkinManager;
-import com.zjyang.mvpframe.ui.ShapeUtils;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.base.utils.ShapeUtils;
+import com.zjyang.base.utils.DrawUtils;
 
 import java.util.List;
 

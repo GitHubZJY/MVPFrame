@@ -8,12 +8,12 @@
     >
 
 
-    <com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView
+    <com.zjyang.base.widget.RefreshLoadRecyclerView
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
-    </com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView>
+    </com.zjyang.base.widget.RefreshLoadRecyclerView>
 
     <ViewStub
         android:id="@+id/empty_tip_view"

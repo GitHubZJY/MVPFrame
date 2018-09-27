@@ -1,7 +1,7 @@
 package com.zjyang.mvpframe.net;
 
-import com.zjyang.mvpframe.utils.HandlerUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.HandlerUtils;
+import com.zjyang.base.utils.LogUtil;
 
 import java.io.IOException;
 import java.util.Map;

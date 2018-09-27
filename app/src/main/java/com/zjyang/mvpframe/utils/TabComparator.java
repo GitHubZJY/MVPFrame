@@ -1,6 +1,6 @@
 package com.zjyang.mvpframe.utils;
 
-import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.BaseFragment;
 
 import java.util.Comparator;
 

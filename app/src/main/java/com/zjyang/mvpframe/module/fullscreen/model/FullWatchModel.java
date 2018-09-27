@@ -1,10 +1,10 @@
 package com.zjyang.mvpframe.module.fullscreen.model;
 
+import com.zjyang.base.base.BaseModel;
 import com.zjyang.mvpframe.event.FocusResultEvent;
-import com.zjyang.mvpframe.module.base.BaseModel;
 import com.zjyang.mvpframe.module.fullscreen.FullWatchTasksContract;
 import com.zjyang.mvpframe.module.fullscreen.model.bean.RelationShip;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 

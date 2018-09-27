@@ -1,8 +1,5 @@
 package com.zjyang.mvpframe.module.setting.theme;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,16 +9,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zjyang.mvpframe.MainActivity;
+import com.zjyang.base.base.BaseActivity;
+import com.zjyang.base.base.BasePresenter;
+import com.zjyang.base.base.SkinManager;
+import com.zjyang.base.bean.ThemeInfo;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FinishActivityEvent;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
-import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.view.HomeActivity;
-import com.zjyang.mvpframe.ui.ShapeUtils;
-import com.zjyang.mvpframe.utils.DrawUtils;
-import com.zjyang.mvpframe.utils.ToastUtils;
+import com.zjyang.base.utils.ShapeUtils;
+import com.zjyang.base.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 

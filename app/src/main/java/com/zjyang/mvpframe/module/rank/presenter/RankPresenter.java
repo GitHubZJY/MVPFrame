@@ -1,6 +1,6 @@
 package com.zjyang.mvpframe.module.rank.presenter;
 
-import com.zjyang.mvpframe.module.base.BasePresenter;
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.module.rank.RankTasksContract;
 import com.zjyang.mvpframe.module.rank.model.RankModel;
 

@@ -2,13 +2,12 @@ package com.zjyang.mvpframe.module.mapmark.presenter;
 
 import android.text.TextUtils;
 
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.event.GetMapMarkEvent;
-import com.zjyang.mvpframe.module.base.BasePresenter;
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.mapmark.MapMarkTasksContract;
 import com.zjyang.mvpframe.module.mapmark.model.MapMarkModel;
-import com.zjyang.mvpframe.module.mapmark.view.MapMarkActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

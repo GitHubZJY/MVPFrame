@@ -3,6 +3,8 @@ package com.zjyang.mvpframe.utils;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
+import com.zjyang.base.utils.DateUtils;
+import com.zjyang.base.utils.LogUtil;
 import com.zjyang.mvpframe.application.AppApplication;
 import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 

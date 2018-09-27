@@ -13,18 +13,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.zjyang.base.widget.BaseSettingItem;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.me.MeTasksContract;
 import com.zjyang.mvpframe.module.home.me.presenter.MePresenter;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.mapmark.view.MapMarkActivity;
 import com.zjyang.mvpframe.module.myvideo.view.MyVideoActivity;
 import com.zjyang.mvpframe.module.setting.SettingActivity;
-import com.zjyang.mvpframe.ui.ShapeUtils;
-import com.zjyang.mvpframe.utils.ColorUtils;
-import com.zjyang.mvpframe.utils.FrescoUtils;
-import com.zjyang.mvpframe.utils.ScreenUtils;
+import com.zjyang.base.utils.ShapeUtils;
+import com.zjyang.base.utils.ColorUtils;
+import com.zjyang.base.utils.FrescoUtils;
+import com.zjyang.base.utils.ScreenUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

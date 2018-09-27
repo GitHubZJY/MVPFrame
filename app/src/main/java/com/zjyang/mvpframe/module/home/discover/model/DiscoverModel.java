@@ -5,8 +5,7 @@ import com.zjyang.mvpframe.event.RequestVideoListEvent;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
 import com.zjyang.mvpframe.module.home.discover.model.bean.Province;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.module.login.model.bean.User;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 

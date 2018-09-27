@@ -17,7 +17,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.zjy.player.utils.PlayerUtil;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.LogUtil;
 
 /**
  * Created by zhengjiayang on 2018/7/16.

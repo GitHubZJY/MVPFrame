@@ -1,7 +1,6 @@
 package com.zjyang.mvpframe.module.home.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
@@ -13,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zjyang.base.base.SkinManager;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.module.home.model.HomeModel;
-import com.zjyang.mvpframe.ui.ShapeUtils;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.base.utils.ShapeUtils;
+import com.zjyang.base.utils.DrawUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

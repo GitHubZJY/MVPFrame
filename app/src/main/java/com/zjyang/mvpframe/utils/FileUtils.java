@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.utils;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import com.zjyang.base.utils.LogUtil;
 import com.zjyang.mvpframe.module.camera.model.CameraModel;
 
 import java.io.BufferedOutputStream;

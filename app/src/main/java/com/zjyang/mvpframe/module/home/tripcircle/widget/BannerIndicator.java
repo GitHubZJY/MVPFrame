@@ -4,13 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.base.utils.DrawUtils;
 
 /**
  * Created by zhengjiayang on 2018/8/29.

@@ -1,6 +1,6 @@
 package com.zjyang.mvpframe.module.camera.model;
 
-import com.zjyang.mvpframe.utils.StorageUtils;
+import com.zjyang.base.utils.StorageUtils;
 
 /**
  * Created by 74215 on 2018/5/6.

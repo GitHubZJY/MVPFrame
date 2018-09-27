@@ -3,15 +3,14 @@ package com.zjyang.mvpframe.module.share.model;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
-import com.example.zjy.player.utils.VideoUtils;
 import com.zjyang.mvpframe.event.ShareResultEvent;
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.utils.FileUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 

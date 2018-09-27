@@ -5,7 +5,7 @@ import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.example.zjy.player.utils.VideoUtils;
-import com.zjyang.mvpframe.ui.view.SeekBarTipView;
+import com.zjyang.base.utils.LogUtil;
 import com.zjyang.mvpframe.ui.view.SelectTipSeekBar;
 
 import java.util.Map;

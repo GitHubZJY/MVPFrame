@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.zjyang.mvpframe.utils.FrescoUtils;
+import com.zjyang.base.utils.FrescoUtils;
 
 import java.util.ArrayList;
 import java.util.List;

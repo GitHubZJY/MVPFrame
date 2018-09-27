@@ -1,12 +1,10 @@
 package com.zjyang.mvpframe.module.share.presenter;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
-import android.widget.ImageView;
 
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.event.ShareResultEvent;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 import com.zjyang.mvpframe.module.share.ShareTaskContracts;
 import com.zjyang.mvpframe.module.share.model.ShareModel;

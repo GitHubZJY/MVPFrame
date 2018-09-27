@@ -1,6 +1,7 @@
 package com.zjyang.mvpframe.module.home;
 
-import com.zjyang.mvpframe.module.base.BaseFragment;
+
+import com.zjyang.mvpframe.module.BaseFragment;
 
 import java.util.List;
 

@@ -1,15 +1,15 @@
 package com.zjyang.mvpframe.module.home.model;
 
+import com.zjyang.base.base.BaseModel;
 import com.zjyang.mvpframe.event.GetHomeTabInfoEvent;
-import com.zjyang.mvpframe.module.base.BaseFragment;
-import com.zjyang.mvpframe.module.base.BaseModel;
+import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.discover.view.GridDiscoverFragment;
 import com.zjyang.mvpframe.module.home.focus.FocusFragment;
 import com.zjyang.mvpframe.module.home.me.view.MeFragment;
 import com.zjyang.mvpframe.module.home.tripcircle.view.TripCircleFragment;
 import com.zjyang.mvpframe.module.home.model.bean.TabInfo;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.LogUtil;
 import com.zjyang.mvpframe.utils.TabComparator;
 
 import org.greenrobot.eventbus.EventBus;

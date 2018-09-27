@@ -8,15 +8,15 @@ import android.text.TextUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.zjyang.base.BaseApp;
 import com.zjyang.mvpframe.db.DBConfig;
 import com.zjyang.mvpframe.db.base.DaoMaster;
 import com.zjyang.mvpframe.db.base.DaoSession;
-import com.zjyang.mvpframe.module.base.SkinManager;
 import com.zjyang.mvpframe.net.RequestApi;
 import com.zjyang.mvpframe.utils.Constants;
-import com.zjyang.mvpframe.utils.HandlerUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
-import com.zjyang.mvpframe.utils.ScreenUtils;
+import com.zjyang.base.utils.HandlerUtils;
+import com.zjyang.base.utils.LogUtil;
+import com.zjyang.base.utils.ScreenUtils;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -25,7 +25,6 @@ import cn.bmob.v3.BmobConfig;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 import tv.danmaku.ijk.media.player.PlugInSoHelper;
 
 /**
@@ -46,8 +45,8 @@ public class AppApplication extends Application{
         super.onCreate();
         long startAppTime = System.currentTimeMillis();
         mContext = this;
+        BaseApp.init(this);
         ScreenUtils.init(this);
-        SkinManager.getInstance().init();
         if(isMainProcess()){
 
         }
@@ -69,7 +68,6 @@ public class AppApplication extends Application{
                 initBombSDK();
             }
         });
-        initFresco();
         initDB();
     }
 
@@ -121,10 +119,6 @@ public class AppApplication extends Application{
                 .setApplicationId(Constants.BMOB_APP_KEY)//设置appkey
                 .setConnectTimeout(1000).build();
         Bmob.initialize(config);
-    }
-
-    public void initFresco(){
-        Fresco.initialize(this);
     }
 
     public static Context getContext(){

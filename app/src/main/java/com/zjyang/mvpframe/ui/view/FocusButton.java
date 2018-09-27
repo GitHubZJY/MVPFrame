@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.ui.ShapeUtils;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.base.utils.ShapeUtils;
+import com.zjyang.base.utils.DrawUtils;
 
 import static android.view.Gravity.CENTER;
 

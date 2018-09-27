@@ -1,6 +1,6 @@
 package com.zjyang.mvpframe.module.home.me.model;
 
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.home.me.MeTasksContract;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 

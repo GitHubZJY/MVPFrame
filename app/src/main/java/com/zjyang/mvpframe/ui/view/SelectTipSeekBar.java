@@ -13,7 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.SeekBar;
 
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.base.utils.DrawUtils;
 
 import java.lang.reflect.Field;
 

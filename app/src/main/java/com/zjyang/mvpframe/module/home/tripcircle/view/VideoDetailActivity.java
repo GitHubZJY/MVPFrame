@@ -2,35 +2,30 @@ package com.zjyang.mvpframe.module.home.tripcircle.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zjy.player.ui.PlayerListener;
-import com.example.zjy.player.ui.VideoFrame;
 import com.example.zjy.player.ui.YPlayerView;
+import com.zjyang.base.base.BaseActivity;
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FullScreenExitEvent;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.enlarge.view.BundleViewController;
 import com.zjyang.mvpframe.module.enlarge.view.EnlargeWatchActivity;
 import com.zjyang.mvpframe.module.home.tripcircle.adapter.CommentListAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.CommentInfo;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.VideoDetailPresenter;
-import com.zjyang.mvpframe.utils.DrawUtils;
+import com.zjyang.base.utils.DrawUtils;
 import com.zjyang.mvpframe.utils.KeyboardPatch;
-import com.zjyang.mvpframe.utils.ScreenUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

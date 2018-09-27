@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.utils.FrescoUtils;
+import com.zjyang.base.utils.FrescoUtils;
 
 import java.util.List;
 

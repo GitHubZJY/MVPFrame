@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zjyang.base.base.SkinManager;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.SkinManager;
-import com.zjyang.mvpframe.utils.DrawUtils;
-import com.zjyang.mvpframe.utils.ScreenUtils;
+import com.zjyang.base.utils.DrawUtils;
+import com.zjyang.base.utils.ScreenUtils;
 
 /**
  * <br>类描述: 滑动指示器

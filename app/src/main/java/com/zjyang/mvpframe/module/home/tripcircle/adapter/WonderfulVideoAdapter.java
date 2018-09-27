@@ -1,22 +1,19 @@
 package com.zjyang.mvpframe.module.home.tripcircle.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.view.VideoDetailActivity;
-import com.zjyang.mvpframe.utils.FrescoUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.FrescoUtils;
 
 import java.util.List;
 

@@ -1,30 +1,21 @@
 package com.zjyang.mvpframe.ui.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zjyang.mvpframe.application.AppApplication;
-import com.zjyang.mvpframe.module.base.SkinManager;
+import com.zjyang.base.base.SkinManager;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
-import com.zjyang.mvpframe.utils.DrawUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
-import com.zjyang.mvpframe.utils.ScreenUtils;
+import com.zjyang.base.utils.DrawUtils;
 
 import java.util.ArrayList;
 import java.util.List;

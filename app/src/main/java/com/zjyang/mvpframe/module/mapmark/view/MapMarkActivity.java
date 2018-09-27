@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 
 import com.amap.api.maps2d.AMap;
@@ -20,13 +17,11 @@ import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
+import com.zjyang.base.base.BaseActivity;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.mapmark.MapMarkTasksContract;
 import com.zjyang.mvpframe.module.mapmark.model.bean.MapMark;
 import com.zjyang.mvpframe.module.mapmark.presenter.MapMarkPresenter;
-import com.zjyang.mvpframe.utils.LogUtil;
 
 import java.util.List;
 

@@ -11,17 +11,17 @@ import android.view.ViewStub;
 import android.view.Window;
 
 import com.andview.refreshview.XRefreshView;
+import com.zjyang.base.base.BaseActivity;
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.RequestMyVideoListEvent;
-import com.zjyang.mvpframe.module.base.BaseActivity;
-import com.zjyang.mvpframe.module.base.BasePresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.myvideo.MyVideoTasksContract;
 import com.zjyang.mvpframe.module.myvideo.adapter.MyVideoListAdapter;
 import com.zjyang.mvpframe.module.myvideo.presenter.MyVideoPresenter;
-import com.zjyang.mvpframe.ui.view.CustomToolBar;
-import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
-import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
+import com.zjyang.base.widget.CustomToolBar;
+import com.zjyang.base.widget.RefreshLoadRecyclerView;
+import com.zjyang.base.widget.SpaceItemDecoration;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

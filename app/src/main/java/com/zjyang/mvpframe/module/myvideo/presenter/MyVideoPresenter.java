@@ -1,6 +1,6 @@
 package com.zjyang.mvpframe.module.myvideo.presenter;
 
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.myvideo.MyVideoTasksContract;

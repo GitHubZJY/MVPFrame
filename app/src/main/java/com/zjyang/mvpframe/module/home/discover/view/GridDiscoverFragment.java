@@ -1,46 +1,26 @@
 package com.zjyang.mvpframe.module.home.discover.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.zjyang.base.base.SkinManager;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.event.FullScreenExitEvent;
-import com.zjyang.mvpframe.event.RequestVideoListEvent;
-import com.zjyang.mvpframe.module.base.BaseFragment;
-import com.zjyang.mvpframe.module.base.SkinManager;
-import com.zjyang.mvpframe.module.home.adapter.GridVideoListAdapter;
+import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
-import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
-import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.discover.model.bean.Province;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
-import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
-import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
 import com.zjyang.mvpframe.ui.view.TabContainer;
-import com.zjyang.mvpframe.utils.DrawUtils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**

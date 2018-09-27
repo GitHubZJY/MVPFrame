@@ -1,8 +1,8 @@
 package com.zjyang.mvpframe.module.home.presenter;
 
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.event.GetHomeTabInfoEvent;
-import com.zjyang.mvpframe.module.base.BaseFragment;
-import com.zjyang.mvpframe.module.base.BasePresenter;
+import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.HomeTasksContract;
 import com.zjyang.mvpframe.module.home.model.HomeModel;
 

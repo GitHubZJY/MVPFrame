@@ -2,13 +2,13 @@ package com.zjyang.mvpframe.module.login.presenter;
 
 import android.text.TextUtils;
 
-import com.zjyang.mvpframe.module.base.BasePresenter;
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.base.base.BasePresenter;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.login.ILoginCallBack;
 import com.zjyang.mvpframe.module.login.LoginErrorCode;
 import com.zjyang.mvpframe.module.login.LoginTasksContract;
 import com.zjyang.mvpframe.module.login.model.LoginModel;
-import com.zjyang.mvpframe.utils.HandlerUtils;
+import com.zjyang.base.utils.HandlerUtils;
 
 /**
  * Created by zhengjiayang on 2018/3/1.

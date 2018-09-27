@@ -5,14 +5,11 @@ import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.utils.DrawUtils;
-import com.zjyang.mvpframe.utils.FrescoUtils;
+import com.zjyang.base.utils.FrescoUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,9 @@
 package com.zjyang.mvpframe.module.home.discover.view;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +11,13 @@ import android.view.ViewStub;
 
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.RequestVideoListEvent;
-import com.zjyang.mvpframe.module.base.BaseFragment;
+import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.adapter.GridVideoListAdapter;
-import com.zjyang.mvpframe.module.home.adapter.HomePagerAdapter;
-import com.zjyang.mvpframe.module.home.adapter.VideoListAdapter;
 import com.zjyang.mvpframe.module.home.discover.DiscoverTasksContract;
-import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
-import com.zjyang.mvpframe.module.home.discover.model.bean.Province;
 import com.zjyang.mvpframe.module.home.discover.presenter.DiscoverPresenter;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.ui.view.RefreshLoadRecyclerView;
-import com.zjyang.mvpframe.ui.view.SpaceItemDecoration;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.widget.RefreshLoadRecyclerView;
+import com.zjyang.base.widget.SpaceItemDecoration;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

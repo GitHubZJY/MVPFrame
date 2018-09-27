@@ -4,14 +4,13 @@ import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
 import com.zjyang.mvpframe.application.AppApplication;
-import com.zjyang.mvpframe.constant.SpConstant;
+import com.zjyang.base.constant.SpConstant;
 import com.zjyang.mvpframe.event.RequestMyVideoListEvent;
-import com.zjyang.mvpframe.event.RequestVideoListEvent;
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
 import com.zjyang.mvpframe.module.login.model.bean.User;
 import com.zjyang.mvpframe.module.myvideo.MyVideoTasksContract;
-import com.zjyang.mvpframe.utils.SpUtils;
+import com.zjyang.base.utils.SpUtils;
 
 import org.greenrobot.eventbus.EventBus;
 

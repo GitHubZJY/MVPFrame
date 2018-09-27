@@ -2,7 +2,7 @@ package com.zjyang.mvpframe.module.camera.model;
 
 import android.hardware.Camera;
 
-import com.zjyang.mvpframe.utils.ScreenUtils;
+import com.zjyang.base.utils.ScreenUtils;
 
 import java.util.List;
 

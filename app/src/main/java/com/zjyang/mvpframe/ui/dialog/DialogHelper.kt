@@ -11,9 +11,9 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.zjyang.mvpframe.R
-import com.zjyang.mvpframe.ui.ShapeUtils
-import com.zjyang.mvpframe.utils.DrawUtils
-import com.zjyang.mvpframe.utils.PermissionUtils
+import com.zjyang.base.utils.ShapeUtils
+import com.zjyang.base.utils.DrawUtils
+import com.zjyang.base.utils.PermissionUtils
 
 /**
  * Created by 74215 on 2018/7/22.

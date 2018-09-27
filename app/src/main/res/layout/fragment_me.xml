@@ -247,7 +247,7 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-                <com.zjyang.mvpframe.module.home.me.view.BaseSettingItem
+                <com.zjyang.base.widget.BaseSettingItem
                     android:id="@+id/my_zuji_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -257,8 +257,8 @@
                     app:bottom_line_margin="56dp"
                     app:content_text="我的足迹">
 
-                </com.zjyang.mvpframe.module.home.me.view.BaseSettingItem>
-                <com.zjyang.mvpframe.module.home.me.view.BaseSettingItem
+                </com.zjyang.base.widget.BaseSettingItem>
+                <com.zjyang.base.widget.BaseSettingItem
                     android:id="@+id/like_video_history_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -267,7 +267,7 @@
                     app:content_text="赞过的视频"
                     app:top_line_visible="false">
 
-                </com.zjyang.mvpframe.module.home.me.view.BaseSettingItem>
+                </com.zjyang.base.widget.BaseSettingItem>
             </LinearLayout>
 
         </ScrollView>

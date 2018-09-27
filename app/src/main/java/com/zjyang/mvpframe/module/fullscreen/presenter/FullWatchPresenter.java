@@ -1,8 +1,8 @@
 package com.zjyang.mvpframe.module.fullscreen.presenter;
 
+import com.zjyang.base.base.BasePresenter;
 import com.zjyang.mvpframe.event.FocusResultEvent;
-import com.zjyang.mvpframe.module.base.BasePresenter;
-import com.zjyang.mvpframe.module.base.UserDataManager;
+import com.zjyang.mvpframe.module.UserDataManager;
 import com.zjyang.mvpframe.module.fullscreen.FullWatchTasksContract;
 import com.zjyang.mvpframe.module.fullscreen.model.FullWatchModel;
 import com.zjyang.mvpframe.module.login.model.bean.User;

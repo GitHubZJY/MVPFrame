@@ -7,14 +7,14 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.zjyang.base.base.BaseActivity;
 import com.zjyang.mvpframe.R;
-import com.zjyang.mvpframe.module.base.BaseActivity;
 import com.zjyang.mvpframe.module.home.discover.model.DiscoverModel;
 import com.zjyang.mvpframe.module.rank.RankTasksContract;
 import com.zjyang.mvpframe.module.rank.adapter.RankListAdapter;
 import com.zjyang.mvpframe.module.rank.presenter.RankPresenter;
-import com.zjyang.mvpframe.utils.FrescoUtils;
-import com.zjyang.mvpframe.utils.ScreenUtils;
+import com.zjyang.base.utils.FrescoUtils;
+import com.zjyang.base.utils.ScreenUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

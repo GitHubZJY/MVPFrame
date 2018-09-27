@@ -1,7 +1,6 @@
 package com.zjyang.mvpframe.module.myvideo.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,16 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.zjy.player.ui.VideoFrame;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.fullscreen.view.FullScreenWatchActivity;
 import com.zjyang.mvpframe.module.home.discover.model.VideoFramesModel;
 import com.zjyang.mvpframe.module.home.model.bean.VideoInfo;
-import com.zjyang.mvpframe.ui.ShapeUtils;
-import com.zjyang.mvpframe.utils.DrawUtils;
-import com.zjyang.mvpframe.utils.FrescoUtils;
-import com.zjyang.mvpframe.utils.LogUtil;
+import com.zjyang.base.utils.ShapeUtils;
+import com.zjyang.base.utils.FrescoUtils;
 
 import java.util.List;
 
