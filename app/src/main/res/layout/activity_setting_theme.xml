@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:left_btn_src="@drawable/ic_close_black"
+    app:left_btn_src="@drawable/ic_back"
     app:left_btn_visible="true"
     app:right_tv_visible="true"
     app:right_tv_text="保存"

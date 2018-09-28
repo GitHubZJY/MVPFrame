@@ -1,4 +1,4 @@
-package com.zjyang.mvpframe.ui.dialog;
+package com.zjyang.base.widget.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,8 +16,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.example.zjy.player.utils.PlayerUtil;
 import com.zjyang.base.utils.LogUtil;
+import com.zjyang.base.utils.ScreenUtils;
 
 /**
  * Created by zhengjiayang on 2018/7/16.
@@ -87,7 +87,7 @@ public class BaseDialogFragment extends DialogFragment {
             Window window = getDialog().getWindow();
             window.setGravity(Gravity.CENTER);
             WindowManager.LayoutParams windowParams = window.getAttributes();
-            windowParams.width = (int) (PlayerUtil.getScreenWidth(getContext()) * mDialogWidthScale);
+            windowParams.width = (int) (ScreenUtils.getsScreenWidth() * mDialogWidthScale);
             windowParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
             windowParams.dimAmount = mBgAlpha;
             window.setAttributes(windowParams);

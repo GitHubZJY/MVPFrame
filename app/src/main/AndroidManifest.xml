@@ -96,10 +96,10 @@
             android:screenOrientation="landscape"/>
 
         <activity android:name=".module.setting.SettingActivity"
-            android:theme="@style/ActivityFullScreen"/>
+            android:theme="@style/ActivityFullScreenNoAnim"/>
 
         <activity android:name=".module.setting.theme.ThemeSettingActivity"
-            android:theme="@style/ActivityFullScreen"/>
+            android:theme="@style/ActivityFullScreenNoAnim"/>
 
 
         <meta-data

@@ -14,6 +14,7 @@ import com.zjyang.base.R;
 
 /**
  * Created by 74215 on 2018/7/18.
+ * 封装基础设置项ItemView
  */
 
 public class BaseSettingItem extends RelativeLayout{

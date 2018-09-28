@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by 74215 on 2018/9/15.
+ * 换肤管理类
  */
 
 public class SkinManager {
@@ -51,7 +52,7 @@ public class SkinManager {
             toggleTheme(curTheme);
         }
         themeList.clear();
-        themeList.add(new ThemeInfo(YELLOW_THEME, YELLOW, "#ffffff"));
+        themeList.add(new ThemeInfo(YELLOW_THEME, YELLOW, "#000000"));
         themeList.add(new ThemeInfo(BLUE_THEME, BLUE, "#ffffff"));
         themeList.add(new ThemeInfo(RED_THEME, RED, "#ffffff"));
         themeList.add(new ThemeInfo(ORANGE_THEME, ORANGE, "#ffffff"));
@@ -92,7 +93,7 @@ public class SkinManager {
             case YELLOW_THEME:
                 SpUtils.obtain().save(CUR_THEME_SP, YELLOW_THEME);
                 setPrimaryColor(Color.parseColor(YELLOW));
-                setPrimaryTextColor(Color.parseColor("#ffffff"));
+                setPrimaryTextColor(Color.parseColor("#000000"));
                 break;
             case BLUE_THEME:
                 SpUtils.obtain().save(CUR_THEME_SP, BLUE_THEME);

@@ -4,6 +4,7 @@ package com.zjyang.mvpframe.ui.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -44,7 +45,7 @@ public class PluginTabStrip extends LinearLayout {
 		mSelectedUnderlineThickness = DrawUtils.dp2px(2);
 		
 		mSelectedUnderlinePaint = new Paint();
-		mSelectedUnderlinePaint.setColor(rsc.getColor(R.color.goplay_home_tab_strip_selected_indicator));
+		mSelectedUnderlinePaint.setColor(SkinManager.getInstance().isDefaultTheme() ? Color.BLACK : Color.WHITE);
 		mSelectedUnderlinePaint.setStrokeWidth(rsc.getDimensionPixelSize(R.dimen.goplugin_home_tab_strip_selected_indicator_width));
 
 		mDefaultColor = SkinManager.getInstance().getPrimaryTextColor();

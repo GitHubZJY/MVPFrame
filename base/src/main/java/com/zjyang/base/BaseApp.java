@@ -13,6 +13,10 @@ public class BaseApp {
 
     public static Context sContext;
 
+    /**
+     * 基础库初始化，必须在主module的application初始化中调用
+     * @param context
+     */
     public static void init(Context context){
         sContext =context;
         SkinManager.getInstance().init();

@@ -111,11 +111,12 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
     }
 
     @Override
-    public void clickTab(int index) {
+    public boolean clickTab(int index) {
         if(index == 4 && !UserDataManager.getInstance().checkLogin(this)){
-            return;
+            return false;
         }
         mViewPager.setCurrentItem(index - 1);
+        return true;
     }
 
     /*************************Android6.0以上申请相机权限的回调**************************/

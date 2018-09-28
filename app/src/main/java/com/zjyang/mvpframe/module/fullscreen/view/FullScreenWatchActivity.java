@@ -10,12 +10,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -32,6 +37,7 @@ import com.zjyang.base.utils.DrawUtils;
 import com.zjyang.base.utils.FrescoUtils;
 import com.zjyang.base.utils.LogUtil;
 import com.zjyang.base.utils.ToastUtils;
+import com.zjyang.mvpframe.utils.KeyboardPatch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,13 +50,15 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  * Created by 74215 on 2018/4/15.
  */
 
-public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> implements FullWatchTasksContract.View{
+public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> implements FullWatchTasksContract.View, TextWatcher{
 
     private static final String TAG = "FullScreenWatchActivity";
     private static final String VIDEO_INFO = "VIDEO_INFO";
     private static final String JUMP_ANIM_VIEW = "JUMP_ANIM_VIEW";
     private Unbinder unbinder;
 
+    @BindView(R.id.root_view)
+    RelativeLayout mRootView;
     @BindView(R.id.preview_iv)
     SimpleDraweeView mPreviewIv;
     @BindView(R.id.player_view)
@@ -59,6 +67,8 @@ public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> im
     TableLayout mHudView;
     @BindView(R.id.comment_edit)
     EditText mCommentEdit;
+    @BindView(R.id.comment_hint_tv)
+    TextView mHintTv;
     @BindView(R.id.video_user_pic)
     SimpleDraweeView mVideoUserPic;
     @BindView(R.id.user_group_view)
@@ -77,6 +87,8 @@ public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> im
     ImageView mCenterPlayIv;
 
     private VideoInfo mVideoInfo;
+
+    private KeyboardPatch keyboardPatch;
 
     @Override
     public FullWatchPresenter createPresenter() {
@@ -99,8 +111,13 @@ public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> im
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);// 允许使用transitions
+        getWindow().setSoftInputMode
+                (WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|
+                        WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.activity_full_screen_watch);
         unbinder = ButterKnife.bind(this);
+        keyboardPatch = new KeyboardPatch(this, mRootView);
+        keyboardPatch.enable();
         ViewCompat.setTransitionName(mPreviewIv, JUMP_ANIM_VIEW);
         mCommentEdit.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(20), Color.parseColor("#33000000")));
         mAuthorGroupView.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(32), Color.parseColor("#33000000")));
@@ -124,6 +141,27 @@ public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> im
         FrescoUtils.showImgByUrl(mVideoInfo.getVideoThumbUrl(), mPreviewIv);
         FrescoUtils.showImgByUrl(mVideoInfo.getUserPicUrl(), mVideoUserPic);
         mAuthorNameTv.setText(mVideoInfo.getUserName());
+
+        mCommentEdit.addTextChangedListener(this);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if(TextUtils.isEmpty(s)){
+            mHintTv.setVisibility(View.VISIBLE);
+        }else{
+            mHintTv.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 
     @Override
@@ -180,6 +218,7 @@ public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> im
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        keyboardPatch.disable();
         unbinder.unbind();
     }
 }

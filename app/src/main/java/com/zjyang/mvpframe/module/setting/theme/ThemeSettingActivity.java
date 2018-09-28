@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ public class ThemeSettingActivity extends BaseActivity implements ThemeSettingAd
     TextView mTitleTv;
     @BindView(R.id.toolbar_right_tv)
     TextView mSaveTv;
+    @BindView(R.id.toolbar_left_btn)
+    Button mBackBtn;
 
     @BindView(R.id.theme_lv)
     RecyclerView mThemeLv;
@@ -102,6 +105,11 @@ public class ThemeSettingActivity extends BaseActivity implements ThemeSettingAd
         }
         SkinManager.getInstance().toggleTheme(mThemeAdapter.getCurApplyTheme().getThemeId());
         restart();
+    }
+
+    @OnClick(R.id.toolbar_left_btn)
+    void clickBack(){
+        finish();
     }
 
 

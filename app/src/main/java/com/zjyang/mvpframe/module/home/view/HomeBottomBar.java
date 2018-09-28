@@ -234,6 +234,13 @@ public class HomeBottomBar extends LinearLayout{
         mMeTab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean isClickSuccess = false;
+                if(mTabClickListener != null){
+                    isClickSuccess = mTabClickListener.clickTab((Integer) mMeTab.getTag());
+                }
+                if(!isClickSuccess){
+                    return;
+                }
                 mDiscoverIv.setImageDrawable(mDiscoverNormal);
                 mFocusIv.setImageDrawable(mFocusNormal);
                 mMessageIv.setImageDrawable(mCircleNormal);
@@ -242,9 +249,6 @@ public class HomeBottomBar extends LinearLayout{
                 mFocusTv.setTextColor(Color.BLACK);
                 mMessageTv.setTextColor(Color.BLACK);
                 mMeTv.setTextColor(SkinManager.getInstance().getPrimaryColor());
-                if(mTabClickListener != null){
-                    mTabClickListener.clickTab((Integer) mMeTab.getTag());
-                }
             }
         });
     }
@@ -272,7 +276,7 @@ public class HomeBottomBar extends LinearLayout{
     }
 
     public interface TabClickListener {
-        void clickTab(int index);
+        boolean clickTab(int index);
     }
 
 

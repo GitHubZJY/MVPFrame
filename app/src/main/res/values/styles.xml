@@ -26,6 +26,15 @@
         <!--<item name="android:windowFullscreen">true</item>-->
     </style>
 
+    <style name="ActivityFullScreenNoAnim" parent="AppTheme">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!--<item name="android:windowFullscreen">true</item>-->
+    </style>
+
     <style name="AppWindowAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>

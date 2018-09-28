@@ -14,6 +14,7 @@ import com.zjyang.mvpframe.R
 import com.zjyang.base.utils.ShapeUtils
 import com.zjyang.base.utils.DrawUtils
 import com.zjyang.base.utils.PermissionUtils
+import com.zjyang.base.widget.dialog.BaseDialogFragment
 
 /**
  * Created by 74215 on 2018/7/22.

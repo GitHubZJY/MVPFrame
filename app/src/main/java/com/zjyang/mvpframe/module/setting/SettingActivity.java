@@ -2,6 +2,7 @@ package com.zjyang.mvpframe.module.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.zjyang.base.base.BaseActivity;
 import com.zjyang.base.base.BasePresenter;
@@ -29,6 +30,8 @@ public class SettingActivity extends BaseActivity {
 
     @BindView(R.id.setting_theme_entrance)
     BaseSettingItem mThemeEntrance;
+    @BindView(R.id.toolbar_left_btn)
+    Button mBackBtn;
 
     @Override
     public BasePresenter createPresenter() {
@@ -49,6 +52,11 @@ public class SettingActivity extends BaseActivity {
     void clickToSettingTheme(){
         Intent intent = new Intent(this, ThemeSettingActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.toolbar_left_btn)
+    void clickBack(){
+        finish();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
