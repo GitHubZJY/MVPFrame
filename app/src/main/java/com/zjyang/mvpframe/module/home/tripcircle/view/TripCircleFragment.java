@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zjyang.base.base.SkinManager;
+import com.zjyang.base.ui.WebViewActivity;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.tripcircle.TripCircleTasksContract;
@@ -147,6 +148,11 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
     void clickRankEntrance(){
         Intent intent = new Intent(getContext(), RankActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.second_scene_iv)
+    void clickWebEntrance(){
+        WebViewActivity.go(getContext(), "https://m.mafengwo.cn");
     }
 
     @Override
