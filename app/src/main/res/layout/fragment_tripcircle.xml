@@ -181,7 +181,15 @@
                 android:layout_marginLeft="16dp"
                 android:textColor="@color/primary_text_color"
                 android:textSize="18sp"
-                android:text="个性推荐"/>
+                android:text="传送门"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/trip_web_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
     </com.zjyang.mvpframe.ui.view.CustomScrollView>

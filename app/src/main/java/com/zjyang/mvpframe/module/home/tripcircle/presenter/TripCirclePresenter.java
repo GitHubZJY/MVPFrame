@@ -35,6 +35,7 @@ public class TripCirclePresenter implements TripCircleTasksContract.Presenter {
         }
         mModel.getAllWonderfulVideo();
         mView.initBannerView(mModel.getBannerData());
+        mView.initTripWebListView(mModel.getTripWebData());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

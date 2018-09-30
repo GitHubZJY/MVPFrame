@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.ui.view;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -44,7 +45,7 @@ public class FocusButton extends TextView{
         setCompoundDrawables(mUnFocusDrawable, null, null, null);
         setGravity(CENTER);
         setPadding(DrawUtils.dp2px(4), DrawUtils.dp2px(2), DrawUtils.dp2px(4), DrawUtils.dp2px(2));
-        setTextSize(DrawUtils.dp2px(5));
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         setText("关注");
         setOnClickListener(mClickListener);
     }

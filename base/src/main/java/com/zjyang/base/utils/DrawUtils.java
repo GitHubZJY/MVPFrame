@@ -21,4 +21,16 @@ public class DrawUtils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal,
                 BaseApp.sContext.getResources().getDisplayMetrics());
     }
+
+    /**
+     * sp 转 px
+     *
+     * @param spValue
+     *            sp大小
+     * @return 像素值
+     */
+    public static int sp2px(float spValue) {
+        final float scale = BaseApp.sContext.getResources().getDisplayMetrics().density;
+        return (int) (scale * spValue);
+    }
 }

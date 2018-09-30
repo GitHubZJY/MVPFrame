@@ -16,7 +16,9 @@ import com.zjyang.base.ui.WebViewActivity;
 import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.module.BaseFragment;
 import com.zjyang.mvpframe.module.home.tripcircle.TripCircleTasksContract;
+import com.zjyang.mvpframe.module.home.tripcircle.adapter.TripWebListAdapter;
 import com.zjyang.mvpframe.module.home.tripcircle.adapter.WonderfulVideoAdapter;
+import com.zjyang.mvpframe.module.home.tripcircle.model.bean.TripWebInfo;
 import com.zjyang.mvpframe.module.home.tripcircle.model.bean.WonderfulVideo;
 import com.zjyang.mvpframe.module.home.tripcircle.presenter.TripCirclePresenter;
 import com.zjyang.mvpframe.module.home.tripcircle.widget.BannerIndicator;
@@ -68,13 +70,19 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
     RelativeLayout mToolbar;
     @BindView(R.id.tool_bar_bg)
     View mToolbarBg;
+    @BindView(R.id.trip_web_list)
+    RecyclerView mTripWebLv;
 
 
     private WonderfulVideoAdapter mWonderfulAdapter;
     private LinearLayoutManager mWonderfulLayoutManager;
     private TripCircleTasksContract.Presenter mPresenter;
 
+    private TripWebListAdapter mTripWebAdapter;
+    private LinearLayoutManager mTripWebLayoutManager;
+
     List<WonderfulVideo> mWonderfulVideoList;
+    List<TripWebInfo> mTripWebInfoList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,15 +94,21 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
         RelativeLayout.LayoutParams toolbarParams = (RelativeLayout.LayoutParams) mToolbar.getLayoutParams();
         toolbarParams.setMargins(0, ScreenUtils.getStatusBarHeight(), 0, 0);
 
-        mPresenter = new TripCirclePresenter(this);
-        mPresenter.initTripCircleData();
-
         mWonderfulVideoList = new ArrayList<>();
         mWonderfulAdapter = new WonderfulVideoAdapter(getContext(), mWonderfulVideoList);
         mWonderfulLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mWonderfulVideoLv.addItemDecoration(new SpaceItemDecoration(10, 1, LinearLayoutManager.HORIZONTAL));
         mWonderfulVideoLv.setLayoutManager(mWonderfulLayoutManager);
         mWonderfulVideoLv.setAdapter(mWonderfulAdapter);
+
+        mTripWebInfoList = new ArrayList<>();
+        mTripWebAdapter = new TripWebListAdapter(getContext(), mTripWebInfoList);
+        mTripWebLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mTripWebLv.addItemDecoration(new SpaceItemDecoration(DrawUtils.dp2px(16), 1, LinearLayoutManager.VERTICAL));
+        mTripWebLv.setLayoutManager(mTripWebLayoutManager);
+        mTripWebLv.setAdapter(mTripWebAdapter);
+        mTripWebLv.setNestedScrollingEnabled(false);
+
 
         FrescoUtils.showImgByUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535397882896&di=09c6277a19464f5a7c83b2450927da96&imgtype=0&src=http%3A%2F%2Fimg06.tooopen.com%2Fimages%2F20180116%2Ftooopen_sy_232320877961.jpg", mTopSceneIv);
         FrescoUtils.showUrlBlur(mSecondSceneIv, "http://thumbs.dreamstime.com/t/摄影师剪影-7849367.jpg", 5);
@@ -110,12 +124,25 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
                 LogUtil.d("scrollview", "y: " + scrollY);
             }
         });
+
+        mPresenter = new TripCirclePresenter(this);
+        mPresenter.initTripCircleData();
         return view;
     }
 
     @Override
     public void initBannerView(List<String> urlList){
         mViewPager.setBannerData(urlList);
+    }
+
+    @Override
+    public void initTripWebListView(List<TripWebInfo> data) {
+        if(mTripWebInfoList == null || mTripWebAdapter == null){
+            return;
+        }
+        mTripWebInfoList.clear();
+        mTripWebInfoList.addAll(data);
+        mTripWebAdapter.notifyDataSetChanged();
     }
 
     @Override

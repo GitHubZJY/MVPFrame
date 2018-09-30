@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +142,7 @@ public class HomeBottomBar extends LinearLayout{
 
     private void initTabItemTv(TextView itemTv){
         itemTv.setTextColor(getResources().getColor(R.color.primary_text_color));
-        itemTv.setTextSize(DrawUtils.dp2px(5));
+        itemTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         LinearLayout.LayoutParams mItemTvParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         itemTv.setLayoutParams(mItemTvParams);
     }

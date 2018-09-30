@@ -41,7 +41,7 @@ public class TabContainer extends HorizontalScrollView implements
 
     private int mTabViewWidth = DrawUtils.dp2px(20);
     private int mTabViewTextNormalColor = SkinManager.getInstance().getPrimaryTextColor();
-    private int mTabViewTextSize = DrawUtils.dp2px(15);
+    private int mTabViewTextSize = 15;
 
 
     public TabContainer(Context context, AttributeSet attrs) {
@@ -143,7 +143,7 @@ public class TabContainer extends HorizontalScrollView implements
                 textView.setTextColor(mTabViewTextNormalColor);
             }
             if (mTabViewTextSize != 0) {
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabViewTextSize);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTabViewTextSize);
             }
             if(index == 0){
                 textView.setTypeface(Typeface.DEFAULT_BOLD);

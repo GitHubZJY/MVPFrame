@@ -268,6 +268,17 @@
                     app:top_line_visible="false">
 
                 </com.zjyang.base.widget.BaseSettingItem>
+
+                <com.zjyang.base.widget.BaseSettingItem
+                    android:id="@+id/my_message_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_bg"
+                    app:left_icon_src="@drawable/ic_support"
+                    app:content_text="我的消息"
+                    app:top_line_visible="false">
+
+                </com.zjyang.base.widget.BaseSettingItem>
             </LinearLayout>
 
         </ScrollView>
