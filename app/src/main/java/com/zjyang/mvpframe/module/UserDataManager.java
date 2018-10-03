@@ -49,4 +49,9 @@ public class UserDataManager {
         }
         return true;
     }
+
+    public void clearCurUserData(){
+        UserDBHelper.getInstance().deleteUser(getCurUser());
+        mCurUser = null;
+    }
 }

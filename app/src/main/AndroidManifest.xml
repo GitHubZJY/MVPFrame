@@ -101,6 +101,8 @@
         <activity android:name=".module.setting.theme.ThemeSettingActivity"
             android:theme="@style/ActivityFullScreenNoAnim"/>
 
+        <activity android:name=".module.collagedetail.view.CollageDetailActivity"
+            android:theme="@style/ActivityFullScreenNoAnim"/>
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

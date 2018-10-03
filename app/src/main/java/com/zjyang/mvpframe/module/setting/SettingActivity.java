@@ -10,6 +10,7 @@ import com.zjyang.mvpframe.R;
 import com.zjyang.mvpframe.event.FinishActivityEvent;
 import com.zjyang.base.widget.BaseSettingItem;
 import com.zjyang.mvpframe.module.setting.theme.ThemeSettingActivity;
+import com.zjyang.mvpframe.ui.dialog.DialogHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,6 +31,8 @@ public class SettingActivity extends BaseActivity {
 
     @BindView(R.id.setting_theme_entrance)
     BaseSettingItem mThemeEntrance;
+    @BindView(R.id.exit_account_entrance)
+    BaseSettingItem mExitAccountEntrance;
     @BindView(R.id.toolbar_left_btn)
     Button mBackBtn;
 
@@ -52,6 +55,11 @@ public class SettingActivity extends BaseActivity {
     void clickToSettingTheme(){
         Intent intent = new Intent(this, ThemeSettingActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.exit_account_entrance)
+    void clickExitAccount(){
+        DialogHelper.Companion.showConfirmDialog(getFragmentManager(), "确认退出当前账号吗", DialogHelper.Companion.getEXIT_DIALOG());
     }
 
     @OnClick(R.id.toolbar_left_btn)

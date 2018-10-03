@@ -16,5 +16,9 @@
 
     <string name="setting">设置</string>
     <string name="change_theme">个性换肤</string>
+    <string name="collage_detail">招募详情</string>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
 
 </resources>

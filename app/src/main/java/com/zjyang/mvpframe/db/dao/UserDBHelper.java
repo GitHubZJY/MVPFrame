@@ -1,5 +1,7 @@
 package com.zjyang.mvpframe.db.dao;
 
+import android.util.Log;
+
 import com.zjyang.mvpframe.application.AppApplication;
 import com.zjyang.mvpframe.db.base.DBUserDao;
 import com.zjyang.mvpframe.db.base.DaoSession;
@@ -32,6 +34,17 @@ public class UserDBHelper {
             DBUser dbUser = user.switchDBUser(user);
             daoSession.getDBUserDao().insert(dbUser);
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteUser(User user){
+        try{
+            DaoSession daoSession = AppApplication.getDaoSession();
+            //DBUser dbUser = user.switchDBUser(user);
+            daoSession.getDBUserDao().deleteAll();
+        }catch (Exception e){
+            Log.d("zjy", e.toString());
             e.printStackTrace();
         }
     }

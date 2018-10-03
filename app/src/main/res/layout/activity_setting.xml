@@ -20,4 +20,16 @@
         app:content_text="个性换肤">
 
     </com.zjyang.base.widget.BaseSettingItem>
+
+    <com.zjyang.base.widget.BaseSettingItem
+        android:id="@+id/exit_account_entrance"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/ripple_bg"
+        app:top_line_visible="false"
+        app:left_icon_src="@drawable/ic_exit_account"
+        app:bottom_line_margin="56dp"
+        app:content_text="注销账号">
+
+    </com.zjyang.base.widget.BaseSettingItem>
 </com.zjyang.base.widget.CustomToolBar>
