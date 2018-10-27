@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.application;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -59,6 +60,13 @@ public class AppApplication extends Application{
         LogUtil.e(TAG, "Application start time--->" + (System.currentTimeMillis() - startAppTime));
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+
     private void initInMainProcess(){
         LogUtil.e(TAG, "主进程启动初始化操作");
         HandlerUtils.postThread(new Runnable() {
@@ -102,11 +110,6 @@ public class AppApplication extends Application{
     }
 
     public void initQuPaiSDK(){
-        System.loadLibrary("aliresample");
-        System.loadLibrary("live-openh264");
-        System.loadLibrary("QuCore-ThirdParty");
-        System.loadLibrary("QuCore");
-
         com.aliyun.common.httpfinal.QupaiHttpFinal.getInstance().initOkHttpFinal();
         com.aliyun.vod.common.httpfinal.QupaiHttpFinal.getInstance().initOkHttpFinal();
     }

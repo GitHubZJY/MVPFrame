@@ -10,6 +10,9 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 import com.zjyang.base.base.BaseActivity;
 import com.zjyang.base.base.SkinManager;
 import com.zjyang.mvpframe.R;
@@ -127,14 +130,15 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeTas
         if (requestCode == PermissionUtils.MY_PERMISSION_REQUEST_CODE) {
             boolean isAllGranted = true;
 
-            // 判断是否所有的权限都已经授予了
             for (int grant : grantResults) {
+                //PERMISSION_GRANTED表示用户同意，PERMISSION_DENIED表示不同意
                 if (grant != PackageManager.PERMISSION_GRANTED) {
                     isAllGranted = false;
                     break;
                 }
             }
 
+            // 判断是否所有的权限都已经授予了
             if (isAllGranted) {
                 // 如果所有的权限都授予了, 则跳转录制界面
                 jumpToCameraPage();

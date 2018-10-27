@@ -15,10 +15,10 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
+        multiDexEnabled true
     }
     buildTypes {
         debug {
-            multiDexEnabled true
             signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -70,6 +70,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.2'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.android.support:multidex:1.0.0'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'cn.bmob.android:http-legacy:1.0'
@@ -82,6 +83,9 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:3.0.0'
 
     compile 'com.android.support:design:26.2.0'
+
+    compile 'com.yanzhenjie.alertdialog:alertdialog:1.0.1'
+    compile 'com.yanzhenjie:permission:2.0.0-rc12'
 
     compile ('com.squareup.retrofit2:retrofit:2.1.0'){
         exclude group : 'com.google.code.gson'

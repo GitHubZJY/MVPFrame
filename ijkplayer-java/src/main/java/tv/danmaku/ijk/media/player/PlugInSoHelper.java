@@ -32,7 +32,11 @@ public class PlugInSoHelper implements Runnable {
     private static final String[] SO_ARRAYS = {
             "libijkffmpeg.so",
             "libijkplayer.so",
-            "libijksdl.so"
+            "libijksdl.so",
+            "libaliresample.so",
+            "liblive-openh264.so",
+            "libQuCore-ThirdParty.so",
+            "libQuCore.so"
     };
 
     private static boolean sIsRunning;
@@ -90,9 +94,13 @@ public class PlugInSoHelper implements Runnable {
             sSp.edit().putLong(LAST_COPY_SO_VC, curTime).apply();
         }
         sIsRunning = false;
-        PlugInSoHelper.loadLibrary("ijkffmpeg");
-        PlugInSoHelper.loadLibrary("ijksdl");
         PlugInSoHelper.loadLibrary("ijkplayer");
+        PlugInSoHelper.loadLibrary("ijksdl");
+        PlugInSoHelper.loadLibrary("ijkffmpeg");
+        PlugInSoHelper.loadLibrary("aliresample");
+        PlugInSoHelper.loadLibrary("live-openh264");
+        PlugInSoHelper.loadLibrary("QuCore-ThirdParty");
+        PlugInSoHelper.loadLibrary("QuCore");
     }
 
     private void copySo(String soName, String apkPath, boolean notNewTime) {
@@ -134,7 +142,11 @@ public class PlugInSoHelper implements Runnable {
         if (!TextUtils.isEmpty(sNativeLibraryPath)) {
             File file = new File(sNativeLibraryPath, "lib" + libname + ".so");
             if (file.exists()) {
-                System.load(file.getPath());
+                try{
+                    System.load(file.getPath());
+                }catch (UnsatisfiedLinkError e){
+                    Log.e(TAG, "load " + libname + " error！！！");
+                }
                 Log.d(TAG, "load " + file.getPath());
                 return;
             }
