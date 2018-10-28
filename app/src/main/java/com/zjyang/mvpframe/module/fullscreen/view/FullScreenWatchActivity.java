@@ -179,7 +179,7 @@ public class FullScreenWatchActivity extends BaseActivity<FullWatchPresenter> im
 
     @OnClick(R.id.close_iv)
     void clickClose(){
-        onBackPressed();
+        exitFullScreen();
     }
 
     @OnTouch(R.id.player_view)

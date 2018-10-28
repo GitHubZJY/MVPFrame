@@ -120,6 +120,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
                 <android.support.v7.widget.CardView
+                    android:id="@+id/second_scene_card"
                     android:layout_width="140dp"
                     android:layout_height="100dp"
                     android:layout_marginRight="4dp"
@@ -146,6 +147,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/third_scene_card"
                     android:layout_width="180dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="4dp"

@@ -3,6 +3,7 @@ package com.zjyang.mvpframe.module.home.tripcircle.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -60,8 +61,12 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
     SimpleDraweeView mTopSceneIv;
     @BindView(R.id.second_scene_iv)
     SimpleDraweeView mSecondSceneIv;
+    @BindView(R.id.second_scene_card)
+    CardView mSecondCard;
     @BindView(R.id.third_scene_iv)
     SimpleDraweeView mThirdSceneIv;
+    @BindView(R.id.third_scene_card)
+    CardView mThirdCard;
     @BindView(R.id.search_entrance)
     RelativeLayout mSearchView;
     @BindView(R.id.scroll_view)
@@ -113,6 +118,9 @@ public class TripCircleFragment extends BaseFragment implements TripCircleTasksC
         FrescoUtils.showImgByUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535397882896&di=09c6277a19464f5a7c83b2450927da96&imgtype=0&src=http%3A%2F%2Fimg06.tooopen.com%2Fimages%2F20180116%2Ftooopen_sy_232320877961.jpg", mTopSceneIv);
         FrescoUtils.showUrlBlur(mSecondSceneIv, "http://thumbs.dreamstime.com/t/摄影师剪影-7849367.jpg", 5);
         FrescoUtils.showUrlBlur(mThirdSceneIv, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535480340747&di=b92fa9e60888de9454e34a8cdf6ce09a&imgtype=0&src=http%3A%2F%2Fwww.bjsyqw.com%2Fqiye%2Fupload%2F123%2Fadmin%2F20180606%2F5f3e438e17856714d8f69895a41341d8.jpg", 5);
+
+        mSecondCard.getLayoutParams().width = ScreenUtils.getsScreenWidth() * 420 / 1080;
+        mThirdCard.getLayoutParams().width = ScreenUtils.getsScreenWidth() * 540 / 1080;
 
         mSearchView.setBackground(ShapeUtils.getRoundRectDrawable(DrawUtils.dp2px(25), Color.parseColor("#ffffff")));
 
